@@ -59,7 +59,7 @@ export const anunt = defineType({
     select: { title: "title", date: "date", pinned: "pinned" },
     prepare({ title, date, pinned }) {
       return {
-        title: pinned ? `📌 ${title}` : title,
+        title: pinned ? `[Fixat] ${title}` : title,
         subtitle: date,
       };
     },

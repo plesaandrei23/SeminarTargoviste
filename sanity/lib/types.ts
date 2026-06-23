@@ -41,3 +41,21 @@ export type ActivityDetail = ActivityCard & {
   seo?: { title?: string; description?: string };
   legacySource?: { page?: string; anchor?: string };
 };
+
+export type CalendarItem = {
+  date: string;
+  label: string;
+  note?: string;
+};
+
+export type AdmissionCycle = {
+  _id: string;
+  year?: string;
+  specialization?: string;
+  availableSpots?: number;
+  session?: string;
+  isCurrent?: boolean;
+  calendar?: CalendarItem[];
+  body: unknown[];
+  seo?: { title?: string; description?: string };
+};

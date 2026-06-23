@@ -1,14 +1,21 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
 
 type StatProps = {
   value: number;
   suffix?: string;
   label: string;
+  /**
+   * Pre-rendered icon node. Pass JSX, not a component reference — Lucide
+   * icons are functions and can't cross the server→client boundary as
+   * raw props.
+   */
+  icon?: React.ReactNode;
 };
 
-export function Stat({ value, suffix, label }: StatProps) {
+export function Stat({ value, suffix, label, icon }: StatProps) {
   const [n, setN] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const animated = useRef(false);
@@ -16,9 +23,7 @@ export function Stat({ value, suffix, label }: StatProps) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setN(value);
       return;
     }
@@ -47,19 +52,26 @@ export function Stat({ value, suffix, label }: StatProps) {
   }, [value]);
 
   return (
-    <div
+    <Card
       ref={ref}
-      className="relative overflow-hidden rounded-2xl border border-navy/10 bg-parchment p-6 sm:p-7"
+      className="relative overflow-hidden border-navy/10 bg-parchment"
     >
       <span
         aria-hidden="true"
         className="absolute inset-y-0 left-0 w-1 bg-gold"
       />
-      <div className="font-serif text-5xl font-bold leading-none text-navy">
-        {n}
-        {suffix && <span className="text-gold-deep">{suffix}</span>}
-      </div>
-      <div className="mt-2 text-sm text-muted">{label}</div>
-    </div>
+      <CardContent className="p-6 sm:p-7">
+        {icon && (
+          <span className="mb-3 inline-flex size-9 items-center justify-center rounded-xl bg-gold/15">
+            {icon}
+          </span>
+        )}
+        <div className="font-serif text-5xl font-bold leading-none text-navy">
+          {n}
+          {suffix && <span className="text-gold-deep">{suffix}</span>}
+        </div>
+        <div className="mt-2 text-sm text-muted">{label}</div>
+      </CardContent>
+    </Card>
   );
 }

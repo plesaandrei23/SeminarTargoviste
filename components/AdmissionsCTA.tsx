@@ -15,18 +15,20 @@ export function AdmissionsCTA() {
       id="admitere"
       className="relative overflow-hidden bg-gradient-to-br from-navy-deep to-navy-soft py-[clamp(4rem,9vw,8rem)] text-center text-white"
     >
-      <span
+      {/*
+        Subtle ornamental dividers. SVG hairlines with a center diamond —
+        intentional, no emojis, draws the eye toward the headline without
+        the previous decorative-star kitsch.
+      */}
+      <svg
         aria-hidden="true"
-        className="absolute -top-2 left-[4%] font-serif text-[9rem] leading-none text-gold/15"
+        viewBox="0 0 240 12"
+        className="absolute left-1/2 top-12 h-3 w-60 -translate-x-1/2 text-gold/40"
       >
-        ✶
-      </span>
-      <span
-        aria-hidden="true"
-        className="absolute -bottom-8 right-[5%] font-serif text-[9rem] leading-none text-gold/15"
-      >
-        ✶
-      </span>
+        <line x1="0" y1="6" x2="100" y2="6" stroke="currentColor" strokeWidth="0.6" />
+        <path d="M120 1 L125 6 L120 11 L115 6 Z" fill="currentColor" />
+        <line x1="140" y1="6" x2="240" y2="6" stroke="currentColor" strokeWidth="0.6" />
+      </svg>
 
       <div className="wrap relative">
         <Reveal as="p" className="eyebrow !text-gold-light">
@@ -59,7 +61,7 @@ export function AdmissionsCTA() {
         </Reveal>
         <Reveal delay={3}>
           <Link
-            href="#"
+            href="/admitere"
             className="inline-flex items-center gap-2 rounded-full bg-gold px-8 py-4 text-base font-semibold text-navy-deep transition-all hover:bg-gold-light hover:-translate-y-0.5 hover:shadow-[var(--shadow-gold)]"
           >
             Vezi detalii admitere →

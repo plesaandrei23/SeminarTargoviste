@@ -1,6 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import {
+  BookMarked,
+  BedDouble,
+  Church,
+  GraduationCap,
+  Inbox,
+  Music2,
+  type LucideIcon,
+} from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { cn } from "@/lib/utils";
 
@@ -15,7 +24,7 @@ type ZoneId =
 type Zone = {
   id: ZoneId;
   label: string;
-  icon: string;
+  Icon: LucideIcon;
   description: string;
   rect: { x: number; y: number; w: number; h: number };
 };
@@ -24,7 +33,7 @@ const ZONES: Zone[] = [
   {
     id: "capela",
     label: "Capela",
-    icon: "⛪",
+    Icon: Church,
     description:
       "Inima duhovnicească a seminarului, unde elevii participă la slujbe și la viața liturgică zilnică.",
     rect: { x: 40, y: 40, w: 180, h: 120 },
@@ -32,7 +41,7 @@ const ZONES: Zone[] = [
   {
     id: "clase",
     label: "Săli de clasă",
-    icon: "📚",
+    Icon: GraduationCap,
     description:
       "Spații moderne de învățare pentru disciplinele teologice și de cultură generală.",
     rect: { x: 240, y: 40, w: 320, h: 120 },
@@ -40,7 +49,7 @@ const ZONES: Zone[] = [
   {
     id: "internat",
     label: "Internat",
-    icon: "🛏️",
+    Icon: BedDouble,
     description:
       "Cazare pentru elevii din afara localității, într-un mediu sigur și supravegheat.",
     rect: { x: 40, y: 185, w: 200, h: 195 },
@@ -48,7 +57,7 @@ const ZONES: Zone[] = [
   {
     id: "secretariat",
     label: "Secretariat",
-    icon: "🗂️",
+    Icon: Inbox,
     description:
       "Acte, înscrieri și informații administrative — program Luni–Vineri, 08:00–16:00.",
     rect: { x: 260, y: 185, w: 150, h: 90 },
@@ -56,7 +65,7 @@ const ZONES: Zone[] = [
   {
     id: "biblioteca",
     label: "Bibliotecă",
-    icon: "📖",
+    Icon: BookMarked,
     description:
       "Fond de carte teologic și academic, spațiu de studiu și lectură.",
     rect: { x: 430, y: 185, w: 130, h: 90 },
@@ -64,7 +73,7 @@ const ZONES: Zone[] = [
   {
     id: "festivitati",
     label: "Sala de festivități",
-    icon: "🎭",
+    Icon: Music2,
     description:
       "Locul evenimentelor, concertelor, serbărilor și întâlnirilor duhovnicești.",
     rect: { x: 260, y: 295, w: 300, h: 85 },
@@ -163,10 +172,10 @@ export function CampusMap() {
             </p>
             <div
               aria-hidden="true"
-              className="mb-4 flex h-13 w-13 items-center justify-center rounded-2xl bg-gold/15 text-2xl"
+              className="mb-4 flex items-center justify-center rounded-2xl bg-gold/15"
               style={{ height: 52, width: 52 }}
             >
-              {current.icon}
+              <current.Icon className="size-6 text-gold-light" strokeWidth={1.5} />
             </div>
             <h3 className="!text-white text-[clamp(1.5rem,2.5vw,2rem)] mb-2 transition-opacity">
               {current.label}
