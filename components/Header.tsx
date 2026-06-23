@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -23,8 +24,15 @@ const nav = [
 ];
 
 export function Header() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  // The transparent / white-text styling only makes sense over the home page's
+  // dark hero. On every other route the page background is parchment, so the
+  // header must always render in its "solid" state to stay legible.
+  const isHome = pathname === "/";
+  const solid = scrolled || !isHome;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -41,7 +49,7 @@ export function Header() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-[background,box-shadow] duration-500",
-        scrolled
+        solid
           ? "bg-parchment/92 backdrop-blur-md shadow-[0_4px_24px_-16px_rgba(10,28,48,0.5)]"
           : "bg-transparent",
       )}
@@ -90,7 +98,7 @@ export function Header() {
           <span
             className={cn(
               "font-serif font-semibold leading-tight transition-colors duration-500 hidden sm:block",
-              scrolled ? "text-navy" : "text-white",
+              solid ? "text-navy" : "text-white",
             )}
             style={{ fontSize: "1rem" }}
           >
@@ -108,7 +116,7 @@ export function Header() {
               href={item.href}
               className={cn(
                 "relative text-[0.85rem] font-medium tracking-wide py-1 transition-colors duration-300 after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-0 after:bg-gold after:transition-[width] after:duration-300 hover:after:w-full",
-                scrolled
+                solid
                   ? "text-navy hover:text-navy-deep"
                   : "text-white/90 hover:text-white",
               )}
@@ -131,7 +139,7 @@ export function Header() {
           onClick={() => setOpen((v) => !v)}
           className={cn(
             "lg:hidden p-2 z-[62] transition-colors",
-            scrolled ? "text-navy" : "text-white",
+            solid ? "text-navy" : "text-white",
           )}
         >
           {open ? <X size={26} /> : <Menu size={26} />}
