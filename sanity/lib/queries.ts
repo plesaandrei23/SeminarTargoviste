@@ -26,7 +26,7 @@ export const latestActivitiesQuery = groq`
 export const allActivitiesQuery = groq`
   *[_type == "activitate" && defined(slug.current)
     && (!defined($schoolYear) || schoolYear == $schoolYear)]
-    | order(date desc) {
+    | order(date desc, _createdAt desc) {
       _id,
       title,
       "slug": slug.current,
@@ -52,7 +52,7 @@ export const activityBySlugQuery = groq`
     schoolYear,
     excerpt,
     coverImage { asset->, alt },
-    body[]{
+    "body": coalesce(body, [])[]{
       ...,
       _type == "localizedImage" => {
         asset->{ _id, url, metadata { dimensions { width, height } } },
@@ -60,7 +60,7 @@ export const activityBySlugQuery = groq`
         caption
       }
     },
-    gallery[]{
+    "gallery": coalesce(gallery, [])[]{
       asset->{ _id, url, metadata { dimensions { width, height } } },
       alt,
       caption
