@@ -38,6 +38,7 @@
     "cheerio": "^1.2.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
+    "image-size": "^2.0.2",
     "marked": "^18.0.5",
     "tailwindcss": "^4",
     "turndown": "^7.2.4",

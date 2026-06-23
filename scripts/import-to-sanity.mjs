@@ -11,6 +11,7 @@
 
 import { createClient } from "@sanity/client";
 import { marked } from "marked";
+import { imageSize } from "image-size";
 import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { dirname, join, basename } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -228,6 +229,60 @@ async function uploadImage(url) {
 /** Convert a slug to a stable Sanity document _id. */
 const docId = (type, slug) => `${type}.${slug}`.replace(/[^a-z0-9_.-]/gi, "-");
 
+/**
+ * Read the dimensions of an already-downloaded image. Returns null if the
+ * file is missing or unreadable (e.g. a CSS pseudo-image).
+ */
+function localImageDims(src) {
+  const original = src.replace(/\/cdn-cgi\/image\/[^/]+\//, "/");
+  const filename = basename(new URL(original).pathname);
+  const localPath = join(IMAGES_DIR, filename);
+  if (!existsSync(localPath)) return null;
+  try {
+    const { width, height } = imageSize(readFileSync(localPath));
+    return { width, height };
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Skip Zyro UI chrome dressed up as images:
+ *   - thin decorative banners (the cross-border strip is 684×59)
+ *   - sub-200px icons
+ *   - extreme aspect ratios (panoramic banners, vertical stripes)
+ * Keep anything that reads as a real photograph.
+ */
+function isContentImage(dims) {
+  if (!dims) return false;
+  const { width, height } = dims;
+  if (width < 400 || height < 240) return false;
+  const aspect = width / height;
+  if (aspect < 0.4 || aspect > 3.0) return false;
+  return true;
+}
+
+/**
+ * Infer a category from the article's Romanian title. Most fall cleanly
+ * into one of the schema's enum values; whatever doesn't lands on "alta"
+ * and a human can pick the right one in Studio.
+ */
+function inferCategory(title) {
+  const t = (title ?? "").toLowerCase();
+  if (/erasmus|mobilit[aă]ț?|antalya/.test(t)) return "erasmus";
+  if (/olimpiad|premii|rezultat[e]? remarcabile|excep[tț]ie|performan[tț]a?\s*[șs]i\s*pasiune|performan[tț]/.test(t))
+    return "performanta";
+  if (/concert|coralia|martisor|talent|spectacol|teatru|scen[aă]|versur|gand|poem/.test(t))
+    return "cultural";
+  if (/festivitat|deschidere|ceremonie|absolv/.test(t)) return "eveniment";
+  if (/concurs|competi[tț]i|comunic[aă]ri|provocarea/.test(t)) return "concurs";
+  if (/sf[iî]nt|duhovnic|preot|liturg|biseric|hristos|spiritual|maica/.test(t))
+    return "spiritualitate";
+  if (/lect[uú]r|cart|biblio|invat|invat[aă]|educa[tț]i|cer[ck]ul|s[aă]pt[aă]m[aâ]na|verde|risip|maniere|siguran[tț]/.test(t))
+    return "educatie";
+  return "alta";
+}
+
 // ─────────────────────────────────────────────────────────────────
 // Section importers
 // ─────────────────────────────────────────────────────────────────
@@ -247,18 +302,35 @@ function parseRoDate(str) {
 }
 
 async function importActivity(record) {
+  // Score images by dimensions so the cover is a real photo, not the Zyro
+  // template's decorative cross-border strip (684×59 px, sneaks in as
+  // images[0] because it appears at the top of each article's markdown).
+  const sourceImages = record.images ?? [];
+  const annotated = sourceImages.map((img) => ({
+    ...img,
+    dims: localImageDims(img.src),
+  }));
+  const contentImages = annotated.filter((img) => isContentImage(img.dims));
+  // Cover = first content image; everything else goes to gallery.
+  // If the article has zero real photos we leave cover undefined and let
+  // the listing fall back to its gradient placeholder.
+  const cover = contentImages[0];
+  const rest = contentImages.slice(1);
+
+  // Upload only the images we'll actually use — saves Sanity asset slots.
   const imageMap = new Map();
-  for (const img of record.images ?? []) {
+  for (const img of contentImages) {
     const id = await uploadImage(img.src);
     if (id) imageMap.set(img.src, id);
   }
   const body = markdownToPortableText(record.body?.markdown, imageMap);
+
   const coverImage =
-    record.images?.[0] && imageMap.get(record.images[0].src)
+    cover && imageMap.get(cover.src)
       ? {
           _type: "localizedImage",
-          asset: { _type: "reference", _ref: imageMap.get(record.images[0].src) },
-          alt: record.images[0].alt || record.title || "Imagine activitate",
+          asset: { _type: "reference", _ref: imageMap.get(cover.src) },
+          alt: cover.alt || record.title || "Imagine activitate",
         }
       : undefined;
 
@@ -269,10 +341,10 @@ async function importActivity(record) {
     slug: { _type: "slug", current: record.slug },
     date: parseRoDate(record.date) || "2026-01-01",
     schoolYear: record.schoolYear ?? null,
+    category: inferCategory(record.title),
     coverImage,
     body,
-    gallery: (record.images ?? [])
-      .slice(1)
+    gallery: rest
       .map((img) => imageMap.get(img.src))
       .filter(Boolean)
       .map((ref, i) => ({
@@ -284,7 +356,9 @@ async function importActivity(record) {
     legacySource: record.source,
   };
   await client.createOrReplace(doc);
-  console.log(`✓ activitate · ${record.slug}`);
+  console.log(
+    `✓ activitate · ${record.slug} · ${doc.category} · ${contentImages.length}/${sourceImages.length} images`,
+  );
 }
 
 async function importPage(record) {
