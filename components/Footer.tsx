@@ -31,7 +31,7 @@ function TikTokIcon() {
 const nav = [
   { href: "/admitere", label: "Admitere" },
   { href: "/activitati", label: "Activități" },
-  { href: "/#campus", label: "Campus" },
+  { href: "/campus", label: "Campus" },
   { href: "/profesori", label: "Profesori" },
   { href: "/#", label: "Erasmus+" },
 ];
