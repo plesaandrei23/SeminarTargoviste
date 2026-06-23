@@ -20,16 +20,31 @@ export const revalidate = 60;
  * these — Next.js routes specific paths first — but listing them here keeps
  * generateStaticParams honest (we don't pre-render duplicate routes).
  */
+// Slugs handled by a dedicated route OR by a permanent redirect in
+// next.config.ts. Excluding them from generateStaticParams avoids
+// pre-rendering pages that will never actually be served — the
+// redirect intercepts the request first.
 const RESERVED_SLUGS = new Set([
+  // Dedicated routes
   "activitati",
   "admitere",
   "campus",
   "contact",
   "profesori",
   "studio",
-  // Tomorrow's PRs:
-  // "erasmus",
-  // "anunturi",
+  // Redirected in next.config.ts → /profesori
+  "didactic",
+  "didactic-auxiliar",
+  "nedidactic",
+  "conducerea-scolii",
+  "director",
+  "consiliul-de-administratie",
+  "consiliul-profesoral",
+  // Redirected → home or other targets
+  "elevi",
+  "informatii",
+  "scoala-noastra",
+  "tur-virtual",
 ]);
 
 type Params = Promise<{ slug: string }>;
