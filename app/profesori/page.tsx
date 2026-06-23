@@ -37,9 +37,14 @@ async function fetchPersonnel(): Promise<Personal[]> {
 export default async function ProfesoriPage() {
   const people = await fetchPersonnel();
 
-  const conducere = people.filter((p) => p.category === "conducere");
   const didactic = people.filter((p) => p.category === "didactic");
-  const auxiliar = people.filter((p) => p.category === "didactic-auxiliar");
+  // Auxiliar strip covers BOTH didactic-auxiliar (secretar, contabil) and
+  // nedidactic (cleaning, maintenance, etc.) — anyone whose role isn't
+  // teaching or running the school lands here.
+  const auxiliar = people.filter(
+    (p) =>
+      p.category === "didactic-auxiliar" || p.category === "nedidactic",
+  );
 
   return (
     <>
@@ -50,10 +55,11 @@ export default async function ProfesoriPage() {
           subjectsCount={new Set(didactic.map((p) => p.subject).filter(Boolean)).size}
         />
 
-        {conducere.length > 0 && (
-          <Conducere people={conducere} didactic={didactic} />
-        )}
-
+        {/*
+          Director + duhovnici + teachers all live in the same grid now.
+          The query already orders conducere first, so the director shows up
+          as the lead card without needing a dedicated row above.
+        */}
         <ProfessorGrid people={people} />
 
         {auxiliar.length > 0 && (

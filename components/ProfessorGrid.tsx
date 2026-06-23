@@ -23,27 +23,36 @@ import type { Personal } from "@/sanity/lib/types";
  * chest up and a centered square crop slices through the eyes.
  */
 export function ProfessorGrid({ people }: { people: Personal[] }) {
-  const didactic = useMemo(
-    () => people.filter((p) => p.category === "didactic"),
+  /*
+   * Grid covers everyone who teaches OR runs the school — director +
+   * duhovnici + teachers. Auxiliary / nedidactic still get their own
+   * strip lower down, since they're a different kind of role and don't
+   * map onto a subject filter.
+   */
+  const teaching = useMemo(
+    () =>
+      people.filter(
+        (p) => p.category === "didactic" || p.category === "conducere",
+      ),
     [people],
   );
 
   const subjects = useMemo(() => {
     const set = new Set<string>();
-    for (const p of didactic) if (p.subject) set.add(p.subject);
+    for (const p of teaching) if (p.subject) set.add(p.subject);
     return [...set].sort((a, b) => a.localeCompare(b, "ro"));
-  }, [didactic]);
+  }, [teaching]);
 
   const [active, setActive] = useState<string>("__all");
   const visible = useMemo(
     () =>
       active === "__all"
-        ? didactic
-        : didactic.filter((p) => p.subject === active),
-    [active, didactic],
+        ? teaching
+        : teaching.filter((p) => p.subject === active),
+    [active, teaching],
   );
 
-  if (didactic.length === 0) return null;
+  if (teaching.length === 0) return null;
 
   return (
     <section className="wrap mt-24">
@@ -70,10 +79,10 @@ export function ProfessorGrid({ people }: { people: Personal[] }) {
           label="Toate disciplinele"
           active={active === "__all"}
           onClick={() => setActive("__all")}
-          count={didactic.length}
+          count={teaching.length}
         />
         {subjects.map((s) => {
-          const count = didactic.filter((p) => p.subject === s).length;
+          const count = teaching.filter((p) => p.subject === s).length;
           return (
             <FilterChip
               key={s}
