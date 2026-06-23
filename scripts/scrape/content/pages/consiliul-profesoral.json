@@ -1,0 +1,28 @@
+{
+  "type": "page",
+  "slug": "consiliul-profesoral",
+  "path": "/consiliul-profesoral",
+  "title": "Consiliul Profesoral",
+  "seo": {
+    "title": "Consiliul Profesoral | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+    "description": null,
+    "ogImage": null
+  },
+  "body": {
+    "markdown": "# **Seminarul Teologic Ortodox \"Sfântul Ioan Gură de Aur\" din Târgoviște**\n\n### _de peste 30 de ani în slujba Bisericii și a Educației_\n\n[![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=80,fit=crop/d95MN2J9V3cXzoxX/arhlogo-m2W1yq3Zr5inKveQ.png)](https://arhiepiscopiatargovistei.ro/)[![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=93,fit=crop/d95MN2J9V3cXzoxX/arhlogo-m2W1yq3Zr5inKveQ.png)](https://arhiepiscopiatargovistei.ro/)"
+  },
+  "images": [
+    {
+      "src": "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=80,fit=crop/d95MN2J9V3cXzoxX/arhlogo-m2W1yq3Zr5inKveQ.png",
+      "alt": "",
+      "width": 339,
+      "height": 72
+    },
+    {
+      "src": "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=93,fit=crop/d95MN2J9V3cXzoxX/arhlogo-m2W1yq3Zr5inKveQ.png",
+      "alt": "",
+      "width": 230,
+      "height": 57
+    }
+  ]
+}

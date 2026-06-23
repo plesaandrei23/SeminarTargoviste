@@ -1,0 +1,455 @@
+{
+  "crawledAt": "2026-06-23T12:44:07.000Z",
+  "root": "https://seminarortodoxtargoviste.ro",
+  "pageCount": 42,
+  "pages": [
+    {
+      "url": "https://seminarortodoxtargoviste.ro/",
+      "path": "/",
+      "title": "ACASĂ | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": "https://seminarortodoxtargoviste.ro/\nSeminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Târgoviște",
+      "ogImage": null,
+      "anchorCount": 435,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/_astro-1782117520007/_..Cs0up5ie.css",
+      "path": "/_astro-1782117520007/_..Cs0up5ie.css",
+      "title": null,
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 0,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/_astro-1782117520007/cookieconsent.CpXrOrr9.css",
+      "path": "/_astro-1782117520007/cookieconsent.CpXrOrr9.css",
+      "title": null,
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 0,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/activitati",
+      "path": "/activitati",
+      "title": "ACTIVITĂŢI | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 36,
+      "anchorsReferenced": [
+        ":~:text=A%20AVUT%20LOC%20RESFIN%C8%9AIREA,octombrie%2030%2C%202022",
+        ":~:text=CONCURS%20%C8%98COLAR%20DEDICAT,octombrie%203%2C%202022",
+        ":~:text=FESTIVITATE%20DE%20DESCHIDERE,septembrie%205%2C%202022",
+        ":~:text=MESAJUL%20%C3%8ENALTPREASFIN%C8%9AITULUI%20P%C4%82RINTE,septembrie%202%2C%202022",
+        "deschidere-an2023-2024"
+      ]
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/activitati-2022-2023",
+      "path": "/activitati-2022-2023",
+      "title": "Activități 2022-2023 | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 99,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/activitati-2023-2024",
+      "path": "/activitati-2023-2024",
+      "title": "Activități 2023-2024 | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 84,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/activitati-2024-2025",
+      "path": "/activitati-2024-2025",
+      "title": "Activităţi 2024-2025 | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 183,
+      "anchorsReferenced": [
+        "activitate-de-prevenire-a-violenei-n-coli--nv-s-m-protejez",
+        "activitate-educationala-la-seminarul-teologic-din-targoviste",
+        "clubul-de-lectura-al-seminarului-teologic",
+        "competitia-provocarea-ratiunii-editia-2025-premii-pentru-cei-sapte-elevi-ai-seminarului-teologic-ortodox",
+        "erasmus-mobilitatea-elevilor-a-doua-zi-antalya",
+        "erasmus-mobilitatea-elevilor-prima-zi-antalya",
+        "erasmus-mobolitatea-elevilor-a-patra-zi-antalya",
+        "erasmus-mobolitatea-elevilor-a-treia-zi-antalya",
+        "erasmus-mobolitatea-elevilor-ultima-zi-antalya",
+        "finalerasmus",
+        "ganduri-versuri-randuri",
+        "invat-sa-ma-protejez-educatie-pentru-siguranta-si-responsabilitate",
+        "performantapasiune",
+        "premii-castigate-la-concursurile-nationale-snac",
+        "saptamana-verde-a-doua-zi-de-activitati",
+        "saptamana-verde-a-treia-zi-de-activitati",
+        "saptamana-verde-prima-zi-de-activitati",
+        "seara-duhovniceasca-mai-2025",
+        "stii-cat-se-risipeste"
+      ]
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/activitati-2025-2026",
+      "path": "/activitati-2025-2026",
+      "title": "Activităţi 2025-2026 | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 223,
+      "anchorsReferenced": [
+        "bunele-maniere-se-invta-pas-cu-pas",
+        "cer-de-lectura",
+        "deschidere-an-scolar-2025-2026",
+        "destinul-unei-carti",
+        "educatie-pentru-siguranta-in-mediul-online",
+        "festivalul-primaverii-martisor-cu-suflet",
+        "festivitatea-de-incheiere-a-anului-scolar",
+        "joaca-invata-economiseste",
+        "maman-merci-dtre",
+        "olimpiada-nationala-de-religie-seminarii-teologice",
+        "performanta-deosebita-la-olimpiada-de-limba-engleza",
+        "premii-la-sesiunea-internationala-de-comunicari-stiintifice",
+        "preotia-ca-fertfa-o-lectie-a-sfintilor-trei-ierarhi-pentru-tinerii-seminaristi",
+        "proiectul-impreuna-prindem-curaj-seara-la-teatru",
+        "recunostinta-pentru-un-gest",
+        "rezultat-de-exceptie-la-olimpiada-de-istorie",
+        "rezultate-remarcabile-olimpiada-istorie",
+        "rezultate-talente-dambovitene",
+        "saptamana-scoala-altfel-ziua-1",
+        "saptamana-scoala-altfel-ziua-2",
+        "saptamana-scoala-altfel-ziua-3",
+        "saptamana-scoala-altfel-ziua-4",
+        "seara-de-lectura-la-biblioteca-judeteana",
+        "seminarul-teologic-prezent-pe-scena-concertului-coralia",
+        "ziua-internationala-a-fericirii"
+      ]
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/admitere",
+      "path": "/admitere",
+      "title": "ADMITERE | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 57,
+      "anchorsReferenced": [
+        "admitere-seminar-sesiunea-a-doua-august-2025",
+        "pregatire-pentru-admitere-la-seminar",
+        "sesiunea-de-admitere-anul-scolar-2026-2027"
+      ]
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/anunturi",
+      "path": "/anunturi",
+      "title": "ANUNȚURI | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 2,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/atestat-profesional",
+      "path": "/atestat-profesional",
+      "title": "Atestat profesional | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 17,
+      "anchorsReferenced": [
+        "examen-de-atestat-profesional"
+      ]
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/avizier",
+      "path": "/avizier",
+      "title": "Avizier | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 96,
+      "anchorsReferenced": [
+        "calendar-examene-finale",
+        "calendarul-inscrierii-clasa-a-ix-a",
+        "rezultate-si-depunere-contestatii-evaluarea-nationala-2025"
+      ]
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/bacalaureat",
+      "path": "/bacalaureat",
+      "title": "Bacalaureat | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 13,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/burse",
+      "path": "/burse",
+      "title": "BURSE | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 11,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/conducerea-scolii",
+      "path": "/conducerea-scolii",
+      "title": "CONDUCEREA ŞCOLII | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 14,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/consiliul-de-administratie",
+      "path": "/consiliul-de-administratie",
+      "title": "Consiliul de Administrație | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 93,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/consiliul-elevilor",
+      "path": "/consiliul-elevilor",
+      "title": "Consiliul Elevilor | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 11,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/consiliul-profesoral",
+      "path": "/consiliul-profesoral",
+      "title": "Consiliul Profesoral | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 8,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/contact",
+      "path": "/contact",
+      "title": "CONTACT | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 17,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/didactic",
+      "path": "/didactic",
+      "title": "Didactic | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 108,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/didactic-auxiliar",
+      "path": "/didactic-auxiliar",
+      "title": "Didactic Auxiliar | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 17,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/director",
+      "path": "/director",
+      "title": "Director | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 12,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/elevi",
+      "path": "/elevi",
+      "title": "ELEVI | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 14,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/erasmus",
+      "path": "/erasmus",
+      "title": "ERASMUS | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 22,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/erasmusdiseminare",
+      "path": "/erasmusdiseminare",
+      "title": "Erasmus+Diseminare | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 73,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/erasmusexperiente",
+      "path": "/erasmusexperiente",
+      "title": "Erasmus+Experiente | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 53,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/erasmusfollow",
+      "path": "/erasmusfollow",
+      "title": "Erasmus+Follow | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 20,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/erasmusinstrumente",
+      "path": "/erasmusinstrumente",
+      "title": "Erasmus+Instrumente | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 19,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/erasmusmobilitati",
+      "path": "/erasmusmobilitati",
+      "title": "Erasmus+Mobilitati | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 74,
+      "anchorsReferenced": [
+        "cursul-de-formare-artificial-intellgence-in-education",
+        "educatie-experienta-si-deschidere-europeana-mobilitati-erasmus"
+      ]
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/erasmusrezultate",
+      "path": "/erasmusrezultate",
+      "title": "Erasmus+Rezultate | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 62,
+      "anchorsReferenced": [
+        "rezultate-finale-erasmus"
+      ]
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/erasmusvizibilitate",
+      "path": "/erasmusvizibilitate",
+      "title": "Erasmus+Vizibilitate | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 74,
+      "anchorsReferenced": [
+        "erata-proces-de-selectie-erasmus",
+        "lansare-proces-selectie-erasmus"
+      ]
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/evaluarea-nationala-clasa-a-viii-a",
+      "path": "/evaluarea-nationala-clasa-a-viii-a",
+      "title": "Evaluarea Națională clasa a VIII-a | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 13,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/informatii",
+      "path": "/informatii",
+      "title": "INFORMAŢII | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 10,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/istoric",
+      "path": "/istoric",
+      "title": "Istoric | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 19,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/managementul-cazurilor-de-violenta",
+      "path": "/managementul-cazurilor-de-violenta",
+      "title": "Managementul cazurilor de violenta | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 10,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/misiune-si-viziune",
+      "path": "/misiune-si-viziune",
+      "title": "Misiune și Viziune | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 12,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/mobilitate-cadre-didactice",
+      "path": "/mobilitate-cadre-didactice",
+      "title": "Mobilitate cadre didactice | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 19,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/nedidactic",
+      "path": "/nedidactic",
+      "title": "Nedidactic | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 10,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/orar",
+      "path": "/orar",
+      "title": "ORAR | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 1,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/regulamente",
+      "path": "/regulamente",
+      "title": "Regulamente | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 10,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/scoala-noastra",
+      "path": "/scoala-noastra",
+      "title": "ŞCOALA NOASTRĂ | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 20,
+      "anchorsReferenced": []
+    },
+    {
+      "url": "https://seminarortodoxtargoviste.ro/tur-virtual",
+      "path": "/tur-virtual",
+      "title": "Tur virtual | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+      "description": null,
+      "ogImage": null,
+      "anchorCount": 11,
+      "anchorsReferenced": []
+    }
+  ]
+}

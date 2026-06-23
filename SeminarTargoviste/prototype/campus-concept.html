@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Campus — concept interactiv</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{--navy:#0f2742;--navy-deep:#0a1c30;--gold:#c8a04e;--gold-light:#e2c279;--cream:#f8f4ec;--muted:rgba(255,255,255,.6)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:radial-gradient(120% 120% at 70% 10%,#15355a 0%,var(--navy) 45%,var(--navy-deep) 100%);color:#fff;min-height:100vh;overflow-x:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4rem 1.5rem}
+  .eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-light);text-align:center}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(2.1rem,5vw,3.4rem);text-align:center;margin:.3em 0 .2em;letter-spacing:-.01em}
+  .sub{text-align:center;color:var(--muted);max-width:520px;margin:0 auto 2.6rem;font-weight:300}
+
+  .stage{perspective:1400px;width:min(960px,94vw);margin:0 auto}
+  .scene{position:relative;transform-style:preserve-3d;transition:transform .25s cubic-bezier(.22,.61,.36,1);will-change:transform}
+  .card{position:relative;aspect-ratio:16/10;border-radius:18px;overflow:hidden;transform-style:preserve-3d;
+    box-shadow:0 40px 80px -30px rgba(0,0,0,.7),0 0 0 1px rgba(200,160,78,.25);background:#0a1c30}
+  .card img{width:100%;height:100%;object-fit:cover;display:block}
+  .card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,28,48,.15),rgba(10,28,48,.55))}
+
+  .hotspot{position:absolute;transform:translate(-50%,-50%) translateZ(60px);cursor:pointer;z-index:3}
+  .dot{width:18px;height:18px;border-radius:50%;background:var(--gold);border:2px solid #fff;box-shadow:0 0 0 0 rgba(200,160,78,.7);animation:pulse 2.4s infinite;transition:transform .25s}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(226,194,121,.6)}70%{box-shadow:0 0 0 16px rgba(226,194,121,0)}100%{box-shadow:0 0 0 0 rgba(226,194,121,0)}}
+  .hotspot .tag{position:absolute;left:50%;top:-12px;transform:translateX(-50%) translateY(-130%);white-space:nowrap;background:rgba(10,28,48,.92);border:1px solid rgba(200,160,78,.5);color:var(--gold-light);font-size:.74rem;font-weight:600;letter-spacing:.04em;padding:.35em .8em;border-radius:100px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;backdrop-filter:blur(4px)}
+  .hotspot:hover .dot,.hotspot.active .dot{transform:scale(1.35);background:var(--gold-light)}
+  .hotspot:hover .tag,.hotspot.active .tag{opacity:1;transform:translateX(-50%) translateY(-150%)}
+
+  .panel{position:absolute;left:22px;bottom:22px;z-index:5;width:min(320px,72%);background:rgba(10,20,34,.82);backdrop-filter:blur(14px);border:1px solid rgba(200,160,78,.3);border-radius:16px;padding:1.2rem 1.3rem;transform:translateY(8px);opacity:0;pointer-events:none;transition:all .4s cubic-bezier(.22,.61,.36,1)}
+  .panel.show{opacity:1;transform:translateY(0);pointer-events:auto}
+  .panel .ic{width:40px;height:40px;border-radius:11px;background:rgba(200,160,78,.16);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:.7rem}
+  .panel h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;margin-bottom:.3rem}
+  .panel p{font-size:.86rem;color:rgba(255,255,255,.72);line-height:1.5;margin-bottom:.9rem}
+  .panel a{font-size:.78rem;font-weight:600;color:var(--gold-light);text-decoration:none;display:inline-flex;gap:.4em;align-items:center}
+
+  .cta{display:flex;justify-content:center;margin-top:2.4rem}
+  .btn{display:inline-flex;align-items:center;gap:.5em;background:var(--gold);color:var(--navy-deep);font-weight:600;font-size:.92rem;padding:.85em 1.7em;border-radius:100px;border:0;cursor:pointer;transition:all .3s}
+  .btn:hover{background:var(--gold-light);transform:translateY(-2px)}
+  .hint{text-align:center;color:rgba(255,255,255,.4);font-size:.74rem;letter-spacing:.06em;margin-top:1.4rem}
+</style>
+</head>
+<body>
+  <p class="eyebrow">Casa noastră</p>
+  <h1>Explorează campusul</h1>
+  <p class="sub">Treci cu privirea peste seminar și descoperă fiecare colț — apasă pe un punct pentru a afla mai multe.</p>
+
+  <div class="stage">
+    <div class="scene" id="scene">
+      <div class="card">
+        <img src="./assets/landing.png" alt="Seminarul Teologic Ortodox din Târgoviște" />
+
+        <div class="hotspot" style="left:30%;top:30%" data-k="capela"><span class="tag">Capela</span><span class="dot"></span></div>
+        <div class="hotspot" style="left:50%;top:40%" data-k="secretariat"><span class="tag">Secretariat</span><span class="dot"></span></div>
+        <div class="hotspot" style="left:68%;top:32%" data-k="clase"><span class="tag">Săli de clasă</span><span class="dot"></span></div>
+        <div class="hotspot" style="left:20%;top:46%" data-k="internat"><span class="tag">Internatul</span><span class="dot"></span></div>
+        <div class="hotspot" style="left:80%;top:44%" data-k="biblioteca"><span class="tag">Biblioteca</span><span class="dot"></span></div>
+
+        <div class="panel" id="panel">
+          <div class="ic" id="p-ic">⛪</div>
+          <h3 id="p-title">Capela</h3>
+          <p id="p-text">Inima duhovnicească a seminarului.</p>
+          <a href="#">Pășește înăuntru →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta"><button class="btn">Tur complet al campusului →</button></div>
+  <p class="hint">mișcă mouse-ul — clădirea te urmărește · concept</p>
+
+<script>
+  const data={
+    capela:{i:'⛪',t:'Capela',d:'Inima duhovnicească a seminarului — slujbe și rugăciune în fiecare zi.'},
+    secretariat:{i:'🗂️',t:'Secretariat',d:'Acte, înscrieri și informații. Program Luni–Vineri, 08:00–16:00.'},
+    clase:{i:'📚',t:'Săli de clasă',d:'Spații moderne pentru disciplinele teologice și de cultură generală.'},
+    internat:{i:'🛏️',t:'Internatul',d:'Cazare pentru elevii din afara orașului, într-un mediu sigur și supravegheat.'},
+    biblioteca:{i:'📖',t:'Biblioteca',d:'Fond de carte teologic și academic, spațiu de studiu și lectură.'}
+  };
+  const scene=document.getElementById('scene'),stage=scene.parentElement;
+  const panel=document.getElementById('panel'),pIc=document.getElementById('p-ic'),pT=document.getElementById('p-title'),pX=document.getElementById('p-text');
+  let raf;
+  stage.addEventListener('mousemove',e=>{
+    const r=stage.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width-.5, py=(e.clientY-r.top)/r.height-.5;
+    cancelAnimationFrame(raf);
+    raf=requestAnimationFrame(()=>{scene.style.transform=`rotateY(${px*12}deg) rotateX(${-py*10}deg)`;});
+  });
+  stage.addEventListener('mouseleave',()=>{scene.style.transform='rotateY(0) rotateX(0)';});
+
+  document.querySelectorAll('.hotspot').forEach(h=>{
+    h.addEventListener('click',e=>{
+      e.stopPropagation();
+      document.querySelectorAll('.hotspot').forEach(x=>x.classList.remove('active'));
+      h.classList.add('active');
+      const d=data[h.dataset.k];
+      pIc.textContent=d.i;pT.textContent=d.t;pX.textContent=d.d;
+      panel.classList.add('show');
+    });
+  });
+</script>
+</body>
+</html>

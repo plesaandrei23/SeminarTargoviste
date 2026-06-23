@@ -1,0 +1,40 @@
+{
+  "type": "page",
+  "slug": "nedidactic",
+  "path": "/nedidactic",
+  "title": "Nedidactic",
+  "seo": {
+    "title": "Nedidactic | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+    "description": null,
+    "ogImage": null
+  },
+  "body": {
+    "markdown": "# **Seminarul Teologic Ortodox \"Sfântul Ioan Gură de Aur\" din Târgoviște**\n\n### _de peste 30 de ani în slujba Bisericii și a Educației_\n\n[![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=80,fit=crop/d95MN2J9V3cXzoxX/arhlogo-m2W1yq3Zr5inKveQ.png)](https://arhiepiscopiatargovistei.ro/)[![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=95,fit=crop/d95MN2J9V3cXzoxX/arhlogo-m2W1yq3Zr5inKveQ.png)](https://arhiepiscopiatargovistei.ro/)\n\n### _Dacă-ți iubești copilul, arat-o prin educația pe care i-o dai!_\n\n![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,h=35,fit=crop/d95MN2J9V3cXzoxX/linie-ts1604505021-AR0epjJO6ehDev1K.png)\n\n![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=28,fit=crop/d95MN2J9V3cXzoxX/linie-ts1604505021-AR0epjJO6ehDev1K.png)\n\n### **PERSONAL NEDIDACTIC**"
+  },
+  "images": [
+    {
+      "src": "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=80,fit=crop/d95MN2J9V3cXzoxX/arhlogo-m2W1yq3Zr5inKveQ.png",
+      "alt": "",
+      "width": 339,
+      "height": 72
+    },
+    {
+      "src": "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=95,fit=crop/d95MN2J9V3cXzoxX/arhlogo-m2W1yq3Zr5inKveQ.png",
+      "alt": "",
+      "width": 273,
+      "height": 69
+    },
+    {
+      "src": "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,h=35,fit=crop/d95MN2J9V3cXzoxX/linie-ts1604505021-AR0epjJO6ehDev1K.png",
+      "alt": "",
+      "width": 1224,
+      "height": 29
+    },
+    {
+      "src": "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=28,fit=crop/d95MN2J9V3cXzoxX/linie-ts1604505021-AR0epjJO6ehDev1K.png",
+      "alt": "",
+      "width": 328,
+      "height": 24
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "type": "page",
+  "slug": "burse",
+  "path": "/burse",
+  "title": "BURSE",
+  "seo": {
+    "title": "BURSE | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+    "description": null,
+    "ogImage": null
+  },
+  "body": {
+    "markdown": "# **Seminarul Teologic Ortodox \"Sfântul Ioan Gură de Aur\" din Târgoviște**\n\n### _30 de ani în slujba Bisericii și a Educației_\n\n[![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=80,fit=crop/d95MN2J9V3cXzoxX/arhlogo-m2W1yq3Zr5inKveQ.png)](https://arhiepiscopiatargovistei.ro/)[![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=95,fit=crop/d95MN2J9V3cXzoxX/arhlogo-m2W1yq3Zr5inKveQ.png)](https://arhiepiscopiatargovistei.ro/)\n\n### _Dacă-ți iubești copilul, arat-o prin educația pe care i-o dai!_\n\n**BURSE**\n\n[Metodologie acordare burse](https://assets.zyrosite.com/d95MN2J9V3cXzoxX/hg_732_2025_metodologie_acordare_burse_elevi-a1nUweWJ6at8Z463.pdf)"
+  },
+  "images": [
+    {
+      "src": "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=80,fit=crop/d95MN2J9V3cXzoxX/arhlogo-m2W1yq3Zr5inKveQ.png",
+      "alt": "",
+      "width": 339,
+      "height": 72
+    },
+    {
+      "src": "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=95,fit=crop/d95MN2J9V3cXzoxX/arhlogo-m2W1yq3Zr5inKveQ.png",
+      "alt": "",
+      "width": 273,
+      "height": 69
+    }
+  ]
+}

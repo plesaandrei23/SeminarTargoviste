@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Seminarul Teologic Ortodox „Sfântul Ioan Gură de Aur" · Târgoviște</title>
+<meta name="description" content="Seminarul Teologic Ortodox „Sfântul Ioan Gură de Aur" din Târgoviște — de peste 30 de ani în slujba Bisericii și a Educației." />
+<link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon-180.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://assets.zyrosite.com" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --navy:#0f2742; --navy-deep:#0a1c30; --navy-soft:#1b3a5c;
+    --gold:#c8a04e; --gold-light:#e2c279; --gold-deep:#a37f33;
+    --cream:#f8f4ec; --cream-2:#efe8da; --paper:#fffdf9;
+    --ink:#1d2128; --muted:#6b7280; --line:rgba(15,39,66,.12);
+    --maxw:1200px; --r:16px; --ease:cubic-bezier(.22,.61,.36,1);
+    --shadow:0 18px 50px -18px rgba(10,28,48,.45);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;overflow-x:hidden}
+  h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.1;color:var(--navy)}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .eyebrow{font-family:'Inter',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-deep)}
+  .serif-i{font-style:italic;font-weight:500}
+  .btn{display:inline-flex;align-items:center;gap:.55em;font-weight:600;font-size:.92rem;padding:.85em 1.6em;border-radius:100px;transition:all .35s var(--ease);cursor:pointer;border:1px solid transparent;white-space:nowrap}
+  .btn-gold{background:var(--gold);color:var(--navy-deep)}
+  .btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 10px 26px -10px rgba(200,160,78,.7)}
+  .btn-ghost{border-color:rgba(255,255,255,.5);color:#fff}
+  .btn-ghost:hover{background:rgba(255,255,255,.12);border-color:#fff}
+  .btn-outline{border-color:var(--navy);color:var(--navy)}
+  .btn-outline:hover{background:var(--navy);color:#fff;transform:translateY(-2px)}
+
+  /* ---------- announcement bar (inside fixed header) ---------- */
+  .topbar{background:var(--navy-deep);color:var(--cream);font-size:.8rem;text-align:center;padding:.55em 1em;letter-spacing:.02em;overflow:hidden;max-height:56px;transition:max-height .45s var(--ease),padding .45s var(--ease),opacity .35s}
+  .topbar a{color:var(--gold-light);font-weight:600}
+  .topbar .dot{color:var(--gold);margin:0 .5em}
+  header.nav.scrolled .topbar{max-height:0;padding-top:0;padding-bottom:0;opacity:0}
+
+  /* ---------- nav ---------- */
+  header.nav{position:fixed;top:0;left:0;right:0;z-index:60;transition:background .4s var(--ease),box-shadow .4s var(--ease);padding:0}
+  header.nav.at-top{background:transparent}
+  header.nav.scrolled{background:rgba(248,244,236,.92);backdrop-filter:blur(12px);box-shadow:0 4px 24px -16px rgba(10,28,48,.5)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:.5rem 0}
+  .brand{display:flex;align-items:center;gap:.7rem;z-index:62}
+  .brand img{height:54px;width:auto;filter:drop-shadow(0 2px 6px rgba(0,0,0,.25))}
+  .brand .bt{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.05;font-size:1.02rem;transition:color .4s}
+  .brand .bt small{display:block;font-family:'Inter';font-weight:500;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;opacity:.75}
+  header.at-top .brand .bt{color:#fff}
+  header.scrolled .brand .bt{color:var(--navy)}
+  .menu{display:flex;align-items:center;gap:1.7rem}
+  .menu a.lk{font-size:.83rem;font-weight:500;letter-spacing:.04em;position:relative;padding:.3em 0;transition:color .3s}
+  .menu a.lk::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--gold);transition:width .35s var(--ease)}
+  .menu a.lk:hover::after{width:100%}
+  header.at-top .menu a.lk{color:rgba(255,255,255,.92)}
+  header.scrolled .menu a.lk{color:var(--navy)}
+  header.at-top .menu a.lk:hover{color:#fff}
+  .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;z-index:62;padding:6px}
+  .burger span{width:26px;height:2px;background:#fff;transition:all .35s var(--ease)}
+  header.scrolled .burger span{background:var(--navy)}
+
+  /* mobile menu overlay */
+  .mobile{position:fixed;inset:0;background:var(--navy-deep);z-index:61;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1.3rem;opacity:0;visibility:hidden;transform:scale(1.04);transition:all .45s var(--ease)}
+  .mobile.open{opacity:1;visibility:visible;transform:scale(1)}
+  .mobile a{color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:500}
+  .mobile a:hover{color:var(--gold-light)}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;color:#fff}
+  .hero-media{position:absolute;inset:0;z-index:0;overflow:hidden}
+  .hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1)}
+  .hero-media.settled img{animation:kenburns 28s ease-in-out infinite alternate}
+  .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;transition:opacity .55s ease}
+  .hero-video.done{opacity:0;pointer-events:none}
+  @media(prefers-reduced-motion:reduce){.hero-video{display:none}}
+  @keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.06)}}
+  .hero-media::after{content:"";position:absolute;inset:0;z-index:2;background:
+    linear-gradient(180deg,rgba(10,28,48,.55) 0%,rgba(10,28,48,.35) 35%,rgba(10,28,48,.82) 100%),
+    radial-gradient(120% 90% at 70% 20%,rgba(10,28,48,0) 30%,rgba(10,28,48,.5) 100%)}
+  .hero-inner{position:relative;z-index:2;padding-top:90px}
+  .hero .eyebrow{color:var(--gold-light)}
+  .hero h1{font-size:clamp(2.6rem,6.4vw,5.4rem);color:#fff;margin:.35em 0 .15em;font-weight:600;letter-spacing:-.01em;text-shadow:0 2px 30px rgba(0,0,0,.3)}
+  .hero h1 .accent{color:var(--gold-light);font-style:italic}
+  .hero .lead{font-size:clamp(1.05rem,1.8vw,1.35rem);font-weight:300;max-width:620px;color:rgba(255,255,255,.9)}
+  .hero .lead .divider{display:inline-block;width:46px;height:1px;background:var(--gold);vertical-align:middle;margin-right:14px}
+  .hero-cta{display:flex;gap:.9rem;flex-wrap:wrap;margin-top:2rem}
+  .scrolldown{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:.5rem;color:rgba(255,255,255,.75);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase}
+  .scrolldown .mouse{width:24px;height:38px;border:2px solid rgba(255,255,255,.6);border-radius:14px;position:relative}
+  .scrolldown .mouse::after{content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);width:3px;height:7px;border-radius:3px;background:var(--gold-light);animation:wheel 1.6s infinite}
+  @keyframes wheel{0%{opacity:0;top:7px}40%{opacity:1}80%{opacity:0;top:18px}}
+  .drone-tag{position:absolute;right:24px;bottom:30px;z-index:2;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.25);padding:.4em .8em;border-radius:100px;backdrop-filter:blur(4px)}
+
+  /* ---------- cinematic intro (Google Earth Studio clip slot) ---------- */
+  .intro{position:fixed;inset:0;z-index:200;background:#06101c;display:none;align-items:center;justify-content:center;overflow:hidden;transition:opacity .4s ease}
+  .intro.run{display:flex}
+  .intro.gone{opacity:0;pointer-events:none}
+  .intro-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .intro-sim{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+  .intro-sim .globe{width:54vmin;height:54vmin;border-radius:50%;position:relative;
+    background:radial-gradient(circle at 36% 30%,#3b82c4 0%,#1c5187 38%,#0a2540 72%,#07182b 100%);
+    box-shadow:inset -18px -26px 70px rgba(0,0,0,.65),inset 16px 18px 50px rgba(120,180,240,.22),0 0 90px rgba(43,108,176,.45);
+    animation:zoomGlobe 1.0s cubic-bezier(.7,.02,.84,.36) forwards}
+  .intro-sim .globe::after{content:"";position:absolute;inset:0;border-radius:50%;mix-blend-mode:screen;
+    background:radial-gradient(circle at 62% 66%,rgba(70,130,90,.55),transparent 36%),radial-gradient(circle at 30% 56%,rgba(80,140,100,.5),transparent 30%),radial-gradient(circle at 50% 30%,rgba(90,150,110,.4),transparent 26%)}
+  .intro-sim .pin{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);z-index:3;animation:pinIn 1.0s ease forwards}
+  .intro-sim .pin span{display:block;width:14px;height:14px;border-radius:50% 50% 50% 0;background:var(--gold);transform:rotate(-45deg);box-shadow:0 0 0 0 rgba(200,160,78,.7);animation:pinPulse 1.2s ease-out infinite}
+  .intro-sim .sim-label{position:absolute;bottom:15%;left:0;right:0;text-align:center;color:rgba(255,255,255,.78);font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;animation:labelFade 1.0s ease forwards}
+  @keyframes zoomGlobe{0%{transform:scale(.45) translateY(6%)}55%{transform:scale(1.7)}100%{transform:scale(8.5);opacity:0}}
+  @keyframes pinIn{0%,28%{opacity:0;transform:translate(-50%,-90%) scale(.4)}44%{opacity:1;transform:translate(-50%,-50%) scale(1)}82%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(2.4)}}
+  @keyframes pinPulse{0%{box-shadow:0 0 0 0 rgba(200,160,78,.6)}100%{box-shadow:0 0 0 22px rgba(200,160,78,0)}}
+  @keyframes labelFade{0%,18%{opacity:0}38%{opacity:1}78%{opacity:1}100%{opacity:0}}
+  .intro-skip{position:absolute;bottom:30px;right:30px;z-index:4;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.35);color:#fff;font-size:.78rem;font-weight:600;padding:.6em 1.2em;border-radius:100px;cursor:pointer;backdrop-filter:blur(6px);transition:all .3s}
+  .intro-skip:hover{background:rgba(255,255,255,.2)}
+
+  /* ---------- sections ---------- */
+  section{position:relative}
+  .pad{padding:clamp(4rem,9vw,8rem) 0}
+  .sec-head{max-width:680px;margin-bottom:3rem}
+  .sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+  .sec-head h2{font-size:clamp(2rem,4.4vw,3.3rem);margin:.3em 0 .35em}
+  .sec-head p{color:var(--muted);font-size:1.05rem}
+
+  /* welcome / stats */
+  .welcome{background:var(--paper)}
+  .welcome-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+  .welcome-grid h2{font-size:clamp(1.9rem,4vw,3rem);margin:.3em 0 .6em}
+  .welcome-grid p{color:#3a4250;margin-bottom:1.1rem;font-size:1.02rem}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  .stat{background:var(--cream);border:1px solid var(--line);border-radius:var(--r);padding:1.6rem 1.4rem;position:relative;overflow:hidden}
+  .stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold)}
+  .stat .n{font-family:'Cormorant Garamond',serif;font-size:2.9rem;font-weight:700;color:var(--navy);line-height:1}
+  .stat .n .suf{color:var(--gold-deep)}
+  .stat .l{font-size:.82rem;color:var(--muted);margin-top:.4rem;letter-spacing:.02em}
+
+  /* news / vlog feed */
+  .news{background:linear-gradient(180deg,var(--cream) 0%,var(--cream-2) 100%)}
+  .news-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:2.6rem}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem}
+  .card{background:var(--paper);border-radius:var(--r);overflow:hidden;border:1px solid var(--line);transition:transform .45s var(--ease),box-shadow .45s var(--ease);display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+  .card .ph{aspect-ratio:16/10;overflow:hidden;position:relative}
+  .card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+  .card:hover .ph img{transform:scale(1.08)}
+  .card .tag{position:absolute;top:12px;left:12px;background:rgba(15,39,66,.88);color:var(--gold-light);font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.4em .8em;border-radius:100px;backdrop-filter:blur(4px)}
+  .card .body{padding:1.3rem 1.4rem 1.5rem;display:flex;flex-direction:column;flex:1}
+  .card .date{font-size:.74rem;color:var(--muted);letter-spacing:.04em;margin-bottom:.5rem}
+  .card h3{font-size:1.4rem;line-height:1.15;margin-bottom:.7rem}
+  .card .more{margin-top:auto;font-size:.8rem;font-weight:600;color:var(--gold-deep);display:inline-flex;align-items:center;gap:.4em;transition:gap .3s}
+  .card:hover .more{gap:.8em}
+
+  /* campus map */
+  .campus{background:var(--navy);color:#fff;overflow:hidden}
+  .campus .sec-head h2{color:#fff}
+  .campus .sec-head p{color:rgba(255,255,255,.7)}
+  .campus .eyebrow{color:var(--gold-light)}
+  .map-layout{display:grid;grid-template-columns:1.4fr .9fr;gap:2.4rem;align-items:stretch}
+  .map-stage{position:relative;background:linear-gradient(160deg,#13314f,#0c2138);border:1px solid rgba(200,160,78,.25);border-radius:20px;padding:22px;min-height:380px}
+  .map-svg{width:100%;height:auto;display:block}
+  .zone{cursor:pointer;transition:all .3s var(--ease)}
+  .zone rect,.zone path{transition:all .3s var(--ease)}
+  .zone .blk{fill:rgba(255,255,255,.05);stroke:rgba(200,160,78,.45);stroke-width:1.5}
+  .zone:hover .blk,.zone.active .blk{fill:rgba(200,160,78,.22);stroke:var(--gold-light)}
+  .zone text{fill:rgba(255,255,255,.85);font-family:'Inter';font-size:11px;font-weight:500;pointer-events:none}
+  .zone .pin{fill:var(--gold)}
+  .zone:hover .pin,.zone.active .pin{fill:var(--gold-light)}
+  .map-info{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:2rem;display:flex;flex-direction:column}
+  .map-info .ic{width:52px;height:52px;border-radius:14px;background:rgba(200,160,78,.16);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.1rem}
+  .map-info h3{color:#fff;font-size:1.9rem;margin-bottom:.6rem;transition:opacity .3s}
+  .map-info p{color:rgba(255,255,255,.72);font-size:.96rem;margin-bottom:1.4rem;transition:opacity .3s}
+  .map-info .go{margin-top:auto;align-self:flex-start}
+  .map-hint{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:1rem}
+
+  /* professors */
+  .team{background:var(--paper)}
+  .filters{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-bottom:2.6rem}
+  .chip{font-size:.8rem;font-weight:500;padding:.55em 1.15em;border-radius:100px;border:1px solid var(--line);background:#fff;cursor:pointer;transition:all .3s var(--ease);color:var(--navy)}
+  .chip:hover{border-color:var(--gold)}
+  .chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem}
+  .prof{background:var(--cream);border:1px solid var(--line);border-radius:var(--r);padding:1.8rem 1.2rem;text-align:center;transition:all .45s var(--ease)}
+  .prof:hover{transform:translateY(-6px);box-shadow:var(--shadow);background:#fff}
+  .avatar{width:96px;height:96px;border-radius:50%;margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:600;color:var(--navy);background:radial-gradient(circle at 30% 25%,#fff,var(--cream-2));border:2px solid var(--gold);position:relative}
+  .avatar::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:1px solid rgba(200,160,78,.35);transition:inset .4s var(--ease)}
+  .prof:hover .avatar::after{inset:-11px}
+  .prof .nm{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--navy)}
+  .prof .role{font-size:.78rem;color:var(--gold-deep);font-weight:600;letter-spacing:.04em;margin-top:.2rem}
+  .prof .sub{font-size:.8rem;color:var(--muted);margin-top:.5rem}
+
+  /* admissions band */
+  .cta-band{background:linear-gradient(120deg,var(--navy-deep),var(--navy-soft));color:#fff;text-align:center;position:relative;overflow:hidden}
+  .cta-band::before,.cta-band::after{content:"✶";position:absolute;color:rgba(200,160,78,.18);font-size:9rem;font-family:serif}
+  .cta-band::before{top:-10px;left:4%}
+  .cta-band::after{bottom:-30px;right:5%}
+  .cta-band h2{color:#fff;font-size:clamp(2.1rem,5vw,3.6rem);margin-bottom:.4em}
+  .cta-band p{color:rgba(255,255,255,.8);max-width:560px;margin:0 auto 2rem;font-size:1.05rem}
+  .cta-pills{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.2rem}
+  .pill{border:1px solid rgba(200,160,78,.4);border-radius:100px;padding:.5em 1.1em;font-size:.84rem;color:var(--gold-light)}
+
+  /* footer */
+  footer{background:var(--navy-deep);color:rgba(255,255,255,.72);font-size:.9rem}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.1fr;gap:2.2rem;padding:clamp(3rem,6vw,5rem) 0 2.4rem}
+  footer h4{color:#fff;font-size:1.05rem;letter-spacing:.02em;margin-bottom:1.1rem;font-family:'Inter';font-weight:600}
+  footer .brand-f{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem}
+  footer .brand-f img{height:52px}
+  footer .brand-f b{font-family:'Cormorant Garamond',serif;color:#fff;font-size:1.1rem;font-weight:600;line-height:1.1}
+  footer ul{list-style:none}
+  footer ul li{margin-bottom:.6rem}
+  footer a:hover{color:var(--gold-light)}
+  .social{display:flex;gap:.6rem;margin-top:.4rem}
+  .social a{width:38px;height:38px;border-radius:10px;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;transition:all .3s var(--ease);color:#fff}
+  .social a:hover{background:var(--gold);color:var(--navy-deep);border-color:var(--gold);transform:translateY(-3px)}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding:1.3rem 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem;font-size:.8rem;color:rgba(255,255,255,.5)}
+
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+  .reveal.d4{transition-delay:.32s}.reveal.d5{transition-delay:.4s}.reveal.d6{transition-delay:.48s}
+
+  /* responsive */
+  @media(max-width:980px){
+    .menu{display:none}.burger{display:flex}
+    .welcome-grid{grid-template-columns:1fr;gap:2.4rem}
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .team-grid{grid-template-columns:repeat(3,1fr)}
+    .map-layout{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:620px){
+    .wrap{padding:0 20px}
+    .hide-sm{display:none}
+    .grid{grid-template-columns:1fr}
+    .team-grid{grid-template-columns:repeat(2,1fr)}
+    .stats{grid-template-columns:1fr 1fr}
+    .foot-grid{grid-template-columns:1fr}
+    .hero-cta .btn{flex:1;justify-content:center}
+    .drone-tag{display:none}
+    .brand .bt{font-size:.9rem}
+    .cta-band::before,.cta-band::after{display:none}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none;transition:none}
+    .hero-media img{animation:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- nav + announcement (combined fixed header — no overlap) -->
+<header class="nav at-top" id="nav">
+  <div class="topbar">
+    📣 <strong>Admitere 2026–2027</strong><span class="hide-sm"><span class="dot">·</span>26 de locuri · Teologie Pastorală</span><span class="dot">·</span><a href="#admitere">Vezi detalii →</a>
+  </div>
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">
+      <img class="logo-img" src="./assets/logo-mark.png" onerror="this.onerror=null;this.src='./assets/logo.png'" alt="Sigla Seminarului Teologic Ortodox Sfântul Ioan Gură de Aur Târgoviște" />
+      <span class="bt">Seminarul Teologic Ortodox<small>Sf. Ioan Gură de Aur · Târgoviște</small></span>
+    </a>
+    <nav class="menu">
+      <a class="lk" href="#top">Acasă</a>
+      <a class="lk" href="#admitere">Admitere</a>
+      <a class="lk" href="#news">Activități</a>
+      <a class="lk" href="#campus">Campus</a>
+      <a class="lk" href="#team">Profesori</a>
+      <a class="lk" href="#contact">Contact</a>
+      <a class="btn btn-gold" href="#admitere">Înscrie-te</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Meniu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile" id="mobile">
+  <a href="#top">Acasă</a><a href="#admitere">Admitere</a><a href="#news">Activități</a>
+  <a href="#campus">Campus</a><a href="#team">Profesori</a><a href="#contact">Contact</a>
+</div>
+
+<!-- hero: the zoom video is the background UNDER the layout; it crossfades to the still (its last frame == the still) -->
+<section class="hero" id="top">
+  <div class="hero-media">
+    <img src="./assets/hero-still.jpg" alt="Seminarul Teologic Ortodox „Sfântul Ioan Gură de Aur” din Târgoviște" fetchpriority="high" />
+    <video id="heroVideo" class="hero-video" autoplay muted playsinline preload="auto" poster="./assets/hero-first.jpg">
+      <source src="./assets/hero-zoom.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow reveal in">Arhiepiscopia Târgoviștei</p>
+    <h1 class="reveal in d1">Seminarul Teologic Ortodox<br><span class="accent">„Sfântul Ioan Gură de Aur"</span></h1>
+    <p class="lead reveal in d2"><span class="divider"></span>De peste 30 de ani în slujba Bisericii și a Educației, în inima cetății Târgoviștei.</p>
+    <div class="hero-cta reveal in d3">
+      <a class="btn btn-gold" href="#admitere">Admitere 2026 →</a>
+      <a class="btn btn-ghost" href="#campus">Descoperă campusul</a>
+    </div>
+  </div>
+  <div class="scrolldown"><div class="mouse"></div><span>Scroll</span></div>
+</section>
+
+<!-- welcome + stats -->
+<section class="welcome pad">
+  <div class="wrap welcome-grid">
+    <div>
+      <p class="eyebrow reveal">Bine ați venit</p>
+      <h2 class="reveal d1">O comunitate a credinței,<br>culturii și caracterului.</h2>
+      <p class="reveal d2">Seminarul Teologic Ortodox „Sfântul Ioan Gură de Aur" formează tineri în specializarea Teologie Pastorală, îmbinând rigoarea academică cu viața duhovnicească și deschiderea europeană prin programul Erasmus+.</p>
+      <p class="reveal d3"><em class="serif-i">„Dacă-ți iubești copilul, arat-o prin educația pe care i-o dai!"</em></p>
+      <a class="btn btn-outline reveal d4" href="#news" style="margin-top:.6rem">Viața seminarului →</a>
+    </div>
+    <div class="stats">
+      <div class="stat reveal d1"><div class="n" data-count="30"><span>0</span><span class="suf">+</span></div><div class="l">ani de tradiție</div></div>
+      <div class="stat reveal d2"><div class="n" data-count="338"><span>0</span></div><div class="l">elevi seminariști</div></div>
+      <div class="stat reveal d3"><div class="n" data-count="68"><span>0</span></div><div class="l">cadre & personal</div></div>
+      <div class="stat reveal d4"><div class="n" style="font-size:1.5rem;padding-top:.5rem">Erasmus+<br><span style="font-size:.9rem;color:var(--gold-deep)">acreditat</span></div><div class="l">mobilități europene</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- news / vlog feed -->
+<section class="news pad" id="news">
+  <div class="wrap">
+    <div class="news-top">
+      <div class="sec-head" style="margin-bottom:0">
+        <p class="eyebrow reveal">Din viața seminarului</p>
+        <h2 class="reveal d1">Activități & evenimente</h2>
+      </div>
+      <a class="btn btn-outline reveal d2" href="#">Toate activitățile →</a>
+    </div>
+    <div class="grid">
+      <article class="card reveal d1">
+        <div class="ph"><img loading="lazy" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=800/d95MN2J9V3cXzoxX/img_9774-c5maBmN6wDMCya6l.jpeg" alt="Festivitate"><span class="tag">Eveniment</span></div>
+        <div class="body"><div class="date">12 iunie 2026</div><h3>Festivitatea de încheiere a anului școlar</h3><a class="more" href="#">Citește mai mult →</a></div>
+      </article>
+      <article class="card reveal d2">
+        <div class="ph"><img loading="lazy" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=800/d95MN2J9V3cXzoxX/img_9226-rJwKKbIZYoRIMbKX.jpeg" alt="Concert Coralia"><span class="tag">Cultural</span></div>
+        <div class="body"><div class="date">7 iunie 2026</div><h3>Prezenți pe scena Concertului „Coralia"</h3><a class="more" href="#">Citește mai mult →</a></div>
+      </article>
+      <article class="card reveal d3">
+        <div class="ph"><img loading="lazy" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=800/d95MN2J9V3cXzoxX/652900604_122236612226139762_4139687152801506898_n-d5KrRj30972CdqBi.jpg" alt="Mobilitate Erasmus"><span class="tag">Erasmus+</span></div>
+        <div class="body"><div class="date">mai 2026</div><h3>Educație și deschidere europeană — Mobilități Erasmus</h3><a class="more" href="#">Citește mai mult →</a></div>
+      </article>
+      <article class="card reveal d1">
+        <div class="ph"><img loading="lazy" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=800/d95MN2J9V3cXzoxX/650053899_122236240862139762_1256219287313679433_n-5rclVuvplEM0xwhW.jpg" alt="Olimpiadă"><span class="tag">Performanță</span></div>
+        <div class="body"><div class="date">aprilie 2026</div><h3>Olimpiada Națională de Religie — Seminarii Teologice</h3><a class="more" href="#">Citește mai mult →</a></div>
+      </article>
+      <article class="card reveal d2">
+        <div class="ph"><img loading="lazy" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=800/d95MN2J9V3cXzoxX/img_4322-p6QQDlS4utPSYz2F.jpeg" alt="Activitate elevi"><span class="tag">Educație</span></div>
+        <div class="body"><div class="date">martie 2026</div><h3>Educație pentru siguranța în mediul online</h3><a class="more" href="#">Citește mai mult →</a></div>
+      </article>
+      <article class="card reveal d3">
+        <div class="ph"><img loading="lazy" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=800/d95MN2J9V3cXzoxX/whatsapp-image-2026-03-25-at-20.30.30-7mp5JZ4FUTbCLmDw.jpeg" alt="Concurs"><span class="tag">Concurs</span></div>
+        <div class="body"><div class="date">martie 2026</div><h3>Premii la sesiunea de comunicări științifice</h3><a class="more" href="#">Citește mai mult →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- campus map -->
+<section class="campus pad" id="campus">
+  <div class="wrap">
+    <div class="sec-head center">
+      <p class="eyebrow reveal">Explorează</p>
+      <h2 class="reveal d1">Campusul, la un clic distanță</h2>
+      <p class="reveal d2">Apasă pe o zonă pentru a afla informații și a ajunge direct la departamentul dorit.</p>
+    </div>
+    <div class="map-layout">
+      <div class="map-stage reveal">
+        <svg class="map-svg" viewBox="0 0 600 420" role="img" aria-label="Hartă interactivă a campusului">
+          <g class="zone active" data-zone="capela">
+            <rect class="blk" x="40" y="40" width="180" height="120" rx="10"/>
+            <circle class="pin" cx="60" cy="60" r="5"/><text x="74" y="64">Capela</text>
+          </g>
+          <g class="zone" data-zone="clase">
+            <rect class="blk" x="240" y="40" width="320" height="120" rx="10"/>
+            <circle class="pin" cx="260" cy="60" r="5"/><text x="274" y="64">Săli de clasă</text>
+          </g>
+          <g class="zone" data-zone="internat">
+            <rect class="blk" x="40" y="185" width="200" height="195" rx="10"/>
+            <circle class="pin" cx="60" cy="205" r="5"/><text x="74" y="209">Internat</text>
+          </g>
+          <g class="zone" data-zone="secretariat">
+            <rect class="blk" x="260" y="185" width="150" height="90" rx="10"/>
+            <circle class="pin" cx="280" cy="205" r="5"/><text x="294" y="209">Secretariat</text>
+          </g>
+          <g class="zone" data-zone="biblioteca">
+            <rect class="blk" x="430" y="185" width="130" height="90" rx="10"/>
+            <circle class="pin" cx="450" cy="205" r="5"/><text x="464" y="209">Bibliotecă</text>
+          </g>
+          <g class="zone" data-zone="festivitati">
+            <rect class="blk" x="260" y="295" width="300" height="85" rx="10"/>
+            <circle class="pin" cx="280" cy="315" r="5"/><text x="294" y="319">Sala de festivități</text>
+          </g>
+        </svg>
+      </div>
+      <div class="map-info reveal d2">
+        <div class="map-hint">Departament selectat</div>
+        <div class="ic" id="zi">⛪</div>
+        <h3 id="zt">Capela</h3>
+        <p id="zd">Inima duhovnicească a seminarului, unde elevii participă la slujbe și la viața liturgică zilnică.</p>
+        <a class="btn btn-gold go" href="#">Mergi la secțiune →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- professors -->
+<section class="team pad" id="team">
+  <div class="wrap">
+    <div class="sec-head center">
+      <p class="eyebrow reveal">Corpul profesoral</p>
+      <h2 class="reveal d1">Dascăli dedicați, modele de urmat</h2>
+      <p class="reveal d2">Preoți profesori și cadre didactice care îmbină competența academică cu îndrumarea duhovnicească.</p>
+    </div>
+    <div class="filters reveal d2">
+      <button class="chip on">Toți</button><button class="chip">Conducere</button>
+      <button class="chip">Teologie</button><button class="chip">Limbi</button>
+      <button class="chip">Real</button><button class="chip">Uman</button>
+    </div>
+    <div class="team-grid">
+      <div class="prof reveal d1"><div class="avatar">N</div><div class="nm">Pr. Prof. Director</div><div class="role">Conducere</div><div class="sub">Teologie Dogmatică</div></div>
+      <div class="prof reveal d2"><div class="avatar">SN</div><div class="nm">Pr. Prof. Ștefan N.</div><div class="role">Duhovnic</div><div class="sub">Religie · Spiritualitate</div></div>
+      <div class="prof reveal d3"><div class="avatar">LP</div><div class="nm">Prof. Liana P.</div><div class="role">Catedra de Limbi</div><div class="sub">Limba și literatura română</div></div>
+      <div class="prof reveal d4"><div class="avatar">FG</div><div class="nm">Prof. Florentin G.</div><div class="role">Catedra de Limbi</div><div class="sub">Limba și literatura română</div></div>
+      <div class="prof reveal d1"><div class="avatar">AM</div><div class="nm">Prof. de Matematică</div><div class="role">Catedra Real</div><div class="sub">Matematică · Informatică</div></div>
+      <div class="prof reveal d2"><div class="avatar">EN</div><div class="nm">Prof. de Engleză</div><div class="role">Catedra de Limbi</div><div class="sub">Limba engleză</div></div>
+      <div class="prof reveal d3"><div class="avatar">IS</div><div class="nm">Prof. de Istorie</div><div class="role">Catedra Uman</div><div class="sub">Istorie · Socio-umane</div></div>
+      <div class="prof reveal d4"><div class="avatar">MZ</div><div class="nm">Prof. de Muzică</div><div class="role">Catedra Artă</div><div class="sub">Muzică bisericească</div></div>
+    </div>
+    <p style="text-align:center;margin-top:1.6rem;font-size:.82rem;color:var(--muted)">Date demonstrative — profilele reale vor fi gestionate din CMS.</p>
+  </div>
+</section>
+
+<!-- admissions cta -->
+<section class="cta-band pad" id="admitere">
+  <div class="wrap">
+    <p class="eyebrow reveal" style="color:var(--gold-light)">Admitere 2026–2027</p>
+    <h2 class="reveal d1">Devino seminarist</h2>
+    <p class="reveal d2">Înscrierile pentru clasa a IX-a, specializarea Teologie Pastorală, sunt deschise. Descoperă criteriile, calendarul și actele necesare.</p>
+    <div class="cta-pills reveal d2">
+      <span class="pill">26 de locuri</span><span class="pill">Teologie Pastorală</span><span class="pill">Liceu · 4 ani</span><span class="pill">Sesiunea mai 2026</span>
+    </div>
+    <a class="btn btn-gold reveal d3" href="#">Vezi detalii admitere →</a>
+  </div>
+</section>
+
+<!-- footer -->
+<footer id="contact">
+  <div class="wrap foot-grid">
+    <div>
+      <div class="brand-f">
+        <img src="./assets/logo.png" onerror="this.onerror=null;this.src='https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=160/d95MN2J9V3cXzoxX/sigla-seminar-buna1-ts1542376618-Y4Llnj3p1rhB1D6e.png'" alt="Sigla seminarului" />
+        <b>Seminarul Teologic Ortodox<br>„Sf. Ioan Gură de Aur"</b>
+      </div>
+      <p style="max-width:300px">De peste 30 de ani în slujba Bisericii și a Educației, sub oblăduirea Arhiepiscopiei Târgoviștei.</p>
+      <div class="social">
+        <a href="https://www.facebook.com/p/Seminarul-Teologic-Ortodox-Sf%C3%A2ntul-Ioan-Gur%C4%83-de-Aur-T%C3%A2rgovi%C5%9Fte-100063548945996/" aria-label="Facebook">f</a>
+        <a href="https://www.tiktok.com/@seminartargoviste" aria-label="TikTok">♪</a>
+        <a href="#" aria-label="Instagram">◎</a>
+      </div>
+    </div>
+    <div>
+      <h4>Navigare</h4>
+      <ul><li><a href="#admitere">Admitere</a></li><li><a href="#news">Activități</a></li><li><a href="#campus">Campus</a></li><li><a href="#team">Profesori</a></li><li><a href="#">Erasmus+</a></li></ul>
+    </div>
+    <div>
+      <h4>Pentru elevi</h4>
+      <ul><li><a href="#">Orar</a></li><li><a href="#">Burse</a></li><li><a href="#">Bacalaureat</a></li><li><a href="#">Atestat profesional</a></li><li><a href="#">Avizier</a></li></ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li>Bd. Unirii 28, Târgoviște 130034</li>
+        <li><a href="tel:+40245614505">0245 614 505</a></li>
+        <li><a href="mailto:seminarul.tgv@scolidb.ro">seminarul.tgv@scolidb.ro</a></li>
+        <li>Luni–Vineri: 08:00–16:00</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© 2026 Seminarul Teologic Ortodox „Sf. Ioan Gură de Aur" Târgoviște</span>
+    <span>Prototip de design · v0.1</span>
+  </div>
+</footer>
+
+<script>
+  // cinematic intro (Earth Studio clip -> crossfade into hero); short + never blocks load
+  // hero background video: plays once over the still, then crossfades out to reveal it (seamless — last frame == the still)
+  (function(){
+    const v=document.getElementById('heroVideo');
+    if(!v)return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){v.style.display='none';return;}
+    const media=document.querySelector('.hero-media');
+    const hide=()=>{v.classList.add('done');if(media)media.classList.add('settled');};
+    v.addEventListener('ended',hide);
+    v.addEventListener('error',hide);
+    setTimeout(hide,3600);                      // safety: video is ~2.3s
+    const p=v.play&&v.play(); if(p&&p.catch)p.catch(hide);
+  })();
+
+  // nav scroll state
+  const nav=document.getElementById('nav');
+  const onScroll=()=>{const s=window.scrollY>40;nav.classList.toggle('scrolled',s);nav.classList.toggle('at-top',!s);};
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+  // mobile menu
+  const burger=document.getElementById('burger'),mobile=document.getElementById('mobile');
+  burger.addEventListener('click',()=>mobile.classList.toggle('open'));
+  mobile.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mobile.classList.remove('open')));
+
+  // reveal on scroll
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.14});
+  document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
+
+  // animated counters
+  const counters=document.querySelectorAll('.n[data-count]');
+  const cio=new IntersectionObserver((es)=>{es.forEach(e=>{
+    if(!e.isIntersecting)return;cio.unobserve(e.target);
+    const el=e.target,end=+el.dataset.count,span=el.querySelector('span'),dur=1400,t0=performance.now();
+    const tick=(t)=>{const p=Math.min((t-t0)/dur,1),ev=1-Math.pow(1-p,3);span.textContent=Math.round(end*ev);if(p<1)requestAnimationFrame(tick);};
+    requestAnimationFrame(tick);
+  })},{threshold:.5});
+  counters.forEach(c=>cio.observe(c));
+
+  // campus map
+  const zones={
+    capela:{i:'⛪',t:'Capela',d:'Inima duhovnicească a seminarului, unde elevii participă la slujbe și la viața liturgică zilnică.'},
+    clase:{i:'📚',t:'Săli de clasă',d:'Spații moderne de învățare pentru disciplinele teologice și de cultură generală.'},
+    internat:{i:'🛏️',t:'Internat',d:'Cazare pentru elevii din afara localității, într-un mediu sigur și supravegheat.'},
+    secretariat:{i:'🗂️',t:'Secretariat',d:'Acte, înscrieri și informații administrative — program Luni–Vineri, 08:00–16:00.'},
+    biblioteca:{i:'📖',t:'Bibliotecă',d:'Fond de carte teologic și academic, spațiu de studiu și lectură.'},
+    festivitati:{i:'🎭',t:'Sala de festivități',d:'Locul evenimentelor, concertelor, serbărilor și întâlnirilor duhovnicești.'}
+  };
+  const zi=document.getElementById('zi'),zt=document.getElementById('zt'),zd=document.getElementById('zd');
+  document.querySelectorAll('.zone').forEach(z=>{
+    const sel=()=>{document.querySelectorAll('.zone').forEach(x=>x.classList.remove('active'));z.classList.add('active');
+      const d=zones[z.dataset.zone];zi.textContent=d.i;zt.textContent=d.t;zd.textContent=d.d;};
+    z.addEventListener('click',sel);
+    z.setAttribute('tabindex','0');z.setAttribute('role','button');
+    z.addEventListener('keypress',e=>{if(e.key==='Enter'||e.key===' ')sel();});
+  });
+
+  // professor filters (visual demo)
+  document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{
+    document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));c.classList.add('on');
+  }));
+</script>
+</body>
+</html>

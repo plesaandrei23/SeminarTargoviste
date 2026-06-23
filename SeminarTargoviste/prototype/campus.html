@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Campusul · Seminarul Teologic Ortodox Târgoviște</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{--navy:#0f2742;--navy-deep:#0a1c30;--gold:#c8a04e;--gold-deep:#a37f33;--cream:#f8f4ec;--cream2:#efe8da;--paper:#fffdf9;--ink:#1d2128;--muted:#6b7280;--line:rgba(15,39,66,.12)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--cream)}
+  h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--navy);line-height:1.08}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 28px}
+  .eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-deep)}
+
+  .topbar{position:sticky;top:0;z-index:30;background:rgba(248,244,236,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .topbar .row{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:.6rem}
+  .brand img{height:40px}
+  .brand b{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--navy);font-size:1rem;line-height:1}
+  .brand small{display:block;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-family:'Inter'}
+  .back{font-size:.82rem;font-weight:500;color:var(--navy);display:inline-flex;gap:.4em;align-items:center}
+  .back:hover{color:var(--gold-deep)}
+
+  .intro{padding:clamp(3.5rem,8vw,6.5rem) 0 2rem;text-align:center}
+  .intro h1{font-size:clamp(2.4rem,6vw,4rem);margin:.3em auto .3em;max-width:14ch}
+  .intro p{color:#3a4250;max-width:600px;margin:0 auto;font-size:1.06rem;font-weight:300}
+  .meta{display:flex;gap:2.4rem;justify-content:center;margin-top:2.2rem;flex-wrap:wrap}
+  .meta div{font-size:.84rem;color:var(--muted)}
+  .meta b{display:block;font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--navy);font-weight:600}
+
+  .places{padding:2rem 0 4rem}
+  .place{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(1.6rem,4vw,3.4rem);align-items:center;padding:clamp(2rem,5vw,3.6rem) 0}
+  .place:nth-child(even) .ph{order:2}
+  .ph{aspect-ratio:4/3;border-radius:18px;position:relative;overflow:hidden;
+    background:radial-gradient(120% 120% at 30% 20%,#163454,var(--navy) 60%,var(--navy-deep));
+    border:1px solid rgba(200,160,78,.22);display:flex;align-items:center;justify-content:center}
+  .ph .mono{font-family:'Cormorant Garamond',serif;font-size:9rem;color:rgba(226,194,121,.12);font-weight:600;position:absolute;line-height:1}
+  .ph .ic{font-size:2.2rem;opacity:.9;position:relative;z-index:2}
+  .ph .badge{position:absolute;left:16px;bottom:16px;z-index:2;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.25);padding:.4em .8em;border-radius:100px;display:flex;gap:.5em;align-items:center}
+  .ph .tag360{position:absolute;right:16px;top:16px;z-index:2;font-size:.66rem;font-weight:600;letter-spacing:.08em;color:var(--navy-deep);background:var(--gold);padding:.4em .8em;border-radius:100px}
+
+  .txt .num{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold-deep);font-weight:600}
+  .txt h2{font-size:clamp(1.9rem,4vw,2.7rem);margin:.15em 0 .6em}
+  .txt p{color:#3a4250;font-size:1.04rem;line-height:1.7;margin-bottom:1.1rem}
+  .txt .more{font-size:.82rem;font-weight:600;color:var(--gold-deep);display:inline-flex;gap:.4em;align-items:center}
+
+  .cta{background:linear-gradient(120deg,var(--navy-deep),#1b3a5c);color:#fff;text-align:center;padding:clamp(3.5rem,7vw,5.5rem) 0}
+  .cta h2{color:#fff;font-size:clamp(2rem,5vw,3rem);margin-bottom:.4em}
+  .cta p{color:rgba(255,255,255,.78);max-width:520px;margin:0 auto 1.8rem}
+  .btn{display:inline-flex;align-items:center;gap:.5em;background:var(--gold);color:var(--navy-deep);font-weight:600;font-size:.92rem;padding:.85em 1.7em;border-radius:100px;transition:all .3s}
+  .btn:hover{background:#e2c279;transform:translateY(-2px)}
+
+  @media(max-width:760px){.place{grid-template-columns:1fr;gap:1.4rem}.place:nth-child(even) .ph{order:0}.meta{gap:1.6rem}}
+</style>
+</head>
+<body>
+  <header class="topbar"><div class="wrap row">
+    <a class="brand" href="./index.html">
+      <img src="./assets/logo-mark.png" alt="Sigla seminarului" />
+      <span><b>Seminarul Teologic Ortodox</b><small>Sf. Ioan Gură de Aur · Târgoviște</small></span>
+    </a>
+    <a class="back" href="./index.html">← Înapoi acasă</a>
+  </div></header>
+
+  <section class="intro"><div class="wrap">
+    <p class="eyebrow">Campusul nostru</p>
+    <h1>Un loc al credinței, al studiului și al comunității</h1>
+    <p>Câteva clădiri vechi și noi, strânse în jurul unei grădini, în inima cetății Târgoviștei. Pășește prin locurile în care, de peste 30 de ani, se formează tineri pentru slujirea Bisericii.</p>
+    <div class="meta">
+      <div><b>6</b> locuri de descoperit</div>
+      <div><b>30+</b> ani de istorie</div>
+      <div><b>338</b> elevi</div>
+    </div>
+  </div></section>
+
+  <section class="places"><div class="wrap">
+
+    <div class="place">
+      <div class="ph"><span class="mono">I</span><span class="ic">⛪</span><span class="tag360">Tur 360°</span><span class="badge">○ fotografie — în pregătire</span></div>
+      <div class="txt"><span class="num">01</span><h2>Capela</h2>
+        <p>Inima duhovnicească a seminarului. Aici ziua începe și se încheie cu rugăciune, iar elevii deprind viața liturgică alături de preoții profesori.</p>
+        <a class="more" href="#">Pășește înăuntru →</a></div>
+    </div>
+
+    <div class="place">
+      <div class="ph"><span class="mono">II</span><span class="ic">📚</span><span class="tag360">Tur 360°</span><span class="badge">○ fotografie — în pregătire</span></div>
+      <div class="txt"><span class="num">02</span><h2>Sălile de clasă</h2>
+        <p>Spații luminoase pentru disciplinele teologice și de cultură generală — locul în care credința întâlnește rigoarea academică.</p>
+        <a class="more" href="#">Pășește înăuntru →</a></div>
+    </div>
+
+    <div class="place">
+      <div class="ph"><span class="mono">III</span><span class="ic">🛏️</span><span class="tag360">Tur 360°</span><span class="badge">○ fotografie — în pregătire</span></div>
+      <div class="txt"><span class="num">03</span><h2>Internatul</h2>
+        <p>Cămin pentru elevii din afara orașului: camere supravegheate, mese în comun și un program care îmbină studiul cu viața de obște.</p>
+        <a class="more" href="#">Pășește înăuntru →</a></div>
+    </div>
+
+    <div class="place">
+      <div class="ph"><span class="mono">IV</span><span class="ic">📖</span><span class="tag360">Tur 360°</span><span class="badge">○ fotografie — în pregătire</span></div>
+      <div class="txt"><span class="num">04</span><h2>Biblioteca</h2>
+        <p>Un fond bogat de carte teologică și academică — un loc de liniște pentru studiu, lectură și cercetare.</p>
+        <a class="more" href="#">Pășește înăuntru →</a></div>
+    </div>
+
+    <div class="place">
+      <div class="ph"><span class="mono">V</span><span class="ic">🎭</span><span class="tag360">Tur 360°</span><span class="badge">○ fotografie — în pregătire</span></div>
+      <div class="txt"><span class="num">05</span><h2>Sala de festivități</h2>
+        <p>Locul marilor momente — serbări, concerte, conferințe și seri duhovnicești ale întregii comunități a seminarului.</p>
+        <a class="more" href="#">Pășește înăuntru →</a></div>
+    </div>
+
+    <div class="place">
+      <div class="ph"><span class="mono">VI</span><span class="ic">🌿</span><span class="tag360">Tur 360°</span><span class="badge">○ fotografie — în pregătire</span></div>
+      <div class="txt"><span class="num">06</span><h2>Curtea &amp; grădina</h2>
+        <p>Grădina dintre clădiri — respirația dintre ore: bănci, flori și umbră, sub privirea turnului seminarului.</p>
+        <a class="more" href="#">Vezi grădina →</a></div>
+    </div>
+
+  </div></section>
+
+  <section class="cta"><div class="wrap">
+    <p class="eyebrow" style="color:#e2c279">Te așteptăm</p>
+    <h2>Vino să ne cunoști</h2>
+    <p>Cel mai bine campusul se simte pe viu. Programează o vizită sau scrie-ne — ușile seminarului îți sunt deschise.</p>
+    <a class="btn" href="./index.html#contact">Programează o vizită →</a>
+  </div></section>
+</body>
+</html>

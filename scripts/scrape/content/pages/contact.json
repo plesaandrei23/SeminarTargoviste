@@ -1,0 +1,40 @@
+{
+  "type": "page",
+  "slug": "contact",
+  "path": "/contact",
+  "title": "CONTACT",
+  "seo": {
+    "title": "CONTACT | Seminarul Teologic Ortodox&quot; Sfântul Ioan Gură de Aur&quot; din Tâ",
+    "description": null,
+    "ogImage": null
+  },
+  "body": {
+    "markdown": "# **Seminarul Teologic Ortodox \"Sfântul Ioan Gură de Aur\" din Târgoviște**\n\n### _30 de ani în slujba Bisericii și a Educației_\n\n[![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=80,fit=crop/d95MN2J9V3cXzoxX/arhlogo-m2W1yq3Zr5inKveQ.png)](https://arhiepiscopiatargovistei.ro/)[![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=96,fit=crop/d95MN2J9V3cXzoxX/arhlogo-m2W1yq3Zr5inKveQ.png)](https://arhiepiscopiatargovistei.ro/)\n\n### _Dacă-ți iubești copilul, arat-o prin educația pe care i-o dai!_\n\n#### Trimiteți mesaj\n\nEmail\n\nTrimiteți\n\n![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=482,fit=crop/d95MN2J9V3cXzoxX/revista-2020-AoPDlWr13GCkQ2Da.jpg)\n\n![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=547,fit=crop/d95MN2J9V3cXzoxX/revista-2020-AoPDlWr13GCkQ2Da.jpg)\n\n#### Seminarul Teologic\n\n**Adresa**:\n\nBulevardul Unirii 28, Târgoviște 130034  \n**Program:**\n\nLuni -vineri: 08–16\n\nSâmbătă- duminica: închis\n\n**Contact:**  \nEmail: [seminarul.tgv@scolidb.ro](mailto:seminarul.tgv@scolidb.ro)\n\nTelefon: 0245 614 505\n\nWeb: [http://seminarortodoxtargoviste.ro](http://seminarortodoxtargoviste.ro)"
+  },
+  "images": [
+    {
+      "src": "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=80,fit=crop/d95MN2J9V3cXzoxX/arhlogo-m2W1yq3Zr5inKveQ.png",
+      "alt": "",
+      "width": 339,
+      "height": 72
+    },
+    {
+      "src": "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=96,fit=crop/d95MN2J9V3cXzoxX/arhlogo-m2W1yq3Zr5inKveQ.png",
+      "alt": "",
+      "width": 188,
+      "height": 48
+    },
+    {
+      "src": "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=482,fit=crop/d95MN2J9V3cXzoxX/revista-2020-AoPDlWr13GCkQ2Da.jpg",
+      "alt": "",
+      "width": 447,
+      "height": 280
+    },
+    {
+      "src": "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=547,fit=crop/d95MN2J9V3cXzoxX/revista-2020-AoPDlWr13GCkQ2Da.jpg",
+      "alt": "",
+      "width": 382,
+      "height": 272
+    }
+  ]
+}

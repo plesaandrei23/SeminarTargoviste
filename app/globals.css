@@ -1,0 +1,217 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  /* ── Brand palette ─────────────────────────────────────────── */
+  --color-navy: #0f2742;
+  --color-navy-deep: #0a1c30;
+  --color-navy-soft: #1b3a5c;
+  --color-gold: #c8a04e;
+  --color-gold-light: #e2c279;
+  --color-gold-deep: #a37f33;
+  --color-parchment: #f8f4ec;
+  --color-parchment-2: #efe8da;
+  --color-paper: #fffdf9;
+  --color-ink: #1d2128;
+  --color-muted: #6b7280;
+
+  /* ── Typography ───────────────────────────────────────────── */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+
+  /* ── Motion ───────────────────────────────────────────────── */
+  --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* ── Layout ───────────────────────────────────────────────── */
+  --container-prose: 70ch;
+
+  /* ── Shadows ──────────────────────────────────────────────── */
+  --shadow-elevated: 0 18px 50px -18px rgba(10, 28, 48, 0.45);
+  --shadow-gold: 0 10px 26px -10px rgba(200, 160, 78, 0.7);
+}
+
+/* ── shadcn/ui tokens (mapped to the seminary palette) ──────── */
+:root {
+  --radius: 0.75rem;
+
+  --background: oklch(0.972 0.014 85.87);   /* parchment */
+  --foreground: oklch(0.21 0.034 263.21);   /* ink */
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.21 0.034 263.21);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.21 0.034 263.21);
+
+  --primary: oklch(0.265 0.06 263.55);      /* navy */
+  --primary-foreground: oklch(0.972 0.014 85.87);
+
+  --secondary: oklch(0.929 0.013 264);
+  --secondary-foreground: oklch(0.21 0.034 263.21);
+
+  --muted: oklch(0.94 0.013 264);
+  --muted-foreground: oklch(0.55 0.013 264);
+
+  --accent: oklch(0.71 0.108 75.34);        /* gold */
+  --accent-foreground: oklch(0.18 0.025 263.21);
+
+  --destructive: oklch(0.577 0.245 27.325);
+
+  --border: oklch(0.91 0.013 264);
+  --input: oklch(0.91 0.013 264);
+  --ring: oklch(0.71 0.108 75.34);          /* gold focus ring */
+
+  --chart-1: oklch(0.71 0.108 75.34);
+  --chart-2: oklch(0.265 0.06 263.55);
+  --chart-3: oklch(0.55 0.105 30);
+  --chart-4: oklch(0.6 0.118 184.704);
+  --chart-5: oklch(0.398 0.07 227.392);
+
+  --sidebar: oklch(0.985 0.001 264);
+  --sidebar-foreground: oklch(0.21 0.034 263.21);
+  --sidebar-primary: oklch(0.265 0.06 263.55);
+  --sidebar-primary-foreground: oklch(0.985 0.001 264);
+  --sidebar-accent: oklch(0.94 0.013 264);
+  --sidebar-accent-foreground: oklch(0.21 0.034 263.21);
+  --sidebar-border: oklch(0.91 0.013 264);
+  --sidebar-ring: oklch(0.71 0.108 75.34);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted-token: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background: var(--color-parchment);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--color-navy);
+    letter-spacing: -0.01em;
+  }
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-navy-deep);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  * {
+    border-color: var(--color-border);
+  }
+}
+
+@layer utilities {
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--color-gold-deep);
+  }
+  .serif-i {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+  }
+  .wrap {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 28px;
+  }
+  @media (max-width: 620px) {
+    .wrap { padding-inline: 20px; }
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* ── Reveal-on-scroll ─────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity 0.8s var(--ease-soft),
+    transform 0.8s var(--ease-soft);
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+.reveal.d1 { transition-delay: 0.08s; }
+.reveal.d2 { transition-delay: 0.16s; }
+.reveal.d3 { transition-delay: 0.24s; }
+.reveal.d4 { transition-delay: 0.32s; }
+.reveal.d5 { transition-delay: 0.4s; }
+.reveal.d6 { transition-delay: 0.48s; }
+
+/* ── Ken Burns slow zoom for hero photo ───────────────────── */
+@keyframes kenburns {
+  from { transform: scale(1) translateY(0); }
+  to   { transform: scale(1.12) translateY(-2%); }
+}
+
+/* ── Scroll-hint mouse animation ──────────────────────────── */
+@keyframes wheel {
+  0%   { opacity: 0; top: 7px; }
+  40%  { opacity: 1; }
+  80%  { opacity: 0; top: 18px; }
+  100% { opacity: 0; top: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
