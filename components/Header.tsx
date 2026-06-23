@@ -46,6 +46,7 @@ export function Header() {
   }, [open]);
 
   return (
+    <>
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-[background,box-shadow] duration-500",
@@ -146,33 +147,63 @@ export function Header() {
         </button>
       </div>
 
-      {/* mobile menu overlay */}
-      <div
-        className={cn(
-          "fixed inset-0 z-[61] bg-navy-deep flex flex-col items-center justify-center gap-6 transition-[opacity,transform,visibility] duration-500 lg:hidden",
-          open
-            ? "opacity-100 scale-100 visible"
-            : "opacity-0 scale-105 invisible",
-        )}
-      >
-        {nav.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            onClick={() => setOpen(false)}
-            className="font-serif text-3xl text-parchment hover:text-gold-light transition-colors"
-          >
-            {item.label}
-          </Link>
-        ))}
-        <Link
-          href="/#admitere"
-          onClick={() => setOpen(false)}
-          className="mt-4 inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-[0.95rem] font-semibold text-navy-deep"
-        >
-          Înscrie-te →
-        </Link>
-      </div>
     </header>
+
+    {/*
+      Mobile menu overlay — rendered as a SIBLING of <header>, not a child.
+      The header carries `backdrop-blur-md` in its solid state, which creates
+      a new containing block for fixed-position descendants. If this overlay
+      lived inside <header>, `fixed inset-0` would be relative to the header
+      (only 105px tall) instead of the viewport, and the menu would clip.
+    */}
+    <div
+      className={cn(
+        "fixed inset-0 z-[61] bg-navy-deep flex flex-col items-center justify-center gap-6 transition-[opacity,transform,visibility] duration-500 lg:hidden",
+        open
+          ? "opacity-100 scale-100 visible"
+          : "opacity-0 scale-105 invisible",
+      )}
+      onClick={(e) => {
+        // Tap on the dark backdrop closes the menu; tap on a link or button
+        // doesn't bubble here (Link's onClick already closes, and the close
+        // button stops propagation).
+        if (e.target === e.currentTarget) setOpen(false);
+      }}
+    >
+      {/*
+        Dedicated close button inside the overlay. The hamburger in the
+        header lives in a separate stacking context (header has z-50, so
+        its button's z-[62] only beats siblings INSIDE the header). The
+        menu sits at z-61 in body's stacking context, so it covers the
+        hamburger entirely — we need our own close affordance here.
+      */}
+      <button
+        type="button"
+        aria-label="Închide meniul"
+        onClick={() => setOpen(false)}
+        className="absolute right-5 top-5 p-2 text-parchment transition-colors hover:text-gold-light"
+      >
+        <X size={26} />
+      </button>
+
+      {nav.map((item) => (
+        <Link
+          key={item.href}
+          href={item.href}
+          onClick={() => setOpen(false)}
+          className="font-serif text-3xl text-parchment hover:text-gold-light transition-colors"
+        >
+          {item.label}
+        </Link>
+      ))}
+      <Link
+        href="/#admitere"
+        onClick={() => setOpen(false)}
+        className="mt-4 inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-[0.95rem] font-semibold text-navy-deep"
+      >
+        Înscrie-te →
+      </Link>
+    </div>
+    </>
   );
 }
