@@ -62,7 +62,7 @@ export const admitere = defineType({
       name: "methodologyDocs",
       title: "Metodologie / acte necesare",
       type: "array",
-      of: [{ type: "reference", to: [{ type: "document" }] }],
+      of: [{ type: "reference", to: [{ type: "documentFile" }] }],
     }),
     defineField({
       name: "body",

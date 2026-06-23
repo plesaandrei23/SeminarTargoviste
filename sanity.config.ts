@@ -35,7 +35,7 @@ export default defineConfig({
             S.documentTypeListItem("erasmus").title("Erasmus+"),
             S.divider(),
             S.documentTypeListItem("pagina").title("Pagini statice"),
-            S.documentTypeListItem("document").title("Documente (PDF)"),
+            S.documentTypeListItem("documentFile").title("Documente (PDF)"),
           ]),
     }),
     visionTool({ defaultApiVersion: apiVersion }),

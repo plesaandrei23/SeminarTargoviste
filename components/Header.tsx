@@ -74,10 +74,10 @@ export function Header() {
           className="flex items-center gap-2.5 z-[62] group"
         >
           <Image
-            src="/assets/logo-mark.png"
+            src="/assets/noBgLogo.png"
             alt=""
-            width={108}
-            height={108}
+            width={521}
+            height={479}
             priority
             className="h-[54px] w-auto drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]"
           />
