@@ -53,3 +53,6 @@ pnpm-debug.log*
 
 # ── Scrape cache (regeneratable from scripts/scrape/*.mjs) ───
 /scripts/scrape/raw/
+# Images are large (~95MB) and re-fetchable via download-images.mjs.
+# They're committed to the CMS during Phase 3, not to git.
+/scripts/scrape/images/

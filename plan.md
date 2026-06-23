@@ -52,7 +52,7 @@ seminarortodoxtargoviste.ro (Next.js on Vercel)    ← cutover step, last
 
 ### What's still missing in Phase 1
 
-- [ ] **Image re-hosting** — 473 unique `assets.zyrosite.com` URLs referenced. Need to download all of them locally and re-upload through the CMS pipeline (next phase).
+- [x] **Image download** — 204 unique images (95 MB) saved locally to `scripts/scrape/images/` via `download-images.mjs`. The full content snapshot is now Hostinger-independent. Re-upload happens in Phase 3.
 - [ ] **Romarg & Hostinger admin pull** — Andrei mentioned holding credentials for both. Worth checking the Hostinger Website Builder's content DB for the missing 35 activities — they may exist in draft/archived state in the admin, not the public render. Same for Romarg if it hosted a previous CMS version.
 
 ---

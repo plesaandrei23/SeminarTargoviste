@@ -48,12 +48,12 @@ export function Footer() {
       <div className="wrap grid gap-10 py-[clamp(3rem,6vw,5rem)] sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.1fr]">
         <div>
           <Image
-            src="/assets/logoFull.png"
+            src="/assets/logo.png"
             alt={`Sigla Seminarului Teologic Ortodox „${siteConfig.patron}”`}
-            width={300}
-            height={300}
-            className="mb-5 h-32 w-auto drop-shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
-            sizes="(min-width: 640px) 128px, 96px"
+            width={1200}
+            height={1090}
+            className="mb-5 h-40 w-auto drop-shadow-[0_4px_20px_rgba(0,0,0,0.35)]"
+            sizes="(min-width: 640px) 176px, 144px"
           />
           <p className="max-w-xs text-white/72">
             {siteConfig.tagline}, sub oblăduirea {siteConfig.diocese}.
