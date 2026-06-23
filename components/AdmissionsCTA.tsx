@@ -59,7 +59,7 @@ export function AdmissionsCTA() {
         </Reveal>
         <Reveal delay={3}>
           <Link
-            href="#"
+            href="/admitere"
             className="inline-flex items-center gap-2 rounded-full bg-gold px-8 py-4 text-base font-semibold text-navy-deep transition-all hover:bg-gold-light hover:-translate-y-0.5 hover:shadow-[var(--shadow-gold)]"
           >
             Vezi detalii admitere →

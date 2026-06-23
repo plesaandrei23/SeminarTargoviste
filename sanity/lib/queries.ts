@@ -51,6 +51,32 @@ export const activitySlugsQuery = groq`
   *[_type == "activitate" && defined(slug.current)].slug.current
 `;
 
+/**
+ * Admission cycles, current first. The schema's `isCurrent` boolean lets
+ * staff promote a session — if none are marked current we just sort by
+ * year DESC so the most recent stays on top.
+ */
+export const admissionCyclesQuery = groq`
+  *[_type == "admitere"] | order(isCurrent desc, year desc, _createdAt desc) {
+    _id,
+    year,
+    specialization,
+    availableSpots,
+    session,
+    isCurrent,
+    calendar,
+    "body": coalesce(body, [])[]{
+      ...,
+      _type == "localizedImage" => {
+        asset->{ _id, url, metadata { dimensions { width, height } } },
+        alt,
+        caption
+      }
+    },
+    seo
+  }
+`;
+
 /** Single activity page. */
 export const activityBySlugQuery = groq`
   *[_type == "activitate" && slug.current == $slug][0] {

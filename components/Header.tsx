@@ -75,7 +75,7 @@ export function Header() {
         </span>
         <span className="mx-2 text-gold">·</span>
         <Link
-          href="/#admitere"
+          href="/admitere"
           className="text-gold-light font-semibold hover:underline underline-offset-4"
         >
           Vezi detalii →
@@ -126,7 +126,7 @@ export function Header() {
             </Link>
           ))}
           <Link
-            href="/#admitere"
+            href="/admitere"
             className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-[0.92rem] font-semibold text-navy-deep transition-all duration-300 hover:bg-gold-light hover:-translate-y-0.5 hover:shadow-[var(--shadow-gold)]"
           >
             Înscrie-te
@@ -197,7 +197,7 @@ export function Header() {
         </Link>
       ))}
       <Link
-        href="/#admitere"
+        href="/admitere"
         onClick={() => setOpen(false)}
         className="mt-4 inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-[0.95rem] font-semibold text-navy-deep"
       >
