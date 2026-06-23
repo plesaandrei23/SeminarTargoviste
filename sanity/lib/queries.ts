@@ -80,7 +80,7 @@ export const allPersonalQuery = groq`
   }
 `;
 
-/** Featured staff for the home page Team section (first 8 by ordering). */
+/** Featured staff for the home page Team section (first 4 by ordering). */
 export const featuredPersonalQuery = groq`
   *[_type == "personal" && defined(name)] | order(
     select(
@@ -91,7 +91,7 @@ export const featuredPersonalQuery = groq`
       99
     ),
     order asc
-  ) [0...8] {
+  ) [0...4] {
     _id,
     name,
     role,

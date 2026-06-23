@@ -1,15 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
-import { Card, CardContent } from "@/components/ui/card";
 import { sanityClient } from "@/sanity/lib/client";
 import { featuredPersonalQuery } from "@/sanity/lib/queries";
 import type { Personal } from "@/sanity/lib/types";
 
 /**
- * Home page team teaser — first 8 staff by category + order (director and
- * duhovnici first, then teachers). For the full list with discipline
- * filters, /profesori is one click away via the CTA below the grid.
+ * Home page team teaser — the four most-featured staff (director first,
+ * then duhovnici, then teachers by source-page order). Compact card
+ * design matches the original placeholder layout (circular avatar +
+ * name + role + subject) but now with real portraits from Sanity. The
+ * full filterable list lives at /profesori.
  */
 async function fetchFeatured(): Promise<Personal[]> {
   try {
@@ -49,9 +50,9 @@ export async function Team() {
 
         {people.length > 0 && (
           <>
-            <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {people.map((p, i) => (
-                <TeamCard
+                <TeamAvatarCard
                   key={p._id}
                   person={p}
                   delay={((i % 4) + 1) as 1 | 2 | 3 | 4}
@@ -74,7 +75,7 @@ export async function Team() {
   );
 }
 
-function TeamCard({
+function TeamAvatarCard({
   person,
   delay,
 }: {
@@ -89,35 +90,45 @@ function TeamCard({
     .join("");
 
   return (
-    <Reveal delay={delay}>
-      <Card className="group h-full overflow-hidden border-navy/10 bg-parchment transition-all duration-500 hover:-translate-y-1 hover:bg-white hover:shadow-[var(--shadow-elevated)]">
-        <div className="relative aspect-square overflow-hidden border-b border-navy/10 bg-gradient-to-br from-navy via-navy-soft to-gold-deep">
-          {person.photo?.asset ? (
-            <Image
-              src={person.photo.asset.url}
-              alt={person.photo.alt || person.name}
-              fill
-              sizes="(min-width: 1024px) 280px, (min-width: 640px) 33vw, 50vw"
-              className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-            />
-          ) : (
-            <span className="absolute inset-0 flex items-center justify-center font-serif text-5xl font-semibold text-gold-light">
-              {initials}
-            </span>
-          )}
+    <Reveal
+      delay={delay}
+      className="group rounded-2xl border border-navy/10 bg-parchment p-7 text-center transition-all duration-500 hover:-translate-y-1.5 hover:bg-white hover:shadow-[var(--shadow-elevated)]"
+    >
+      {/*
+        Circular avatar — `object-top` keeps the face above the crop line
+        because legacy portraits often frame the subject from the chest up,
+        and a centered square crop slices the head.
+      */}
+      <div className="relative mx-auto mb-4 size-24 overflow-hidden rounded-full border-2 border-gold bg-gradient-to-br from-navy via-navy-soft to-gold-deep">
+        {person.photo?.asset ? (
+          <Image
+            src={person.photo.asset.url}
+            alt={person.photo.alt || person.name}
+            fill
+            sizes="96px"
+            className="object-cover object-top"
+          />
+        ) : (
+          <span className="absolute inset-0 flex items-center justify-center font-serif text-3xl font-semibold text-gold-light">
+            {initials}
+          </span>
+        )}
+        <span
+          aria-hidden="true"
+          className="absolute -inset-2 rounded-full border border-gold/35 transition-all duration-500 group-hover:-inset-3"
+        />
+      </div>
+      <div className="font-serif text-xl font-semibold leading-tight text-navy text-balance">
+        {person.name}
+      </div>
+      <div className="mt-1 text-[0.78rem] font-semibold tracking-wide text-gold-deep">
+        {person.role}
+      </div>
+      {person.subject && (
+        <div className="mt-2 text-sm text-muted text-pretty">
+          {person.subject}
         </div>
-        <CardContent className="p-5 text-center">
-          {person.subject && (
-            <p className="text-[0.66rem] font-semibold uppercase tracking-[0.14em] text-gold-deep">
-              {person.subject}
-            </p>
-          )}
-          <p className="mt-1 font-serif text-base font-semibold leading-tight text-navy text-balance">
-            {person.name}
-          </p>
-          <p className="mt-2 text-xs text-muted">{person.role}</p>
-        </CardContent>
-      </Card>
+      )}
     </Reveal>
   );
 }

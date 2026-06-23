@@ -438,12 +438,42 @@ function classifyPersonal(rawRole, category) {
   return { role: "Profesor", subject: t };
 }
 
+/**
+ * Pick the best portrait among scraped candidates. Staff blocks on the
+ * legacy site usually carry 1–3 images: the actual portrait, a decorative
+ * line (already filtered upstream), and sometimes a group event photo.
+ * We prefer portrait-orientation images (height > width × 1.1) since
+ * they're almost always headshots; group photos read as landscape.
+ */
+function pickPersonalPhoto(candidates) {
+  const annotated = candidates
+    .map((img) => ({ ...img, dims: localImageDims(img.src) }))
+    .filter((img) => img.dims);
+  if (annotated.length === 0) return null;
+  // Portrait orientation wins outright (the director's group hram photo
+  // is 1360×973 landscape — we want img_4485-A3Q2v6NJODCRbGnx.jpg 1620×2160).
+  const portrait = annotated.find(
+    (i) => i.dims.height > i.dims.width * 1.1,
+  );
+  if (portrait) return portrait;
+  // Otherwise fall back to anything that passes the basic content-image
+  // filter (filters out 982×32 decorative strips, 684×59 banners).
+  return annotated.find((i) => isContentImage(i.dims)) ?? annotated[0];
+}
+
 async function importPersonal(record, index) {
-  if (!record.photo?.src) {
-    console.warn(`  ! ${record.slug} has no photo, skipping`);
+  const candidates =
+    record.images && record.images.length
+      ? record.images
+      : record.photo
+        ? [record.photo]
+        : [];
+  const picked = pickPersonalPhoto(candidates);
+  if (!picked) {
+    console.warn(`  ! ${record.slug} has no usable photo, skipping`);
     return;
   }
-  const photoId = await uploadImage(record.photo.src);
+  const photoId = await uploadImage(picked.src);
   const { role, subject } = classifyPersonal(record.role, record.category);
 
   const doc = {
@@ -457,7 +487,7 @@ async function importPersonal(record, index) {
       ? {
           _type: "localizedImage",
           asset: { _type: "reference", _ref: photoId },
-          alt: record.photo.alt || `Portret ${record.name}`,
+          alt: picked.alt || `Portret ${record.name}`,
         }
       : undefined,
     order: index,

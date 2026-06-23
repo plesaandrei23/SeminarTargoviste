@@ -235,7 +235,7 @@ function PortraitFrame({
             alt={photo.alt || person.name}
             fill
             sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw"
-            className="object-cover"
+            className="object-cover object-top"
           />
         )}
         <span
@@ -253,7 +253,7 @@ function PortraitFrame({
           alt={photo.alt || person.name}
           fill
           sizes="64px"
-          className="object-cover"
+          className="object-cover object-top"
         />
       ) : (
         <span className="absolute inset-0 flex items-center justify-center font-serif text-xl font-semibold text-gold-light">

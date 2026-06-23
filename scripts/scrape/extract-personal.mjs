@@ -85,23 +85,37 @@ function isPageChrome(text) {
   return PAGE_HEADER_BLOCKLIST.some((rx) => rx.test(text));
 }
 
-/** Pull the first real Zyrosite photo from a block. */
-function findPhoto($, block) {
+/**
+ * Filenames that show up as `<img>` on a staff block but are never the
+ * actual portrait — decorative dividers, the diocese coat-of-arms, the
+ * seminary logo, the cross-border banner. Skip them so the first
+ * survivor is the real photo.
+ */
+const NOT_A_PORTRAIT_RX =
+  /\/(linie|arhlogo|sigla-seminar|logo|icon|shared|ea1d677841fc418a1566e08785f72b5ed58fb44a)[^/]*$/i;
+
+/**
+ * All real photo candidates in a block, in DOM order. Junk filenames are
+ * dropped here; final size-based filtering happens at import time where
+ * we already have the file dimensions cached.
+ */
+function findPhotoCandidates($, block) {
   const seen = new Set();
+  const out = [];
   for (const el of $(block).find("img").toArray()) {
     const raw = $(el).attr("src") || $(el).attr("data-src");
     if (!raw || !/zyrosite\.com/.test(raw)) continue;
     if (/\.(svg|gif)(\?|$)/i.test(raw)) continue;
     const url = originalUrl(raw);
+    if (NOT_A_PORTRAIT_RX.test(url)) continue;
     if (seen.has(url)) continue;
     seen.add(url);
-    // First non-trivial image wins.
-    return {
+    out.push({
       src: url,
       alt: $(el).attr("alt") || "",
-    };
+    });
   }
-  return null;
+  return out;
 }
 
 const records = [];
@@ -134,7 +148,7 @@ for (const source of SOURCES) {
     if (!slug || seenSlugs.has(slug)) return;
     seenSlugs.add(slug);
 
-    const photo = findPhoto($, el);
+    const candidates = findPhotoCandidates($, el);
 
     // The "DIRECTOR" role on /didactic should land on "conducere", not "didactic".
     const category =
@@ -147,7 +161,11 @@ for (const source of SOURCES) {
       name: nameHeading,
       role: roleHeading ?? null,
       category,
-      photo,
+      // Multiple candidates → the import script picks the best one with
+      // dimension-aware filtering. Keep `photo` for backwards compat with
+      // the download-images script which used to read it directly.
+      images: candidates,
+      photo: candidates[0] ?? null,
       sourcePage: "/" + source.file.replace(/^%2F/, "").replace(/\.html$/, ""),
     });
   });

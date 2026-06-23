@@ -3,8 +3,14 @@
   "name": "Prof. Ciprian Nicolae Popescu",
   "role": "Informatică",
   "category": "didactic",
+  "images": [
+    {
+      "src": "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/popescu-nicolae-ciprian-b1Tzs4BjJwxy7SSl.jpg",
+      "alt": ""
+    }
+  ],
   "photo": {
-    "src": "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/linie-ts1604505021-AR0epjJO6ehDev1K.png",
+    "src": "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/popescu-nicolae-ciprian-b1Tzs4BjJwxy7SSl.jpg",
     "alt": ""
   },
   "sourcePage": "/didactic"

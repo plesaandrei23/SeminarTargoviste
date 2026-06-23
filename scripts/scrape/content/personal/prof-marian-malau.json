@@ -3,6 +3,12 @@
   "name": "Prof. Marian Mălău",
   "role": "Ed. Fizică",
   "category": "didactic",
+  "images": [
+    {
+      "src": "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/malau-d951J2R763TOyMEg.jpg",
+      "alt": ""
+    }
+  ],
   "photo": {
     "src": "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/malau-d951J2R763TOyMEg.jpg",
     "alt": ""
