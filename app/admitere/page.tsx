@@ -235,18 +235,23 @@ function Hero() {
           oblăduirea {siteConfig.diocese}.
         </Reveal>
         <Reveal delay={3} className="mt-9 flex flex-wrap justify-center gap-3">
-          <Link
+          {/*
+            Native <a> for hash navigation. next/link with a hash-only
+            href doesn't trigger the browser's hash scroll reliably in
+            App Router — the URL updates but the page stays put.
+          */}
+          <a
             href="#calendar"
             className="inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold text-navy-deep transition-all hover:-translate-y-0.5 hover:bg-gold-light"
           >
             Calendar înscriere
-          </Link>
-          <Link
+          </a>
+          <a
             href="#pregatire"
             className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-all hover:border-white hover:bg-white/10"
           >
             Pregătire gratuită
-          </Link>
+          </a>
         </Reveal>
       </div>
     </section>
@@ -552,6 +557,8 @@ function DocumentsSection() {
                 Icon={MapPin}
                 label="Adresă"
                 value={`${siteConfig.address.street}, ${siteConfig.address.city} ${siteConfig.address.postalCode}`}
+                href={siteConfig.address.mapsUrl}
+                external
               />
             </CardContent>
           </Card>
@@ -611,13 +618,13 @@ function ContactSection() {
                   <Phone className="size-4" strokeWidth={1.75} />
                   Sună la secretariat
                 </Link>
-                <Link
+                <a
                   href="#pregatire"
                   className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-all hover:border-white hover:bg-white/10"
                 >
                   <Award className="size-4" strokeWidth={1.75} />
                   Vezi pregătirea gratuită
-                </Link>
+                </a>
               </div>
             </div>
             <div className="space-y-4 text-sm">
@@ -644,6 +651,8 @@ function ContactSection() {
                 Icon={MapPin}
                 label="Adresă"
                 value={`${siteConfig.address.street}, ${siteConfig.address.city}`}
+                href={siteConfig.address.mapsUrl}
+                external
               />
             </div>
           </CardContent>
@@ -687,12 +696,15 @@ function ContactRow({
   value,
   href,
   hint,
+  external,
 }: {
   Icon: typeof Phone;
   label: string;
   value: string;
   href?: string;
   hint?: string;
+  /** Open the link in a new tab (set on external destinations like Google Maps). */
+  external?: boolean;
 }) {
   return (
     <div className="flex items-start gap-3">
@@ -706,6 +718,8 @@ function ContactRow({
         {href ? (
           <a
             href={href}
+            target={external ? "_blank" : undefined}
+            rel={external ? "noopener noreferrer" : undefined}
             className="block truncate font-semibold text-white transition-colors hover:text-gold-light"
           >
             {value}

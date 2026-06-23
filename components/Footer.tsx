@@ -93,8 +93,15 @@ export function Footer() {
           </h3>
           <ul className="space-y-2">
             <li>
-              {siteConfig.address.street}, {siteConfig.address.city}{" "}
-              {siteConfig.address.postalCode}
+              <a
+                href={siteConfig.address.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-start gap-1 hover:text-gold-light"
+              >
+                {siteConfig.address.street}, {siteConfig.address.city}{" "}
+                {siteConfig.address.postalCode}
+              </a>
             </li>
             <li>
               <Link

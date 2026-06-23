@@ -10,6 +10,16 @@ export const siteConfig = {
     city: "Târgoviște",
     postalCode: "130034",
     country: "România",
+    /**
+     * Google Maps deep link to the seminary. Uses the `search?api=1`
+     * format which works on both desktop and mobile (mobile auto-opens
+     * the Google Maps app on Android / iOS Maps via universal link).
+     */
+    mapsUrl:
+      "https://www.google.com/maps/search/?api=1&query=" +
+      encodeURIComponent(
+        "Seminarul Teologic Ortodox Sfantul Ioan Gura de Aur, Bd. Unirii 28, Targoviste 130034",
+      ),
   },
   contact: {
     phone: "+40245614505",
