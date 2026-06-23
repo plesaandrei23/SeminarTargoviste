@@ -20,7 +20,7 @@ const nav = [
   { href: "/activitati", label: "Activități" },
   { href: "/#campus", label: "Campus" },
   { href: "/profesori", label: "Profesori" },
-  { href: "/#contact", label: "Contact" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function Header() {
