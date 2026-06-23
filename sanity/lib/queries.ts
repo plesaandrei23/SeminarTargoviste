@@ -41,6 +41,16 @@ export const allActivitiesQuery = groq`
     }
 `;
 
+/** Distinct school years that have published activities — used to build filter chips. */
+export const activityYearsQuery = groq`
+  array::unique(*[_type == "activitate" && defined(schoolYear)].schoolYear) | order(@ desc)
+`;
+
+/** Slugs for generateStaticParams. */
+export const activitySlugsQuery = groq`
+  *[_type == "activitate" && defined(slug.current)].slug.current
+`;
+
 /** Single activity page. */
 export const activityBySlugQuery = groq`
   *[_type == "activitate" && slug.current == $slug][0] {
