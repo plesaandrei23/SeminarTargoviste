@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { CalendarClock, Users, GraduationCap, Globe2 } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { Stat } from "@/components/Stat";
+import { Card, CardContent } from "@/components/ui/card";
 
 export function Welcome() {
   return (
@@ -46,30 +48,48 @@ export function Welcome() {
 
         <div className="grid grid-cols-2 gap-4">
           <Reveal delay={1}>
-            <Stat value={30} suffix="+" label="ani de tradiție" />
+            <Stat
+              value={30}
+              suffix="+"
+              label="ani de tradiție"
+              icon={<CalendarClock className="size-4 text-gold-deep" strokeWidth={1.75} />}
+            />
           </Reveal>
           <Reveal delay={2}>
-            <Stat value={338} label="elevi seminariști" />
+            <Stat
+              value={338}
+              label="elevi seminariști"
+              icon={<Users className="size-4 text-gold-deep" strokeWidth={1.75} />}
+            />
           </Reveal>
           <Reveal delay={3}>
-            <Stat value={68} label="cadre & personal" />
+            <Stat
+              value={68}
+              label="cadre & personal"
+              icon={<GraduationCap className="size-4 text-gold-deep" strokeWidth={1.75} />}
+            />
           </Reveal>
           <Reveal delay={4}>
-            <div className="relative overflow-hidden rounded-2xl border border-navy/10 bg-parchment p-6 sm:p-7">
+            <Card className="relative overflow-hidden border-navy/10 bg-parchment">
               <span
                 aria-hidden="true"
                 className="absolute inset-y-0 left-0 w-1 bg-gold"
               />
-              <div className="font-serif text-2xl font-bold leading-tight text-navy mt-1">
-                Erasmus+
-                <span className="block text-sm font-semibold text-gold-deep mt-0.5">
-                  acreditat
+              <CardContent className="p-6 sm:p-7">
+                <span className="mb-3 inline-flex size-9 items-center justify-center rounded-xl bg-gold/15">
+                  <Globe2 className="size-4 text-gold-deep" strokeWidth={1.75} />
                 </span>
-              </div>
-              <div className="mt-2 text-sm text-muted">
-                mobilități europene
-              </div>
-            </div>
+                <div className="font-serif text-2xl font-bold leading-tight text-navy">
+                  Erasmus+
+                  <span className="mt-0.5 block text-sm font-semibold text-gold-deep">
+                    acreditat
+                  </span>
+                </div>
+                <div className="mt-2 text-sm text-muted">
+                  mobilități europene
+                </div>
+              </CardContent>
+            </Card>
           </Reveal>
         </div>
       </div>
