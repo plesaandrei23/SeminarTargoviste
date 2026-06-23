@@ -26,20 +26,22 @@ function TikTokIcon() {
   );
 }
 
+// Prefix anchors with "/" so they always land on the home page's anchors,
+// not the current route. Routes that exist as real pages link directly.
 const nav = [
-  { href: "#admitere", label: "Admitere" },
-  { href: "#news", label: "Activități" },
-  { href: "#campus", label: "Campus" },
-  { href: "#team", label: "Profesori" },
-  { href: "#", label: "Erasmus+" },
+  { href: "/#admitere", label: "Admitere" },
+  { href: "/activitati", label: "Activități" },
+  { href: "/#campus", label: "Campus" },
+  { href: "/#team", label: "Profesori" },
+  { href: "/#", label: "Erasmus+" },
 ];
 
 const studentLinks = [
-  { href: "#", label: "Orar" },
-  { href: "#", label: "Burse" },
-  { href: "#", label: "Bacalaureat" },
-  { href: "#", label: "Atestat profesional" },
-  { href: "#", label: "Avizier" },
+  { href: "/#", label: "Orar" },
+  { href: "/#", label: "Burse" },
+  { href: "/#", label: "Bacalaureat" },
+  { href: "/#", label: "Atestat profesional" },
+  { href: "/#", label: "Avizier" },
 ];
 
 export function Footer() {

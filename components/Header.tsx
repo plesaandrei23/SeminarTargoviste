@@ -7,13 +7,19 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/site-config";
 
+/**
+ * Nav targets. Hash-only hrefs (e.g. `#admitere`) only work on the home page;
+ * from any other route (/activitati, /admitere) the browser would resolve
+ * them against the current path. Prefix with "/" so they always land at the
+ * home page's anchor, and use real routes where those exist.
+ */
 const nav = [
-  { href: "#top", label: "Acasă" },
-  { href: "#admitere", label: "Admitere" },
-  { href: "#news", label: "Activități" },
-  { href: "#campus", label: "Campus" },
-  { href: "#team", label: "Profesori" },
-  { href: "#contact", label: "Contact" },
+  { href: "/", label: "Acasă" },
+  { href: "/#admitere", label: "Admitere" },
+  { href: "/activitati", label: "Activități" },
+  { href: "/#campus", label: "Campus" },
+  { href: "/#team", label: "Profesori" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export function Header() {
@@ -60,7 +66,7 @@ export function Header() {
         </span>
         <span className="mx-2 text-gold">·</span>
         <Link
-          href="#admitere"
+          href="/#admitere"
           className="text-gold-light font-semibold hover:underline underline-offset-4"
         >
           Vezi detalii →
@@ -70,7 +76,7 @@ export function Header() {
       {/* nav row */}
       <div className="wrap flex items-center justify-between gap-6 py-2">
         <Link
-          href="#top"
+          href="/"
           className="flex items-center gap-2.5 z-[62] group"
         >
           <Image
@@ -111,7 +117,7 @@ export function Header() {
             </Link>
           ))}
           <Link
-            href="#admitere"
+            href="/#admitere"
             className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-[0.92rem] font-semibold text-navy-deep transition-all duration-300 hover:bg-gold-light hover:-translate-y-0.5 hover:shadow-[var(--shadow-gold)]"
           >
             Înscrie-te
@@ -152,7 +158,7 @@ export function Header() {
           </Link>
         ))}
         <Link
-          href="#admitere"
+          href="/#admitere"
           onClick={() => setOpen(false)}
           className="mt-4 inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-[0.95rem] font-semibold text-navy-deep"
         >
