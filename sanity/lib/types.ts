@@ -35,6 +35,15 @@ export type ActivityCard = {
   coverImage: SanityImageRef | null;
 };
 
+export type Pagina = {
+  _id: string;
+  title: string;
+  slug: string;
+  section?: string;
+  body: unknown[];
+  seo?: { title?: string; description?: string };
+};
+
 export type ActivityDetail = ActivityCard & {
   body: unknown[]; // Portable Text — typed in @portabletext/react
   gallery?: SanityImageRef[];

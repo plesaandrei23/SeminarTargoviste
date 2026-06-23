@@ -37,11 +37,11 @@ const nav = [
 ];
 
 const studentLinks = [
-  { href: "/#", label: "Orar" },
-  { href: "/#", label: "Burse" },
-  { href: "/#", label: "Bacalaureat" },
-  { href: "/#", label: "Atestat profesional" },
-  { href: "/#", label: "Avizier" },
+  { href: "/orar", label: "Orar" },
+  { href: "/burse", label: "Burse" },
+  { href: "/bacalaureat", label: "Bacalaureat" },
+  { href: "/atestat-profesional", label: "Atestat profesional" },
+  { href: "/istoric", label: "Istoric" },
 ];
 
 export function Footer() {
@@ -85,7 +85,7 @@ export function Footer() {
         </div>
 
         <FooterCol title="Navigare" items={nav} />
-        <FooterCol title="Pentru elevi" items={studentLinks} />
+        <FooterCol title="Informații utile" items={studentLinks} />
 
         <div>
           <h3 className="mb-4 font-sans text-base font-semibold text-white">
