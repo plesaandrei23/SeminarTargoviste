@@ -47,14 +47,19 @@ export function Footer() {
     <footer id="contact" className="bg-navy-deep text-white/72 text-sm">
       <div className="wrap grid gap-10 py-[clamp(3rem,6vw,5rem)] sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.1fr]">
         <div>
-          <Image
-            src="/assets/logo.png"
-            alt={`Sigla Seminarului Teologic Ortodox „${siteConfig.patron}”`}
-            width={1200}
-            height={1090}
-            className="mb-5 h-40 w-auto drop-shadow-[0_4px_20px_rgba(0,0,0,0.35)]"
-            sizes="(min-width: 640px) 176px, 144px"
-          />
+          <div className="mb-4 flex items-center gap-3">
+            <Image
+              src="/assets/logo-mark.png"
+              alt={`Sigla Seminarului Teologic Ortodox „${siteConfig.patron}”`}
+              width={108}
+              height={108}
+              className="h-14 w-14 drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]"
+            />
+            <b className="font-serif text-lg font-semibold leading-tight text-white">
+              Seminarul Teologic Ortodox
+              <br />„{siteConfig.patron}”
+            </b>
+          </div>
           <p className="max-w-xs text-white/72">
             {siteConfig.tagline}, sub oblăduirea {siteConfig.diocese}.
           </p>

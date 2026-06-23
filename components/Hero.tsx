@@ -2,121 +2,100 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { Globe } from "@/components/Globe";
+import { useEffect, useRef, useState } from "react";
 import { Reveal } from "@/components/Reveal";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/site-config";
 
-type Phase = "intro" | "hero";
-
-const INTRO_DURATION_MS = 2400;
-const STORAGE_KEY = "hero-intro-seen";
-
+/**
+ * Two-layer cinematic hero:
+ *  1) `hero-still.jpg` is the persistent background (also the still that the
+ *     video resolves to — last frame == still, so the transition is seamless).
+ *  2) `hero-zoom.mp4` autoplays once on top of it, then fades out to reveal
+ *     the still. The still then drifts via a slow Ken Burns.
+ *
+ * Reduced motion: the video never plays; users land directly on the still.
+ * Safety: a 3.6s timeout calls `settle()` even if the video errors or never
+ * fires `ended` (some mobile browsers don't dispatch it reliably).
+ */
 export function Hero() {
-  const [phase, setPhase] = useState<Phase>("intro");
-  // Render the globe layer only while it's needed, then unmount it for perf.
-  const [mountGlobe, setMountGlobe] = useState(true);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [videoDone, setVideoDone] = useState(false);
 
   useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
     const reduce = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    const seen = sessionStorage.getItem(STORAGE_KEY) === "1";
-
-    if (reduce || seen) {
-      setPhase("hero");
-      setMountGlobe(false);
+    if (reduce) {
+      setVideoDone(true);
       return;
     }
 
-    const transitionTimer = setTimeout(() => {
-      setPhase("hero");
-      sessionStorage.setItem(STORAGE_KEY, "1");
-    }, INTRO_DURATION_MS);
+    let settled = false;
+    const settle = () => {
+      if (settled) return;
+      settled = true;
+      setVideoDone(true);
+    };
 
-    const unmountTimer = setTimeout(
-      () => setMountGlobe(false),
-      INTRO_DURATION_MS + 900,
-    );
+    video.addEventListener("ended", settle);
+    video.addEventListener("error", settle);
+    const safety = setTimeout(settle, 3600);
+
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(settle);
+    }
 
     return () => {
-      clearTimeout(transitionTimer);
-      clearTimeout(unmountTimer);
+      clearTimeout(safety);
+      video.removeEventListener("ended", settle);
+      video.removeEventListener("error", settle);
     };
   }, []);
-
-  const skip = () => {
-    setPhase("hero");
-    sessionStorage.setItem(STORAGE_KEY, "1");
-    setTimeout(() => setMountGlobe(false), 700);
-  };
 
   return (
     <section
       id="top"
-      className="relative isolate min-h-[100svh] flex items-center overflow-hidden text-white"
+      className="relative isolate flex min-h-[100svh] items-center overflow-hidden text-white"
     >
-      {/* ─── Hero photo layer (fades in after intro) ─────────── */}
+      {/* ─── Hero media — still + video overlay ──────────────── */}
       <div
         className={cn(
-          "absolute inset-0 -z-10 transition-opacity duration-[900ms]",
-          phase === "hero" ? "opacity-100" : "opacity-0",
+          "absolute inset-0 -z-10 overflow-hidden",
+          videoDone && "[&_img]:animate-[kenburns_28s_ease-in-out_infinite_alternate]",
         )}
       >
         <Image
-          src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920/d95MN2J9V3cXzoxX/8-AR0L6W6RkKHel340.jpeg"
-          alt="Curtea Seminarului Teologic Ortodox din Târgoviște"
+          src="/assets/hero-still.jpg"
+          alt="Seminarul Teologic Ortodox „Sfântul Ioan Gură de Aur” din Târgoviște"
           fill
           priority
           sizes="100vw"
-          className="object-cover animate-[kenburns_22s_ease-in-out_infinite_alternate]"
+          className="object-cover"
         />
+        <video
+          ref={videoRef}
+          className={cn(
+            "absolute inset-0 z-[1] h-full w-full object-cover transition-opacity duration-[550ms] motion-reduce:hidden",
+            videoDone && "pointer-events-none opacity-0",
+          )}
+          muted
+          playsInline
+          preload="auto"
+          poster="/assets/hero-first.jpg"
+          aria-hidden="true"
+        >
+          <source src="/assets/hero-zoom.mp4" type="video/mp4" />
+        </video>
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,28,48,0.6)_0%,rgba(10,28,48,0.35)_35%,rgba(10,28,48,0.85)_100%),radial-gradient(120%_90%_at_70%_20%,rgba(10,28,48,0)_30%,rgba(10,28,48,0.55)_100%)]"
+          className="absolute inset-0 z-[2] bg-[linear-gradient(180deg,rgba(10,28,48,0.55)_0%,rgba(10,28,48,0.35)_35%,rgba(10,28,48,0.82)_100%),radial-gradient(120%_90%_at_70%_20%,rgba(10,28,48,0)_30%,rgba(10,28,48,0.5)_100%)]"
         />
       </div>
-
-      {/* ─── Globe intro layer ───────────────────────────────── */}
-      {mountGlobe && (
-        <div
-          className={cn(
-            "absolute inset-0 z-20 bg-navy-deep flex items-center justify-center overflow-hidden transition-opacity duration-[900ms]",
-            phase === "intro"
-              ? "opacity-100"
-              : "opacity-0 pointer-events-none",
-          )}
-        >
-          {/* the canvas itself — scales up as the intro plays */}
-          <div
-            className={cn(
-              "relative aspect-square transition-transform duration-[2200ms] ease-[cubic-bezier(0.7,0.02,0.84,0.36)]",
-              phase === "intro" ? "scale-[2.4]" : "scale-[0.7]",
-            )}
-            style={{ width: "min(64vmin, 720px)" }}
-          >
-            <Globe rotationSpeed={0.013} />
-            {/* gold pulsing marker — sits roughly over Targoviste once globe locks */}
-            <span
-              aria-hidden="true"
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block size-3 rounded-full bg-gold opacity-0 animate-[pin-in_2.4s_ease-out_forwards]"
-            />
-          </div>
-
-          <div className="absolute bottom-[18%] inset-x-0 text-center text-white/85 text-xs tracking-[0.32em] uppercase font-sans animate-[label-fade_2.4s_ease_forwards]">
-            {siteConfig.city} · România
-          </div>
-
-          <button
-            type="button"
-            onClick={skip}
-            className="absolute bottom-6 right-6 z-30 inline-flex items-center gap-1.5 rounded-full border border-white/30 bg-white/10 px-4 py-2 text-xs font-semibold text-white backdrop-blur-md transition-colors hover:bg-white/20"
-          >
-            Sari peste ↓
-          </button>
-        </div>
-      )}
 
       {/* ─── Hero content ─────────────────────────────────────── */}
       <div className="wrap relative z-10 pt-24 pb-12">
@@ -138,20 +117,20 @@ export function Hero() {
         >
           <span
             aria-hidden="true"
-            className="inline-block h-px w-12 bg-gold align-middle mr-4"
+            className="mr-4 inline-block h-px w-12 align-middle bg-gold"
           />
           {siteConfig.tagline}, în inima cetății {siteConfig.city}.
         </Reveal>
         <Reveal as="div" delay={3} className="mt-8 flex flex-wrap gap-3">
           <Link
             href="#admitere"
-            className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-[0.95rem] font-semibold text-navy-deep transition-all duration-300 hover:bg-gold-light hover:-translate-y-0.5 hover:shadow-[var(--shadow-gold)]"
+            className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-[0.95rem] font-semibold text-navy-deep transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold-light hover:shadow-[var(--shadow-gold)]"
           >
             Admitere {siteConfig.admission.cycle} →
           </Link>
           <Link
             href="#campus"
-            className="inline-flex items-center gap-2 rounded-full border border-white/50 px-7 py-3.5 text-[0.95rem] font-semibold text-white transition-all duration-300 hover:bg-white/10 hover:border-white"
+            className="inline-flex items-center gap-2 rounded-full border border-white/50 px-7 py-3.5 text-[0.95rem] font-semibold text-white transition-all duration-300 hover:border-white hover:bg-white/10"
           >
             Descoperă campusul
           </Link>
@@ -159,34 +138,18 @@ export function Hero() {
       </div>
 
       {/* scroll-down indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-2 text-white/75 text-[0.66rem] tracking-[0.22em] uppercase">
+      <div className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-[0.66rem] tracking-[0.22em] uppercase text-white/75 md:flex">
         <span
           aria-hidden="true"
-          className="relative w-6 h-9 rounded-xl border-2 border-white/60"
+          className="relative h-9 w-6 rounded-xl border-2 border-white/60"
         >
           <span
-            className="absolute top-1.5 left-1/2 -translate-x-1/2 w-[3px] h-[7px] rounded-sm bg-gold-light"
+            className="absolute top-1.5 left-1/2 h-[7px] w-[3px] -translate-x-1/2 rounded-sm bg-gold-light"
             style={{ animation: "wheel 1.6s infinite" }}
           />
         </span>
         Scroll
       </div>
-
-      {/* keyframes specific to this hero */}
-      <style>{`
-        @keyframes pin-in {
-          0%, 52% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); box-shadow: 0 0 0 0 rgba(200,160,78,0); }
-          60%     { opacity: 1; transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 0 0 0 rgba(200,160,78,0.6); }
-          80%     { opacity: 1; transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 20px rgba(200,160,78,0); }
-          100%    { opacity: 0; transform: translate(-50%, -50%) scale(2.2); }
-        }
-        @keyframes label-fade {
-          0%, 12% { opacity: 0; transform: translateY(8px); }
-          32%     { opacity: 1; transform: translateY(0); }
-          82%     { opacity: 1; }
-          100%    { opacity: 0; }
-        }
-      `}</style>
     </section>
   );
 }
