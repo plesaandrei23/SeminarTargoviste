@@ -64,7 +64,6 @@ export function Header() {
             : "max-h-14 py-2 px-3 opacity-100",
         )}
       >
-        <span aria-hidden="true">📣</span>{" "}
         <strong className="font-semibold">
           Admitere {siteConfig.admission.cycle}
         </strong>
