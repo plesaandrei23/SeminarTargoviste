@@ -1,8 +1,8 @@
 import { defineType, defineField } from "sanity";
 
-/** document — uploaded PDF/file (regulamente, rezultate, metodologie, etc.). */
+/** documentFile — uploaded PDF/file (regulamente, rezultate, metodologie, etc.). */
 export const documentFile = defineType({
-  name: "document",
+  name: "documentFile",
   title: "Document (PDF)",
   type: "document",
   fields: [
