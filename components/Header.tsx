@@ -18,7 +18,7 @@ const nav = [
   { href: "/", label: "Acasă" },
   { href: "/#admitere", label: "Admitere" },
   { href: "/activitati", label: "Activități" },
-  { href: "/#campus", label: "Campus" },
+  { href: "/campus", label: "Campus" },
   { href: "/profesori", label: "Profesori" },
   { href: "/contact", label: "Contact" },
 ];

@@ -1,88 +1,38 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
-import {
-  BookMarked,
-  BedDouble,
-  Church,
-  GraduationCap,
-  Inbox,
-  Music2,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { cn } from "@/lib/utils";
+import { CAMPUS_ZONES, type CampusZone } from "@/lib/campus";
 
-type ZoneId =
-  | "capela"
-  | "clase"
-  | "internat"
-  | "secretariat"
-  | "biblioteca"
-  | "festivitati";
+/**
+ * Map positions for each zone on the interactive SVG. Slugs match the
+ * single source of truth in `@/lib/campus` so the rest of the data
+ * (icon, tagline, etc.) doesn't drift.
+ */
+const ZONE_RECTS: Record<string, { x: number; y: number; w: number; h: number }> = {
+  capela: { x: 40, y: 40, w: 180, h: 120 },
+  "sali-de-clasa": { x: 240, y: 40, w: 320, h: 120 },
+  internat: { x: 40, y: 185, w: 200, h: 195 },
+  secretariat: { x: 260, y: 185, w: 150, h: 90 },
+  biblioteca: { x: 430, y: 185, w: 130, h: 90 },
+  "sala-de-festivitati": { x: 260, y: 295, w: 300, h: 85 },
+};
 
-type Zone = {
-  id: ZoneId;
-  label: string;
-  Icon: LucideIcon;
-  description: string;
+type ZoneWithRect = CampusZone & {
   rect: { x: number; y: number; w: number; h: number };
 };
 
-const ZONES: Zone[] = [
-  {
-    id: "capela",
-    label: "Capela",
-    Icon: Church,
-    description:
-      "Inima duhovnicească a seminarului, unde elevii participă la slujbe și la viața liturgică zilnică.",
-    rect: { x: 40, y: 40, w: 180, h: 120 },
-  },
-  {
-    id: "clase",
-    label: "Săli de clasă",
-    Icon: GraduationCap,
-    description:
-      "Spații moderne de învățare pentru disciplinele teologice și de cultură generală.",
-    rect: { x: 240, y: 40, w: 320, h: 120 },
-  },
-  {
-    id: "internat",
-    label: "Internat",
-    Icon: BedDouble,
-    description:
-      "Cazare pentru elevii din afara localității, într-un mediu sigur și supravegheat.",
-    rect: { x: 40, y: 185, w: 200, h: 195 },
-  },
-  {
-    id: "secretariat",
-    label: "Secretariat",
-    Icon: Inbox,
-    description:
-      "Acte, înscrieri și informații administrative — program Luni–Vineri, 08:00–16:00.",
-    rect: { x: 260, y: 185, w: 150, h: 90 },
-  },
-  {
-    id: "biblioteca",
-    label: "Bibliotecă",
-    Icon: BookMarked,
-    description:
-      "Fond de carte teologic și academic, spațiu de studiu și lectură.",
-    rect: { x: 430, y: 185, w: 130, h: 90 },
-  },
-  {
-    id: "festivitati",
-    label: "Sala de festivități",
-    Icon: Music2,
-    description:
-      "Locul evenimentelor, concertelor, serbărilor și întâlnirilor duhovnicești.",
-    rect: { x: 260, y: 295, w: 300, h: 85 },
-  },
-];
+const ZONES: ZoneWithRect[] = CAMPUS_ZONES.map((z) => ({
+  ...z,
+  rect: ZONE_RECTS[z.slug] ?? { x: 0, y: 0, w: 100, h: 60 },
+}));
 
 export function CampusMap() {
-  const [active, setActive] = useState<ZoneId>("capela");
-  const current = ZONES.find((z) => z.id === active)!;
+  const [active, setActive] = useState<string>(ZONES[0].slug);
+  const current = ZONES.find((z) => z.slug === active)!;
 
   return (
     <section
@@ -113,17 +63,17 @@ export function CampusMap() {
             >
               {ZONES.map((z) => (
                 <g
-                  key={z.id}
+                  key={z.slug}
                   role="button"
                   tabIndex={0}
-                  aria-label={z.label}
-                  aria-pressed={active === z.id}
+                  aria-label={z.name}
+                  aria-pressed={active === z.slug}
                   className="cursor-pointer focus:outline-none"
-                  onClick={() => setActive(z.id)}
+                  onClick={() => setActive(z.slug)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {
                       e.preventDefault();
-                      setActive(z.id);
+                      setActive(z.slug);
                     }
                   }}
                 >
@@ -135,7 +85,7 @@ export function CampusMap() {
                     rx={10}
                     className={cn(
                       "transition-all duration-300",
-                      active === z.id
+                      active === z.slug
                         ? "fill-[rgba(200,160,78,0.22)] stroke-gold-light"
                         : "fill-white/[0.05] stroke-gold/45 hover:fill-[rgba(200,160,78,0.15)] hover:stroke-gold-light",
                     )}
@@ -147,7 +97,7 @@ export function CampusMap() {
                     r={5}
                     className={cn(
                       "transition-colors",
-                      active === z.id ? "fill-gold-light" : "fill-gold",
+                      active === z.slug ? "fill-gold-light" : "fill-gold",
                     )}
                   />
                   <text
@@ -156,7 +106,7 @@ export function CampusMap() {
                     className="pointer-events-none fill-white/85 text-[11px] font-medium"
                     style={{ fontFamily: "var(--font-sans)" }}
                   >
-                    {z.label}
+                    {z.name}
                   </text>
                 </g>
               ))}
@@ -178,17 +128,18 @@ export function CampusMap() {
               <current.Icon className="size-6 text-gold-light" strokeWidth={1.5} />
             </div>
             <h3 className="!text-white text-[clamp(1.5rem,2.5vw,2rem)] mb-2 transition-opacity">
-              {current.label}
+              {current.name}
             </h3>
             <p className="text-white/70 mb-6 transition-opacity text-pretty">
-              {current.description}
+              {current.tagline}.
             </p>
-            <a
-              href="#"
+            <Link
+              href={`/campus/${current.slug}`}
               className="mt-auto self-start inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold text-navy-deep transition-all hover:bg-gold-light hover:-translate-y-0.5"
             >
-              Mergi la secțiune →
-            </a>
+              Vezi pagina
+              <ArrowRight className="size-4" strokeWidth={1.75} />
+            </Link>
           </Reveal>
         </div>
       </div>
