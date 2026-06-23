@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const inter = Inter({
@@ -51,6 +53,9 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-parchment text-ink">
         {children}
+        {/* Vercel monitoring — no-op locally, only sends data from the deployed site. */}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
