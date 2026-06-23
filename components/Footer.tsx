@@ -32,7 +32,7 @@ const nav = [
   { href: "/admitere", label: "Admitere" },
   { href: "/activitati", label: "Activități" },
   { href: "/#campus", label: "Campus" },
-  { href: "/#team", label: "Profesori" },
+  { href: "/profesori", label: "Profesori" },
   { href: "/#", label: "Erasmus+" },
 ];
 

@@ -412,6 +412,62 @@ async function importErasmus(record) {
   console.log(`✓ erasmus · ${record.slug}`);
 }
 
+/**
+ * Map the raw role-heading from the scraped staff page to the personal
+ * schema's two distinct fields: `role` (job title) and `subject`
+ * (discipline / department). The seminary's source page conflates them
+ * — DIRECTOR / Spiritual / Secretar / Contabil are real job titles,
+ * everything else ("Limba Latină", "Vechiul şi Noul Testament", etc.)
+ * is the subject the person teaches.
+ */
+function classifyPersonal(rawRole, category) {
+  if (!rawRole) {
+    if (category === "didactic-auxiliar") return { role: "Personal auxiliar", subject: null };
+    if (category === "nedidactic") return { role: "Personal nedidactic", subject: null };
+    return { role: "Profesor", subject: null };
+  }
+  const t = rawRole.trim();
+  if (/^director$/i.test(t)) return { role: "Director", subject: null };
+  if (/^spiritual$/i.test(t) || /duhovnic/i.test(t))
+    return { role: "Duhovnic", subject: null };
+  if (/^secretar/i.test(t)) return { role: "Secretar", subject: null };
+  if (/^contabil/i.test(t)) return { role: "Contabil", subject: null };
+  if (/^bibliotecar/i.test(t)) return { role: "Bibliotecar", subject: null };
+  if (/^consilier/i.test(t)) return { role: "Consilier școlar", subject: null };
+  // Everything else reads as a teaching subject.
+  return { role: "Profesor", subject: t };
+}
+
+async function importPersonal(record, index) {
+  if (!record.photo?.src) {
+    console.warn(`  ! ${record.slug} has no photo, skipping`);
+    return;
+  }
+  const photoId = await uploadImage(record.photo.src);
+  const { role, subject } = classifyPersonal(record.role, record.category);
+
+  const doc = {
+    _id: docId("personal", record.slug),
+    _type: "personal",
+    name: record.name,
+    role,
+    category: record.category,
+    subject,
+    photo: photoId
+      ? {
+          _type: "localizedImage",
+          asset: { _type: "reference", _ref: photoId },
+          alt: record.photo.alt || `Portret ${record.name}`,
+        }
+      : undefined,
+    order: index,
+  };
+  await client.createOrReplace(doc);
+  console.log(
+    `✓ personal · ${record.slug.padEnd(40)} · ${role}${subject ? " · " + subject : ""}`,
+  );
+}
+
 async function importAdmission(record) {
   const imageMap = new Map();
   for (const img of record.images ?? []) {
@@ -439,6 +495,7 @@ const handlers = {
   pages: importPage,
   erasmus: importErasmus,
   admission: importAdmission,
+  personal: importPersonal,
 };
 
 const sections = onlySection ? [onlySection] : Object.keys(handlers);
@@ -447,12 +504,15 @@ for (const section of sections) {
   const dir = join(CONTENT_DIR, section);
   if (!existsSync(dir)) continue;
   console.log(`\n▸ ${section}`);
-  for (const file of listJson(dir)) {
-    const record = JSON.parse(readFileSync(file, "utf8"));
+  // Personal needs the array index passed in (used as the order field
+  // so the original source-page ordering shows up in Studio + lists).
+  const files = listJson(dir);
+  for (let i = 0; i < files.length; i++) {
+    const record = JSON.parse(readFileSync(files[i], "utf8"));
     try {
-      await handlers[section](record);
+      await handlers[section](record, i);
     } catch (e) {
-      console.error(`  ✗ ${record.slug ?? file} — ${e.message}`);
+      console.error(`  ✗ ${record.slug ?? files[i]} — ${e.message}`);
     }
   }
 }

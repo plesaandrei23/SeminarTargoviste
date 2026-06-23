@@ -51,7 +51,14 @@ const urls = new Map(); // localFilename → { src, alt, used_in: [slug...] }
 for (const file of listJson(CONTENT_DIR)) {
   const data = JSON.parse(readFileSync(file, "utf8"));
   const slug = data.slug || basename(file, ".json");
-  for (const img of data.images ?? []) {
+  // Activity / page records keep their images in an `images` array.
+  // Personal records (one photo per person) keep theirs in `photo`.
+  const candidates = [
+    ...(Array.isArray(data.images) ? data.images : []),
+    ...(data.photo ? [data.photo] : []),
+  ];
+  for (const img of candidates) {
+    if (!img?.src) continue;
     const src = originalUrl(img.src);
     const name = localFilename(src);
     if (!urls.has(name))

@@ -52,6 +52,59 @@ export const activitySlugsQuery = groq`
 `;
 
 /**
+ * All staff, sorted by category then by `order` (we set order = source-page
+ * position during import so the seminary's own ordering is preserved).
+ */
+export const allPersonalQuery = groq`
+  *[_type == "personal" && defined(name)] | order(
+    select(
+      category == "conducere"        => 0,
+      category == "didactic"          => 1,
+      category == "didactic-auxiliar" => 2,
+      category == "nedidactic"        => 3,
+      99
+    ),
+    order asc,
+    name asc
+  ) {
+    _id,
+    name,
+    role,
+    category,
+    subject,
+    order,
+    photo {
+      asset->{ _id, url, metadata { dimensions { width, height } } },
+      alt
+    }
+  }
+`;
+
+/** Featured staff for the home page Team section (first 8 by ordering). */
+export const featuredPersonalQuery = groq`
+  *[_type == "personal" && defined(name)] | order(
+    select(
+      category == "conducere"        => 0,
+      category == "didactic"          => 1,
+      category == "didactic-auxiliar" => 2,
+      category == "nedidactic"        => 3,
+      99
+    ),
+    order asc
+  ) [0...8] {
+    _id,
+    name,
+    role,
+    category,
+    subject,
+    photo {
+      asset->{ _id, url, metadata { dimensions { width, height } } },
+      alt
+    }
+  }
+`;
+
+/**
  * Admission cycles, current first. The schema's `isCurrent` boolean lets
  * staff promote a session — if none are marked current we just sort by
  * year DESC so the most recent stays on top.

@@ -59,3 +59,19 @@ export type AdmissionCycle = {
   body: unknown[];
   seo?: { title?: string; description?: string };
 };
+
+export type PersonalCategory =
+  | "conducere"
+  | "didactic"
+  | "didactic-auxiliar"
+  | "nedidactic";
+
+export type Personal = {
+  _id: string;
+  name: string;
+  role: string;
+  category: PersonalCategory;
+  subject?: string;
+  order?: number;
+  photo: SanityImageRef | null;
+};
