@@ -49,11 +49,11 @@ export function Footer() {
         <div>
           <div className="mb-4 flex items-center gap-3">
             <Image
-              src="/assets/logo-mark.png"
-              alt={`Sigla Seminarului Teologic Ortodox „${siteConfig.patron}”`}
-              width={108}
-              height={108}
-              className="h-14 w-14 drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]"
+              src="/assets/noBgLogo.png"
+              alt=""
+              width={521}
+              height={479}
+              className="h-16 w-auto drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]"
             />
             <b className="font-serif text-lg font-semibold leading-tight text-white">
               Seminarul Teologic Ortodox

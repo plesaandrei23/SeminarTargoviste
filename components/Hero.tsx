@@ -66,12 +66,13 @@ export function Hero() {
       <div
         className={cn(
           "absolute inset-0 -z-10 overflow-hidden",
-          videoDone && "[&_img]:animate-[kenburns_28s_ease-in-out_infinite_alternate]",
+          videoDone &&
+            "motion-safe:[&_img]:animate-[kenburns_28s_ease-in-out_infinite_alternate]",
         )}
       >
         <Image
           src="/assets/hero-still.jpg"
-          alt="Seminarul Teologic Ortodox „Sfântul Ioan Gură de Aur” din Târgoviște"
+          alt=""
           fill
           priority
           sizes="100vw"
@@ -85,7 +86,7 @@ export function Hero() {
           )}
           muted
           playsInline
-          preload="auto"
+          preload="none"
           poster="/assets/hero-first.jpg"
           aria-hidden="true"
         >
@@ -144,8 +145,7 @@ export function Hero() {
           className="relative h-9 w-6 rounded-xl border-2 border-white/60"
         >
           <span
-            className="absolute top-1.5 left-1/2 h-[7px] w-[3px] -translate-x-1/2 rounded-sm bg-gold-light"
-            style={{ animation: "wheel 1.6s infinite" }}
+            className="absolute top-1.5 left-1/2 h-[7px] w-[3px] -translate-x-1/2 rounded-sm bg-gold-light motion-safe:animate-[wheel_1.6s_infinite]"
           />
         </span>
         Scroll
