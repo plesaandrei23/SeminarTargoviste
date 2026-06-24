@@ -31,7 +31,12 @@ const RESERVED_SLUGS = new Set([
   "campus",
   "contact",
   "director",
+  "istoric",
+  "managementul-cazurilor-de-violenta",
+  "misiune-si-viziune",
+  "mobilitate-cadre-didactice",
   "profesori",
+  "regulamente",
   "studio",
   // Redirected in next.config.ts → /profesori
   "didactic",
