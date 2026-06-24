@@ -10,7 +10,9 @@
   --color-navy-soft: #1b3a5c;
   --color-gold: #c8a04e;
   --color-gold-light: #e2c279;
-  --color-gold-deep: #a37f33;
+  /* Slightly darker than the original #a37f33 to meet WCAG AA contrast
+     (4.5:1) against parchment when used for small text like .eyebrow. */
+  --color-gold-deep: #8c6924;
   --color-parchment: #f8f4ec;
   --color-parchment-2: #efe8da;
   --color-paper: #fffdf9;

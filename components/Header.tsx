@@ -134,9 +134,16 @@ export function Header() {
             priority
             className="h-[54px] w-auto drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]"
           />
+          {/*
+            The wordmark is the link's accessible name on both desktop and
+            mobile. On mobile (<sm) it's visually hidden via sr-only so the
+            logo can stand alone, but screen readers still announce it —
+            which means the visible text and the accessible name match
+            (WCAG 2.5.3 label-content-name-mismatch).
+          */}
           <span
             className={cn(
-              "font-serif font-semibold leading-tight transition-colors duration-500 hidden sm:block",
+              "font-serif font-semibold leading-tight transition-colors duration-500 sr-only sm:not-sr-only sm:block",
               solid ? "text-navy" : "text-white",
             )}
             style={{ fontSize: "1rem" }}
