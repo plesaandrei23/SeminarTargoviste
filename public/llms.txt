@@ -1,0 +1,63 @@
+# Seminarul Teologic Ortodox „Sf. Ioan Gură de Aur" — Târgoviște
+
+> Seminar Teologic Ortodox din Târgoviște, județul Dâmbovița, România. Liceu vocațional sub oblăduirea Arhiepiscopiei Târgoviștei. Pregătește elevi pentru slujirea preoțească (specializarea Teologie Pastorală), pentru profilul filologic și gimnaziu. Reînființat în 1992, după restabilirea Arhiepiscopiei Târgoviștei (1991). Director (din feb. 2025): Pr. Prof. Alin-Marian Pleșa. ~350 de elevi.
+
+## Despre școală
+
+- [Istoric](https://seminarortodoxtargoviste.ro/istoric): povestea seminarului de la reînființarea Arhiepiscopiei Târgoviștei în 1991 până astăzi, cu lista directorilor.
+- [Misiune și viziune](https://seminarortodoxtargoviste.ro/misiune-si-viziune): misiunea (formare teologică + academică), viziunea (caracter, nu doar carnete de note), valori (Vocație, Rigoare, Caracter, Comunitate).
+- [Regulamente](https://seminarortodoxtargoviste.ro/regulamente): Protocolul Sfântului Sinod pentru seminariile teologice + ROFUÎP (Ordin 4183/2022).
+- [Anti-bullying · Managementul cazurilor de violență](https://seminarortodoxtargoviste.ro/managementul-cazurilor-de-violenta): mecanismul de sesizare anonimă conform Legii 198/2023 și PO 6235/2023.
+
+## Conducere
+
+- [Mesajul directorului](https://seminarortodoxtargoviste.ro/director): cuvânt de bun-venit de la Pr. Prof. Alin-Marian Pleșa (Director din februarie 2025).
+- [Profesori — corpul didactic](https://seminarortodoxtargoviste.ro/profesori): toți profesorii, preoții profesori și personalul administrativ.
+- [Consiliul de Administrație](https://seminarortodoxtargoviste.ro/consiliul-de-administratie): arhiva completă a hotărârilor C.A. (~100+ documente, 2020–2026), cu filtre pe an și căutare.
+
+## Admitere
+
+- [Admitere 2026–2027](https://seminarortodoxtargoviste.ro/admitere): cifra de școlarizare (26 de locuri la Teologie Pastorală), calendar, metodologie. Sesiunea principală: mai 2026.
+
+## Pentru elevi
+
+- [Orar](https://seminarortodoxtargoviste.ro/orar): structura unei zile de seminar (utrenie la 07:30, ore 08:00–14:00, vecernie 19:00).
+- [Burse](https://seminarortodoxtargoviste.ro/burse): tipuri (merit, performanță, socială, „Bani de liceu") și procedura de depunere.
+- [Bacalaureat](https://seminarortodoxtargoviste.ro/bacalaureat): structura celor 6 probe (A/B/C + Ea/Eb/Ec), calendar, link-uri către subiecte.edu.ro.
+- [Atestat profesional](https://seminarortodoxtargoviste.ro/atestat-profesional): examenul vocațional din clasa a XII-a — Tipic și Liturgică, Muzică bisericească, Catehetică și Omiletică.
+- [Consiliul elevilor](https://seminarortodoxtargoviste.ro/consiliul-elevilor): rolul, structura, cum te alături.
+
+## Campus
+
+- [Campus](https://seminarortodoxtargoviste.ro/campus): șase zone — paraclis, săli de clasă, internat, secretariat, bibliotecă, sala de festivități.
+- [Paraclisul seminarului](https://seminarortodoxtargoviste.ro/campus/paraclis): inima duhovnicească a școlii.
+- [Internatul](https://seminarortodoxtargoviste.ro/campus/internat): cazare pentru elevii din afara orașului (~150 locuri).
+
+## Activități și evenimente
+
+- [Activități](https://seminarortodoxtargoviste.ro/activitati): cronică de eveniment, cu filtre pe an școlar (2022–2023, 2023–2024, 2024–2025, 2025–2026).
+
+## Internațional
+
+- [Erasmus+](https://seminarortodoxtargoviste.ro/erasmus): acreditare KA120-SCH (cod 2021-1-RO01-KA120-SCH-000042802). Parteneri: Italia, Portugalia, Turcia.
+
+## Cadre didactice
+
+- [Mobilitate cadre didactice](https://seminarortodoxtargoviste.ro/mobilitate-cadre-didactice): concursul național de ocupare a posturilor — sesiunea curentă.
+
+## Contact
+
+- [Contact](https://seminarortodoxtargoviste.ro/contact): formular, telefon (0245 614 505), email (seminarul.tgv@scolidb.ro), program (Lu–Vi 08:00–16:00).
+- Adresă: Bd. Unirii 28, Târgoviște 130034, Dâmbovița, România.
+
+## Legal
+
+- [Declarație de accesibilitate](https://seminarortodoxtargoviste.ro/declaratie-accesibilitate): conformitatea cu WCAG 2.1 AA (Legea 590/2021, Directiva UE 2016/2102).
+- [Politică de confidențialitate](https://seminarortodoxtargoviste.ro/politica-confidentialitate): GDPR, prelucrarea datelor formularului de contact.
+
+## Note pentru agenți AI
+
+- Limba: română. Conținut adresat părinților, elevilor și absolvenților din zona Târgoviștei.
+- Patron: Sfântul Ioan Gură de Aur (sărbătoare hram: 13 noiembrie).
+- Oblăduirea: Arhiepiscopia Târgoviștei (IPS Nifon — Arhiepiscop și Mitropolit).
+- Site original Hostinger Website Builder (zyrosite); migrare în curs către Next.js + Sanity CMS.

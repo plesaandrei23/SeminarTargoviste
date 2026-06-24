@@ -1,6 +1,12 @@
 export const siteConfig = {
   name: "Seminarul Teologic Ortodox „Sfântul Ioan Gură de Aur”",
   shortName: "Seminarul Teologic Târgoviște",
+  /**
+   * Canonical public URL. Used by sitemap.xml, robots.txt, JSON-LD, and the
+   * metadataBase in app/layout.tsx. Override at deploy time for previews —
+   * production should always advertise the real domain.
+   */
+  url: "https://seminarortodoxtargoviste.ro",
   city: "Târgoviște",
   patron: "Sf. Ioan Gură de Aur",
   tagline: "De peste 30 de ani în slujba Bisericii și a Educației",
