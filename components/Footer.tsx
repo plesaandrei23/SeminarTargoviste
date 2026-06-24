@@ -48,6 +48,8 @@ const studentLinks = [
 const aboutLinks = [
   { href: "/istoric", label: "Istoric" },
   { href: "/misiune-si-viziune", label: "Misiune și viziune" },
+  { href: "/director", label: "Mesajul directorului" },
+  { href: "/consiliul-de-administratie", label: "Consiliul de Administrație" },
   { href: "/regulamente", label: "Regulamente" },
   { href: "/managementul-cazurilor-de-violenta", label: "Anti-bullying (PO 6)" },
   { href: "/erasmus", label: "Erasmus+" },
