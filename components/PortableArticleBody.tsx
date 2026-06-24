@@ -53,7 +53,27 @@ const marks: Record<string, PortableTextMarkComponent> = {
   ),
 };
 
-const types: Record<string, PortableTextTypeComponent<any>> = {
+/**
+ * Loose schema for all three Portable Text custom types we render
+ * (`localizedImage`, `callout`, `embed`). Real values come from Sanity
+ * via GROQ — fields are optional so the renderer can be defensive.
+ */
+type CustomBlock = {
+  _type: string;
+  asset?: {
+    url?: string;
+    metadata?: { dimensions?: { width?: number; height?: number } };
+  };
+  metadata?: { dimensions?: { width?: number; height?: number } };
+  alt?: string;
+  caption?: string;
+  text?: string;
+  attribution?: string;
+  url?: string;
+  title?: string;
+};
+
+const types: Record<string, PortableTextTypeComponent<CustomBlock>> = {
   localizedImage: ({ value }) => {
     if (!value?.asset) return null;
     const w =

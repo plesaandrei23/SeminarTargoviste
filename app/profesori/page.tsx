@@ -6,7 +6,6 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
 import { ProfessorGrid } from "@/components/ProfessorGrid";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { sanityClient } from "@/sanity/lib/client";
 import { allPersonalQuery } from "@/sanity/lib/queries";
@@ -141,56 +140,6 @@ function HeroStat({
       <span className="font-serif text-lg font-semibold text-white">{value}</span>
       <span className="text-white/65">{label}</span>
     </span>
-  );
-}
-
-/* ── Conducere — feature row ─────────────────────────────────── */
-
-function Conducere({
-  people,
-  didactic,
-}: {
-  people: Personal[];
-  didactic: Personal[];
-}) {
-  // The director is also a teacher with subjects — pull a hint from didactic
-  // listings if the conducere record doesn't carry a discipline.
-  const director = people.find((p) => /director/i.test(p.role));
-  const teaching = director
-    ? didactic.find((d) => d.name === director.name)
-    : undefined;
-  const directorSubject = director?.subject ?? teaching?.subject ?? null;
-
-  return (
-    <section className="wrap mt-20">
-      <SectionHeader
-        eyebrow="Conducere"
-        title="Cei care deschid ușa seminarului"
-        intro="Director și duhovnici — cu rol activ în viața academică și liturgică zilnică."
-      />
-      <div className="mt-12 grid gap-6 lg:grid-cols-3">
-        {people.map((p, i) => (
-          <Reveal key={p._id} delay={((i % 3) + 1) as 1 | 2 | 3}>
-            <Card className="h-full overflow-hidden border-navy/10 bg-paper">
-              <PortraitFrame person={p} large />
-              <CardContent className="p-6">
-                <Badge variant="outline" className="border-gold/40 text-gold-deep">
-                  {p.role}
-                </Badge>
-                <p className="mt-3 font-serif text-2xl font-semibold leading-tight text-navy text-balance">
-                  {p.name}
-                </p>
-                {(p.subject || (p === director && directorSubject)) && (
-                  <p className="mt-1 text-sm text-muted">
-                    {p.subject ?? directorSubject}
-                  </p>
-                )}
-              </CardContent>
-            </Card>
-          </Reveal>
-        ))}
-      </div>
-    </section>
   );
 }
 

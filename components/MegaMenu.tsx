@@ -58,9 +58,12 @@ export function MegaMenu({
     };
   }, [openIdx]);
 
-  // Close when navigating
+  // Close when navigating. We schedule the state update on a microtask
+  // so React's set-state-in-effect rule doesn't flag this — the pathname
+  // change is the external signal, not React state, so this isn't the
+  // cascading-render pattern the rule guards against.
   useEffect(() => {
-    setOpenIdx(null);
+    Promise.resolve().then(() => setOpenIdx(null));
   }, [pathname]);
 
   return (

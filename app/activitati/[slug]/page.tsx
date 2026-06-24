@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PortableArticleBody } from "@/components/PortableArticleBody";
-import { Reveal } from "@/components/Reveal";
 import { sanityClient } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import {
@@ -103,7 +102,11 @@ export default async function ActivityArticlePage({
           */}
           {(() => {
             const bodyHasImages = (article.body ?? []).some(
-              (b: any) => b?._type === "localizedImage",
+              (b) =>
+                typeof b === "object" &&
+                b !== null &&
+                "_type" in b &&
+                (b as { _type: unknown })._type === "localizedImage",
             );
             if (bodyHasImages) return null;
             return (

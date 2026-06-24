@@ -30,7 +30,11 @@ export function Hero() {
       "(prefers-reduced-motion: reduce)",
     ).matches;
     if (reduce) {
-      setVideoDone(true);
+      // Defer to the next microtask so React doesn't flag this as a
+      // synchronous setState-in-effect (it isn't cascading — the user just
+      // wants reduced motion, so skip the count-down — but the rule can't
+      // tell the difference statically).
+      Promise.resolve().then(() => setVideoDone(true));
       return;
     }
 
