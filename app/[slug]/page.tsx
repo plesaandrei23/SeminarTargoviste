@@ -28,6 +28,7 @@ const RESERVED_SLUGS = new Set([
   // Dedicated routes
   "activitati",
   "admitere",
+  "anunturi",
   "atestat-profesional",
   "bacalaureat",
   "burse",

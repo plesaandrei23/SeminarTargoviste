@@ -30,50 +30,50 @@ type Doc = {
 };
 
 /**
- * The originals still live on assets.zyrosite.com — those URLs survive
- * until the Hostinger sub gets cancelled. Phase 3 in plan.md re-hosts
- * them into the CMS asset pipeline; until then, link externally.
+ * Documents re-hosted to /public/docs/mobilitate from the original
+ * assets.zyrosite.com URLs. The legacy CDN survives only until the
+ * Hostinger sub is cancelled — these are the canonical copies now.
  */
 const DOCS: Doc[] = [
   {
     title: "Procedura Operațională · Mobilitatea personalului didactic 2026–2027",
     byline: "Aviz Seminar 2026 · PDF",
-    href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/procedurai-operatissionalai-mobilitate-2026-2027-aviz-seminar-2026-FWBV2aaD1nM5nRzW.pdf",
+    href: "/docs/mobilitate/procedura-mobilitate-2026-2027.pdf",
   },
   {
     title: "Condiții specifice de mobilitate 2026–2027",
     byline: "Seminarul Teologic Ortodox · PDF",
-    href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/conditii-specifice-de-mobilitate-2026-2027-jVNxMSQtB27Ple5M.pdf",
+    href: "/docs/mobilitate/conditii-specifice-mobilitate-2026-2027.pdf",
   },
   {
     title: "Metodologie mobilitate 2026–2027",
     byline: "Ministerul Educației · PDF",
-    href: "https://seminarortodoxtargoviste.ro/mobilitate-cadre-didactice#metodologie",
+    href: "/docs/erasmus/metodologie-selectie.pdf",
   },
   {
     title: "Grafic inspecții la clasă",
     byline: "Religie · PDF",
-    href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/religie_inspectii-p0fA2GT0ZI2cWMzf.pdf",
+    href: "/docs/mobilitate/religie-inspectii.pdf",
   },
   {
     title: "Programare inspecții",
     byline: "Inspecții la clasă · PDF",
-    href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/programarea-inspeceiilor-la-clasa-CE9X0dWNT03Ob9BZ.pdf",
+    href: "/docs/mobilitate/programarea-inspectiilor.pdf",
   },
   {
     title: "Teme inspecție",
     byline: "Susținere inspecții la clasă · PDF",
-    href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/teme-sustinere-inspectii-la-clasa-orMsh3l5476IMghS.pdf",
+    href: "/docs/mobilitate/teme-inspectii.pdf",
   },
   {
     title: "Grilă interviu",
     byline: "Interviu candidați · PDF",
-    href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/grila_interviu-OVxDZYIcSIjVIlr2.pdf",
+    href: "/docs/mobilitate/grila-interviu.pdf",
   },
   {
     title: "Rezultate inspecții — obținere aviz",
     byline: "Rezultate probe aviz · PDF",
-    href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/rezultate-probe-aviz-hC9yM81dQUriJW2N.pdf",
+    href: "/docs/mobilitate/rezultate-probe-aviz.pdf",
   },
 ];
 
@@ -236,7 +236,6 @@ function Documents() {
               href={doc.href}
               title={doc.title}
               byline={doc.byline}
-              external
             />
           </Reveal>
         ))}

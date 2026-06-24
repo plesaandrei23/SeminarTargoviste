@@ -32,6 +32,7 @@ function TikTokIcon() {
 const nav = [
   { href: "/admitere", label: "Admitere" },
   { href: "/activitati", label: "Activități" },
+  { href: "/anunturi", label: "Anunțuri" },
   { href: "/campus", label: "Campus" },
   { href: "/profesori", label: "Profesori" },
   { href: "/contact", label: "Contact" },

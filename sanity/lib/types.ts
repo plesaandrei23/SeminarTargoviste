@@ -84,3 +84,28 @@ export type Personal = {
   order?: number;
   photo: SanityImageRef | null;
 };
+
+export type AnuntCard = {
+  _id: string;
+  title: string;
+  slug: string;
+  date: string;
+  pinned: boolean;
+  expiresAt?: string | null;
+  hasBody: boolean;
+  excerpt: string;
+};
+
+export type AnuntDetail = {
+  _id: string;
+  title: string;
+  slug: string;
+  date: string;
+  pinned: boolean;
+  expiresAt?: string | null;
+  body: unknown[];
+  attachments?: {
+    asset?: { url: string; originalFilename?: string };
+  }[];
+  seo?: { title?: string; description?: string };
+};
