@@ -154,6 +154,9 @@ export function Footer() {
           >
             Politică de confidențialitate
           </Link>
+          <Link href="/tutorial" className="hover:text-gold-light">
+            Tutorial CMS
+          </Link>
         </div>
       </div>
     </footer>
