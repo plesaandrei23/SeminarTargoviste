@@ -29,6 +29,7 @@ const RESERVED_SLUGS = new Set([
   "activitati",
   "admitere",
   "campus",
+  "consiliul-de-administratie",
   "contact",
   "director",
   "istoric",
@@ -43,7 +44,6 @@ const RESERVED_SLUGS = new Set([
   "didactic-auxiliar",
   "nedidactic",
   "conducerea-scolii",
-  "consiliul-de-administratie",
   "consiliul-profesoral",
   // Redirected → home or other targets
   "elevi",
