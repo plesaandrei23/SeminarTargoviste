@@ -26,28 +26,37 @@ function TikTokIcon() {
   );
 }
 
-// Prefix anchors with "/" so they always land on the home page's anchors,
-// not the current route. Routes that exist as real pages link directly.
+// Footer column targets. Main routes link directly; secondary pages
+// (institutional content, school-life info, documents) get their own
+// columns below so users can reach them without crowding the header.
 const nav = [
   { href: "/admitere", label: "Admitere" },
   { href: "/activitati", label: "Activități" },
   { href: "/campus", label: "Campus" },
   { href: "/profesori", label: "Profesori" },
-  { href: "/#", label: "Erasmus+" },
+  { href: "/contact", label: "Contact" },
 ];
 
 const studentLinks = [
-  { href: "/#", label: "Orar" },
-  { href: "/#", label: "Burse" },
-  { href: "/#", label: "Bacalaureat" },
-  { href: "/#", label: "Atestat profesional" },
-  { href: "/#", label: "Avizier" },
+  { href: "/orar", label: "Orar" },
+  { href: "/burse", label: "Burse" },
+  { href: "/bacalaureat", label: "Bacalaureat" },
+  { href: "/atestat-profesional", label: "Atestat profesional" },
+  { href: "/consiliul-elevilor", label: "Consiliul elevilor" },
+];
+
+const aboutLinks = [
+  { href: "/istoric", label: "Istoric" },
+  { href: "/misiune-si-viziune", label: "Misiune și viziune" },
+  { href: "/regulamente", label: "Regulamente" },
+  { href: "/managementul-cazurilor-de-violenta", label: "Anti-bullying (PO 6)" },
+  { href: "/mobilitate-cadre-didactice", label: "Mobilități Erasmus+" },
 ];
 
 export function Footer() {
   return (
     <footer id="contact" className="bg-navy-deep text-white/72 text-sm">
-      <div className="wrap grid gap-10 py-[clamp(3rem,6vw,5rem)] sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.1fr]">
+      <div className="wrap grid gap-10 py-[clamp(3rem,6vw,5rem)] sm:grid-cols-2 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
         <div>
           <div className="mb-4 flex items-center gap-3">
             <Image
@@ -86,6 +95,7 @@ export function Footer() {
 
         <FooterCol title="Navigare" items={nav} />
         <FooterCol title="Pentru elevi" items={studentLinks} />
+        <FooterCol title="Despre școală" items={aboutLinks} />
 
         <div>
           <h3 className="mb-4 font-sans text-base font-semibold text-white">

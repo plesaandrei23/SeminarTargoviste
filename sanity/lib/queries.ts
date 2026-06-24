@@ -130,6 +130,35 @@ export const admissionCyclesQuery = groq`
   }
 `;
 
+/**
+ * Slugs of static pages we render via the catch-all /[slug] route. Used
+ * by generateStaticParams + filtered against route paths that have
+ * dedicated pages (those win over the catch-all anyway, but excluding
+ * them here keeps the prerender list honest).
+ */
+export const paginaSlugsQuery = groq`
+  *[_type == "pagina" && defined(slug.current)].slug.current
+`;
+
+/** Single static page rendered by /[slug]. */
+export const paginaBySlugQuery = groq`
+  *[_type == "pagina" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    section,
+    "body": coalesce(body, [])[]{
+      ...,
+      _type == "localizedImage" => {
+        asset->{ _id, url, metadata { dimensions { width, height } } },
+        alt,
+        caption
+      }
+    },
+    seo
+  }
+`;
+
 /** Single activity page. */
 export const activityBySlugQuery = groq`
   *[_type == "activitate" && slug.current == $slug][0] {
