@@ -11,13 +11,13 @@ A practical brief for the campus photo shoot. The goal: one strong **hero** imag
 - **Framing:** shoot **landscape (3:2 / 16:9)** for web. Keep verticals straight (level the camera — buildings shouldn't lean). For each place: 1 wide *establishing* shot + 2–3 closer *detail* shots.
 - **People:** a few candid shots with students/teachers (with consent) bring it to life — but also capture **clean, empty** versions of each space.
 - **Consistency:** try to shoot all exteriors in similar weather/time so the set feels cohesive.
-- **Files:** highest quality JPEG (or RAW), **≥ 3000 px** on the long side. Name them clearly: `capela-1.jpg`, `clase-1.jpg`, etc.
+- **Files:** highest quality JPEG (or RAW), **≥ 3000 px** on the long side. Name them clearly: `paraclis-1.jpg`, `clase-1.jpg`, etc.
 
 ---
 
 ## The 6 places
 
-**01 · Capela**
+**01 · Paraclis**
 - Hero: full interior toward the iconostasis/altar, centered, symmetrical.
 - Details: icons, candles, an open Gospel, light through a window.
 - 360°: from the centre of the nave.

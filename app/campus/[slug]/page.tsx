@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
@@ -61,13 +62,30 @@ export default async function CampusZonePage({
 function Hero({ zone }: { zone: (typeof CAMPUS_ZONES)[number] }) {
   return (
     <section className="relative isolate overflow-hidden bg-gradient-to-br from-navy-deep via-navy to-navy-soft pt-32 pb-20 text-white">
-      {/* outsized icon as a watermark on the side */}
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-10 top-10 text-gold/10 select-none"
-      >
-        <zone.Icon className="size-[28rem]" strokeWidth={0.8} />
-      </span>
+      {zone.image ? (
+        <>
+          <Image
+            src={zone.image.src}
+            alt=""
+            aria-hidden="true"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-30"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-b from-navy-deep/65 via-navy/65 to-navy-deep/95"
+          />
+        </>
+      ) : (
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-10 top-10 text-gold/10 select-none"
+        >
+          <zone.Icon className="size-[28rem]" strokeWidth={0.8} />
+        </span>
+      )}
       <div className="wrap relative">
         <Link
           href="/campus"
@@ -104,6 +122,19 @@ function Body({ zone }: { zone: (typeof CAMPUS_ZONES)[number] }) {
   return (
     <section className="wrap mt-16 grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
       <article className="space-y-10">
+        {zone.image ? (
+          <Reveal as="figure" className="overflow-hidden rounded-3xl border border-navy/10 shadow-[var(--shadow-elevated)]">
+            <div className="relative aspect-[16/10] w-full">
+              <Image
+                src={zone.image.src}
+                alt={zone.image.alt}
+                fill
+                sizes="(min-width: 1024px) 720px, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </Reveal>
+        ) : null}
         <Reveal>
           <p className="text-lg leading-relaxed text-ink/85 text-pretty">
             {zone.intro}

@@ -2,7 +2,7 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Welcome } from "@/components/Welcome";
 import { News } from "@/components/News";
-import { CampusMap } from "@/components/CampusMap";
+import { CampusBento } from "@/components/CampusBento";
 import { Team } from "@/components/Team";
 import { AdmissionsCTA } from "@/components/AdmissionsCTA";
 import { Footer } from "@/components/Footer";
@@ -15,7 +15,7 @@ export default function HomePage() {
         <Hero />
         <Welcome />
         <News />
-        <CampusMap />
+        <CampusBento />
         <Team />
         <AdmissionsCTA />
       </main>

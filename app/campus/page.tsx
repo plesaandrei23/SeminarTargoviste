@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Compass, MapPin } from "lucide-react";
 import { Header } from "@/components/Header";
@@ -10,7 +11,7 @@ import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Campus",
-  description: `Descoperă campusul Seminarului Teologic Ortodox „${siteConfig.patron}” din ${siteConfig.city} — capelă, săli de clasă, internat, bibliotecă, sala de festivități.`,
+  description: `Descoperă campusul Seminarului Teologic Ortodox „${siteConfig.patron}” din ${siteConfig.city} — paraclis, săli de clasă, internat, bibliotecă, sala de festivități.`,
   alternates: { canonical: "/campus" },
 };
 
@@ -31,6 +32,19 @@ export default function CampusPage() {
 function Hero() {
   return (
     <section className="relative isolate overflow-hidden bg-gradient-to-br from-navy-deep via-navy to-navy-soft pt-36 pb-24 text-white">
+      <Image
+        src="/campus/intrare-arc.jpg"
+        alt=""
+        aria-hidden="true"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover opacity-30"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-b from-navy-deep/70 via-navy/60 to-navy-deep/95"
+      />
       <div className="wrap relative mx-auto max-w-3xl text-center">
         <Reveal as="p" className="eyebrow !text-gold-light">
           Campus
@@ -56,9 +70,9 @@ function Hero() {
           delay={2}
           className="mx-auto mt-6 max-w-xl text-white/85 text-pretty sm:text-lg"
         >
-          Șase spații, fiecare cu rolul lui în viața seminarului — capelă,
-          săli de clasă, internat, secretariat, bibliotecă și sala de
-          festivități. Apasă pe oricare pentru a afla mai multe.
+          Șase spații, fiecare cu rolul lui în viața seminarului —
+          paraclis, săli de clasă, internat, secretariat, bibliotecă și
+          sala de festivități. Apasă pe oricare pentru a afla mai multe.
         </Reveal>
       </div>
     </section>
@@ -79,16 +93,31 @@ function ZonesGrid() {
               className="group block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 rounded-2xl"
             >
               <Card className="relative h-full overflow-hidden border-navy/10 bg-paper transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-[var(--shadow-elevated)]">
-                {/* gradient header band with the zone icon, sized to read like a poster */}
                 <div className="relative h-44 overflow-hidden bg-gradient-to-br from-navy-deep via-navy to-navy-soft">
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute -right-6 -top-6 text-gold/15"
-                  >
-                    <zone.Icon className="size-44" strokeWidth={1} />
-                  </span>
+                  {zone.image ? (
+                    <Image
+                      src={zone.image.src}
+                      alt={zone.image.alt}
+                      fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    />
+                  ) : (
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute -right-6 -top-6 text-gold/15"
+                    >
+                      <zone.Icon className="size-44" strokeWidth={1} />
+                    </span>
+                  )}
+                  {zone.image ? (
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-deep/85 via-navy-deep/30 to-transparent"
+                    />
+                  ) : null}
                   <div className="absolute bottom-0 left-0 p-5 text-white">
-                    <span className="inline-flex size-11 items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/15">
+                    <span className="inline-flex size-11 items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/15 backdrop-blur-sm">
                       <zone.Icon className="size-5 text-gold-light" strokeWidth={1.75} />
                     </span>
                   </div>
@@ -126,8 +155,8 @@ function VisitCta() {
                 Programează un tur al seminarului
               </h2>
               <p className="mt-4 max-w-md text-pretty text-white/80">
-                Vrei să vezi sălile, capela, internatul cu ochii tăi? Sună
-                la secretariat — organizăm vizite pentru părinți și
+                Vrei să vezi sălile, paraclisul, internatul cu ochii tăi?
+                Sună la secretariat — organizăm vizite pentru părinți și
                 candidați la admitere, în programul de funcționare.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
