@@ -36,6 +36,7 @@ const RESERVED_SLUGS = new Set([
   "consiliul-elevilor",
   "contact",
   "director",
+  "erasmus",
   "istoric",
   "managementul-cazurilor-de-violenta",
   "misiune-si-viziune",

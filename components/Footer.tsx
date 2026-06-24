@@ -50,7 +50,7 @@ const aboutLinks = [
   { href: "/misiune-si-viziune", label: "Misiune și viziune" },
   { href: "/regulamente", label: "Regulamente" },
   { href: "/managementul-cazurilor-de-violenta", label: "Anti-bullying (PO 6)" },
-  { href: "/mobilitate-cadre-didactice", label: "Mobilități Erasmus+" },
+  { href: "/erasmus", label: "Erasmus+" },
 ];
 
 export function Footer() {

@@ -25,6 +25,10 @@ const SLUG_REDIRECTS: { source: string; destination: string }[] = [
   { source: "/tur-virtual", destination: "/campus" },
   // Capela was renamed to the Orthodox term Paraclis
   { source: "/campus/capela", destination: "/campus/paraclis" },
+  // Legacy Erasmus sub-pages — everything consolidated on /erasmus
+  { source: "/erasmusmobilitati", destination: "/erasmus" },
+  { source: "/erasmusrezultate", destination: "/erasmus" },
+  { source: "/erasmusvizibilitate", destination: "/erasmus" },
 ];
 
 const nextConfig: NextConfig = {
