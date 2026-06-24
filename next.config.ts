@@ -15,8 +15,7 @@ const SLUG_REDIRECTS: { source: string; destination: string }[] = [
   { source: "/didactic-auxiliar", destination: "/profesori" },
   { source: "/nedidactic", destination: "/profesori" },
   { source: "/conducerea-scolii", destination: "/profesori" },
-  { source: "/director", destination: "/profesori" },
-  { source: "/consiliul-de-administratie", destination: "/profesori" },
+  // /director used to redirect to /profesori — now it's its own page
   { source: "/consiliul-profesoral", destination: "/profesori" },
   // Parent menu pages → home
   { source: "/elevi", destination: "/" },

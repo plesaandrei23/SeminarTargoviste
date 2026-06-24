@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -15,6 +16,11 @@ import {
 import { Reveal } from "@/components/Reveal";
 import { cn } from "@/lib/utils";
 import type { Personal } from "@/sanity/lib/types";
+
+/** The director gets a dedicated /director page (welcome letter, photo). */
+function isDirector(role: string): boolean {
+  return /^director\b/i.test(role.trim());
+}
 
 /**
  * Full teaching staff with a discipline filter on top + a click-to-open
@@ -165,6 +171,53 @@ export function ProfessorCard({
     .map((s) => s[0])
     .join("");
 
+  // The director gets its own page with the welcome letter — everyone else
+  // opens an inline dialog with the same surface.
+  const cardInner = (
+    <Card className="h-full overflow-hidden border-navy/10 bg-paper transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-[var(--shadow-elevated)]">
+      <div className="relative aspect-[4/5] overflow-hidden border-b border-navy/10 bg-gradient-to-br from-navy via-navy-soft to-gold-deep">
+        {person.photo?.asset ? (
+          <Image
+            src={person.photo.asset.url}
+            alt={person.photo.alt || person.name}
+            fill
+            sizes="(min-width: 1024px) 280px, (min-width: 640px) 33vw, 50vw"
+            className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
+          />
+        ) : (
+          <span className="absolute inset-0 flex items-center justify-center font-serif text-5xl font-semibold text-gold-light">
+            {initials}
+          </span>
+        )}
+      </div>
+      <CardContent className="p-5">
+        {person.subject && (
+          <p className="text-[0.66rem] font-semibold uppercase tracking-[0.14em] text-gold-deep">
+            {person.subject}
+          </p>
+        )}
+        <p className="mt-1 font-serif text-base font-semibold leading-tight text-navy text-balance">
+          {person.name}
+        </p>
+        <p className="mt-2 text-xs text-muted">{person.role}</p>
+      </CardContent>
+    </Card>
+  );
+
+  if (isDirector(person.role)) {
+    return (
+      <Reveal delay={delay}>
+        <Link
+          href="/director"
+          aria-label={`Mesajul directorului · ${person.name}`}
+          className="group block w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:rounded-2xl"
+        >
+          {cardInner}
+        </Link>
+      </Reveal>
+    );
+  }
+
   return (
     <Reveal delay={delay}>
       <Dialog>
@@ -174,34 +227,7 @@ export function ProfessorCard({
             className="group block w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:rounded-2xl"
             aria-label={`Detalii despre ${person.name}`}
           >
-            <Card className="h-full overflow-hidden border-navy/10 bg-paper transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-[var(--shadow-elevated)]">
-              <div className="relative aspect-[4/5] overflow-hidden border-b border-navy/10 bg-gradient-to-br from-navy via-navy-soft to-gold-deep">
-                {person.photo?.asset ? (
-                  <Image
-                    src={person.photo.asset.url}
-                    alt={person.photo.alt || person.name}
-                    fill
-                    sizes="(min-width: 1024px) 280px, (min-width: 640px) 33vw, 50vw"
-                    className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
-                  />
-                ) : (
-                  <span className="absolute inset-0 flex items-center justify-center font-serif text-5xl font-semibold text-gold-light">
-                    {initials}
-                  </span>
-                )}
-              </div>
-              <CardContent className="p-5">
-                {person.subject && (
-                  <p className="text-[0.66rem] font-semibold uppercase tracking-[0.14em] text-gold-deep">
-                    {person.subject}
-                  </p>
-                )}
-                <p className="mt-1 font-serif text-base font-semibold leading-tight text-navy text-balance">
-                  {person.name}
-                </p>
-                <p className="mt-2 text-xs text-muted">{person.role}</p>
-              </CardContent>
-            </Card>
+            {cardInner}
           </button>
         </DialogTrigger>
 

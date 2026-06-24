@@ -30,6 +30,7 @@ const RESERVED_SLUGS = new Set([
   "admitere",
   "campus",
   "contact",
+  "director",
   "profesori",
   "studio",
   // Redirected in next.config.ts → /profesori
@@ -37,7 +38,6 @@ const RESERVED_SLUGS = new Set([
   "didactic-auxiliar",
   "nedidactic",
   "conducerea-scolii",
-  "director",
   "consiliul-de-administratie",
   "consiliul-profesoral",
   // Redirected → home or other targets
