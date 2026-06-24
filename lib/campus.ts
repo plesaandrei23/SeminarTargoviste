@@ -28,16 +28,22 @@ export type CampusZone = {
   features: string[];
   /** Practical info shown in the right rail of the detail page. */
   practical: { label: string; value: string }[];
+  /**
+   * Optional photo of the zone, served from /public/campus/. When present
+   * it replaces the icon-only gradient header on the /campus card and
+   * the detail page hero.
+   */
+  image?: { src: string; alt: string };
 };
 
 export const CAMPUS_ZONES: CampusZone[] = [
   {
-    slug: "capela",
-    name: "Capela",
+    slug: "paraclis",
+    name: "Paraclis",
     Icon: Church,
     tagline: "Inima duhovnicească a seminarului",
     intro:
-      "Aici începe orice zi de seminar. Slujbele de dimineață și de seară, rugăciunile dinaintea meselor, sărbătorile liturgice — toate au loc în capela seminarului, sub îndrumarea duhovnicilor.",
+      "Aici începe orice zi de seminar. Slujbele de dimineață și de seară, rugăciunile dinaintea meselor, sărbătorile liturgice — toate au loc în paraclisul seminarului, sub îndrumarea duhovnicilor.",
     features: [
       "Slujbe zilnice — Sfânta Liturghie de dimineață și vecernia",
       "Sărbători liturgice — sfințirea anului școlar, Te Deum de Crăciun",
@@ -49,6 +55,10 @@ export const CAMPUS_ZONES: CampusZone[] = [
       { label: "Slujbe", value: "Zilnic — 07:30 dimineața · 19:00 seara" },
       { label: "Duhovnici", value: "Pr. Constantin Rădulescu · Pr. Ștefănel Cosmin Gheorghe" },
     ],
+    image: {
+      src: "/campus/paraclis.jpg",
+      alt: "Slujbă în paraclisul seminarului, în fața iconostasului",
+    },
   },
   {
     slug: "sali-de-clasa",
@@ -87,6 +97,10 @@ export const CAMPUS_ZONES: CampusZone[] = [
       { label: "Tarif", value: "Stabilit anual prin hotărâre C.A." },
       { label: "Cereri", value: "Se depun odată cu dosarul de admitere" },
     ],
+    image: {
+      src: "/campus/internat.jpg",
+      alt: "Clădirea internatului seminarului, văzută din curte",
+    },
   },
   {
     slug: "secretariat",
@@ -106,6 +120,10 @@ export const CAMPUS_ZONES: CampusZone[] = [
       { label: "Telefon", value: "0245 614 505" },
       { label: "Email", value: "seminarul.tgv@scolidb.ro" },
     ],
+    image: {
+      src: "/campus/intrare.jpg",
+      alt: "Intrarea principală a seminarului, cu firma „Seminarul Teologic Ortodox Sf. Ioan Gură de Aur”",
+    },
   },
   {
     slug: "biblioteca",
@@ -144,6 +162,10 @@ export const CAMPUS_ZONES: CampusZone[] = [
       { label: "Echipamente", value: "Pian · sistem audio · proiector" },
       { label: "Evenimente recente", value: "Festivitate sfârșit an · concert Coralia" },
     ],
+    image: {
+      src: "/campus/sala-de-festivitati.jpg",
+      alt: "Corul seminarului pe scena sălii de festivități, în timpul unui concert",
+    },
   },
 ];
 

@@ -15,8 +15,7 @@ const SLUG_REDIRECTS: { source: string; destination: string }[] = [
   { source: "/didactic-auxiliar", destination: "/profesori" },
   { source: "/nedidactic", destination: "/profesori" },
   { source: "/conducerea-scolii", destination: "/profesori" },
-  { source: "/director", destination: "/profesori" },
-  { source: "/consiliul-de-administratie", destination: "/profesori" },
+  // /director used to redirect to /profesori — now it's its own page
   { source: "/consiliul-profesoral", destination: "/profesori" },
   // Parent menu pages → home
   { source: "/elevi", destination: "/" },
@@ -24,6 +23,12 @@ const SLUG_REDIRECTS: { source: string; destination: string }[] = [
   { source: "/scoala-noastra", destination: "/istoric" },
   // Tur virtual lived as a separate Zyro page; treat /campus as the home for it
   { source: "/tur-virtual", destination: "/campus" },
+  // Capela was renamed to the Orthodox term Paraclis
+  { source: "/campus/capela", destination: "/campus/paraclis" },
+  // Legacy Erasmus sub-pages — everything consolidated on /erasmus
+  { source: "/erasmusmobilitati", destination: "/erasmus" },
+  { source: "/erasmusrezultate", destination: "/erasmus" },
+  { source: "/erasmusvizibilitate", destination: "/erasmus" },
 ];
 
 const nextConfig: NextConfig = {
@@ -42,6 +47,28 @@ const nextConfig: NextConfig = {
       destination: r.destination,
       permanent: true,
     }));
+  },
+  async headers() {
+    // Conservative defaults applied site-wide. CSP is deliberately omitted
+    // here because Sanity Studio + Google Maps embeds need a non-trivial
+    // policy; a full CSP belongs in a follow-up once the embed surface is
+    // pinned down. These headers cover the cheap wins.
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-DNS-Prefetch-Control", value: "on" },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=(), interest-cohort=()",
+          },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+        ],
+      },
+    ];
   },
 };
 

@@ -1,6 +1,12 @@
 export const siteConfig = {
   name: "Seminarul Teologic Ortodox „Sfântul Ioan Gură de Aur”",
   shortName: "Seminarul Teologic Târgoviște",
+  /**
+   * Canonical public URL. Used by sitemap.xml, robots.txt, JSON-LD, and the
+   * metadataBase in app/layout.tsx. Override at deploy time for previews —
+   * production should always advertise the real domain.
+   */
+  url: "https://seminarortodoxtargoviste.ro",
   city: "Târgoviște",
   patron: "Sf. Ioan Gură de Aur",
   tagline: "De peste 30 de ani în slujba Bisericii și a Educației",
@@ -33,8 +39,9 @@ export const siteConfig = {
     lng: 25.4567,
   },
   social: {
-    facebook:
-      "https://www.facebook.com/p/Seminarul-Teologic-Ortodox-Sf%C3%A2ntul-Ioan-Gur%C4%83-de-Aur-T%C3%A2rgovi%C5%9Fte-100063548945996/",
+    facebook: "https://www.facebook.com/profile.php?id=61554192865224",
+    /** Numeric Facebook Page ID — used by the FB Page Plugin embed + future Graph API integration. */
+    facebookPageId: "61554192865224",
     tiktok: "https://www.tiktok.com/@seminartargoviste",
     instagram: "#",
   },

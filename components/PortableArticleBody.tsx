@@ -94,6 +94,10 @@ const types: Record<string, PortableTextTypeComponent<any>> = {
   ),
   embed: ({ value }) => {
     if (!value?.url) return null;
+    if (!isAllowedEmbedUrl(value.url)) {
+      console.warn("[PortableArticleBody] blocked embed for non-allowlisted host:", value.url);
+      return null;
+    }
     return (
       <div className="my-10 aspect-video overflow-hidden rounded-2xl">
         <iframe
@@ -101,12 +105,44 @@ const types: Record<string, PortableTextTypeComponent<any>> = {
           title={value.title || "Conținut încorporat"}
           loading="lazy"
           allowFullScreen
+          referrerPolicy="no-referrer"
+          sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"
           className="h-full w-full"
         />
       </div>
     );
   },
 };
+
+/**
+ * Tight allowlist for embed URLs. The CMS editors trust each other, but a
+ * compromised editor account is the realistic threat — without this an
+ * attacker could embed phishing/clickjacking pages into any article.
+ */
+const EMBED_HOST_ALLOWLIST = new Set([
+  "www.youtube.com",
+  "youtube.com",
+  "www.youtube-nocookie.com",
+  "youtube-nocookie.com",
+  "player.vimeo.com",
+  "vimeo.com",
+  "www.google.com",
+  "google.com",
+  "maps.google.com",
+  "www.openstreetmap.org",
+  "drive.google.com",
+  "docs.google.com",
+]);
+
+function isAllowedEmbedUrl(raw: string): boolean {
+  try {
+    const u = new URL(raw);
+    if (u.protocol !== "https:") return false;
+    return EMBED_HOST_ALLOWLIST.has(u.hostname.toLowerCase());
+  } catch {
+    return false;
+  }
+}
 
 const components: PortableTextComponents = { block, marks, types };
 

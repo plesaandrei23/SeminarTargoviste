@@ -80,6 +80,21 @@ export const allPersonalQuery = groq`
   }
 `;
 
+/** The current director — the first conducere record whose role mentions Director. */
+export const directorQuery = groq`
+  *[_type == "personal" && category == "conducere" && role match "Director*"][0] {
+    _id,
+    name,
+    role,
+    category,
+    subject,
+    photo {
+      asset->{ _id, url, metadata { dimensions { width, height } } },
+      alt
+    }
+  }
+`;
+
 /** Featured staff for the home page Team section (first 4 by ordering). */
 export const featuredPersonalQuery = groq`
   *[_type == "personal" && defined(name)] | order(

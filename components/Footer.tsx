@@ -48,9 +48,11 @@ const studentLinks = [
 const aboutLinks = [
   { href: "/istoric", label: "Istoric" },
   { href: "/misiune-si-viziune", label: "Misiune și viziune" },
+  { href: "/director", label: "Mesajul directorului" },
+  { href: "/consiliul-de-administratie", label: "Consiliul de Administrație" },
   { href: "/regulamente", label: "Regulamente" },
   { href: "/managementul-cazurilor-de-violenta", label: "Anti-bullying (PO 6)" },
-  { href: "/mobilitate-cadre-didactice", label: "Mobilități Erasmus+" },
+  { href: "/erasmus", label: "Erasmus+" },
 ];
 
 export function Footer() {
@@ -134,12 +136,25 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="wrap flex flex-wrap justify-between gap-2 border-t border-white/10 py-5 text-xs text-white/50">
+      <div className="wrap flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-white/10 py-5 text-xs text-white/50">
         <span>
           © 2026 Seminarul Teologic Ortodox „{siteConfig.patron}”{" "}
           {siteConfig.city}
         </span>
-        <span>Prototip de design · v0.1</span>
+        <div className="flex flex-wrap gap-x-5 gap-y-2">
+          <Link
+            href="/declaratie-accesibilitate"
+            className="hover:text-gold-light"
+          >
+            Declarație de accesibilitate
+          </Link>
+          <Link
+            href="/politica-confidentialitate"
+            className="hover:text-gold-light"
+          >
+            Politică de confidențialitate
+          </Link>
+        </div>
       </div>
     </footer>
   );
