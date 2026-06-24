@@ -47,7 +47,6 @@ const RESERVED_SLUGS = new Set([
   "profesori",
   "regulamente",
   "studio",
-  "tutorial",
   // Redirected in next.config.ts → /profesori
   "didactic",
   "didactic-auxiliar",

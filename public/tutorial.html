@@ -1,0 +1,945 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, follow" />
+  <title>Tutorial · Cum se actualizează site-ul · Seminarul Teologic Târgoviște</title>
+  <meta name="description" content="Ghid intern pentru personalul Seminarului Teologic Ortodox „Sf. Ioan Gură de Aur” din Târgoviște — cum se folosește Sanity Studio pentru a publica anunțuri, activități, fotografii." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Design tokens (mirrors lib/site-config + globals.css) ── */
+    :root {
+      --navy-deep: #0b1f33;
+      --navy: #14314c;
+      --navy-soft: #21425f;
+      --gold: #c8a04e;
+      --gold-light: #e0c382;
+      --gold-deep: #8e6b1f;
+      --parchment: #f4ede4;
+      --paper: #faf6f1;
+      --ink: #1f2731;
+      --muted: #6b727b;
+      --shadow-elev: 0 20px 50px -25px rgba(11, 31, 51, 0.35);
+      --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+      --font-serif: "Cormorant Garamond", "Times New Roman", serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--ink);
+      background: var(--parchment);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 600; color: var(--navy); line-height: 1.15; margin: 0; }
+    a { color: var(--gold-deep); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Layout primitives ── */
+    .wrap { width: min(1200px, 100% - 2rem); margin-inline: auto; }
+    .eyebrow {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+      margin: 0;
+    }
+    .text-balance { text-wrap: balance; }
+    .text-pretty { text-wrap: pretty; }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 60%, var(--navy-soft) 100%);
+      color: #fff;
+      padding-top: clamp(5rem, 10vw, 8rem);
+      padding-bottom: clamp(3.5rem, 7vw, 6rem);
+    }
+    .hero h1 {
+      color: #fff;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      letter-spacing: -0.01em;
+      margin-top: 1.25rem;
+      max-width: 36ch;
+    }
+    .hero p.lede { color: rgba(255,255,255,0.85); font-size: 1.075rem; margin-top: 1.5rem; max-width: 56ch; }
+    .hero .badge {
+      display: inline-block;
+      padding: 0.35rem 0.8rem;
+      border: 1px solid rgba(200,160,78,0.4);
+      border-radius: 999px;
+      color: var(--gold-light);
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .hero .sub {
+      color: var(--gold-light);
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+    }
+    .hero svg.diamond { display: block; height: 0.75rem; margin-top: 1.5rem; color: rgba(200,160,78,0.6); }
+    .hero a.back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.73rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .hero a.back:hover { color: var(--gold-light); text-decoration: none; }
+
+    /* ── Body grid ── */
+    .body-grid {
+      margin-top: 3rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    @media (min-width: 1024px) {
+      .body-grid {
+        grid-template-columns: 280px 1fr;
+        gap: 3.5rem;
+      }
+    }
+
+    /* ── Sticky TOC ── */
+    nav.toc { position: relative; }
+    @media (min-width: 1024px) {
+      nav.toc { position: sticky; top: 6rem; align-self: start; }
+    }
+    nav.toc ol { list-style: none; padding: 0; margin: 1rem 0 0 0; display: flex; flex-direction: column; gap: 0.25rem; }
+    nav.toc a {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.55rem 0.75rem;
+      border-radius: 0.75rem;
+      color: rgba(31,39,49,0.7);
+      font-size: 0.875rem;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    nav.toc a:hover {
+      background: var(--paper);
+      color: var(--navy);
+      text-decoration: none;
+    }
+    nav.toc a.active { background: var(--navy); color: #fff; }
+    nav.toc a.active:hover { color: #fff; }
+    nav.toc .step {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 999px;
+      flex-shrink: 0;
+      font-family: var(--font-serif);
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: rgba(11,31,51,0.08);
+      color: var(--navy);
+    }
+    nav.toc a.active .step { background: var(--gold); color: var(--navy-deep); }
+    nav.toc .label { display: block; font-weight: 600; line-height: 1.25; }
+    nav.toc .sub { display: block; font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; }
+    nav.toc a.active .sub { color: rgba(255,255,255,0.65); }
+
+    /* ── Article ── */
+    article { max-width: 48rem; }
+    article > section { padding-bottom: 1rem; }
+    article > section + section { margin-top: 4rem; }
+
+    .section-head { scroll-margin-top: 8rem; }
+    .section-head h2 {
+      margin-top: 0.6rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+    }
+    .section-head h2 .icon-wrap {
+      margin-top: 0.3rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 0.75rem;
+      background: rgba(200,160,78,0.15);
+      flex-shrink: 0;
+    }
+    .section-head h2 .icon-wrap svg { width: 1.25rem; height: 1.25rem; color: var(--gold-deep); }
+    .section-head > p {
+      margin-top: 1rem;
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: rgba(31,39,49,0.85);
+    }
+
+    /* ── Steps list ── */
+    ol.steps { list-style: none; padding: 0; margin: 1.25rem 0; display: flex; flex-direction: column; gap: 0.75rem; }
+    ol.steps li {
+      display: flex;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: var(--paper);
+      border: 1px solid rgba(11,31,51,0.1);
+      border-radius: 1rem;
+    }
+    ol.steps .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 999px;
+      background: var(--gold);
+      color: var(--navy-deep);
+      font-size: 0.78rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    ol.steps p { margin: 0; font-size: 0.95rem; line-height: 1.55; color: rgba(31,39,49,0.85); }
+
+    /* ── Tips / callouts ── */
+    .callout {
+      display: flex;
+      gap: 0.75rem;
+      padding: 1rem;
+      border-radius: 1rem;
+      margin: 1.25rem 0;
+      border: 1px solid;
+    }
+    .callout svg { width: 1.25rem; height: 1.25rem; flex-shrink: 0; margin-top: 0.2rem; }
+    .callout p { margin: 0; font-size: 0.92rem; line-height: 1.55; color: rgba(31,39,49,0.85); }
+    .callout.tip { background: rgba(200,160,78,0.05); border-color: rgba(200,160,78,0.3); }
+    .callout.tip svg { color: var(--gold-deep); }
+    .callout.warn { background: #fefce8; border-color: #fde68a; }
+    .callout.warn svg { color: #b45309; }
+    .callout.ok { background: #ecfdf5; border-color: #a7f3d0; }
+    .callout.ok svg { color: #047857; }
+
+    /* ── Field tables ── */
+    .field-table {
+      margin: 1.25rem 0;
+      border: 1px solid rgba(11,31,51,0.1);
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+    .field-table table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+    .field-table thead { background: var(--navy); color: #fff; }
+    .field-table th { padding: 0.85rem 1rem; text-align: left; font-weight: 600; }
+    .field-table tbody { background: var(--paper); }
+    .field-table tbody tr + tr { border-top: 1px solid rgba(11,31,51,0.08); }
+    .field-table td { padding: 0.85rem 1rem; vertical-align: top; }
+    .field-table .name { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.82rem; color: var(--navy); }
+    .field-table .req {
+      margin-left: 0.4rem;
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #b91c1c;
+    }
+    .field-table td.desc { color: rgba(31,39,49,0.85); }
+
+    /* ── Inline keyboard / button hints ── */
+    kbd {
+      display: inline-block;
+      padding: 0.1rem 0.4rem;
+      border: 1px solid rgba(11,31,51,0.15);
+      background: var(--paper);
+      border-radius: 0.35rem;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 0.78rem;
+      color: var(--navy);
+      box-shadow: 0 1px 0 rgba(11,31,51,0.05);
+    }
+
+    /* ── Type-card grid (Ce poți edita) ── */
+    .type-grid { margin: 1.25rem 0; display: grid; gap: 0.75rem; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .type-grid { grid-template-columns: repeat(2, 1fr); } }
+    .type-card {
+      display: flex;
+      gap: 0.75rem;
+      padding: 1rem;
+      border: 1px solid rgba(11,31,51,0.1);
+      background: var(--paper);
+      border-radius: 1rem;
+    }
+    .type-card .ico {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 2.5rem; height: 2.5rem;
+      border-radius: 0.75rem;
+      background: rgba(200,160,78,0.15);
+      flex-shrink: 0;
+    }
+    .type-card .ico svg { width: 1.25rem; height: 1.25rem; color: var(--gold-deep); }
+    .type-card .title { font-family: var(--font-serif); font-size: 0.95rem; font-weight: 600; color: var(--navy); margin: 0 0 0.15rem 0; }
+    .type-card .desc { font-size: 0.78rem; color: rgba(31,39,49,0.8); margin: 0; line-height: 1.45; }
+
+    /* ── Save vs Publish duo ── */
+    .duo { margin: 1.25rem 0; display: grid; gap: 1rem; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .duo { grid-template-columns: 1fr 1fr; } }
+    .duo-card {
+      padding: 1.5rem;
+      background: var(--paper);
+      border: 1px solid rgba(11,31,51,0.1);
+      border-radius: 1rem;
+    }
+    .duo-card .ico {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 2.5rem; height: 2.5rem; border-radius: 0.75rem; margin-bottom: 0.8rem;
+    }
+    .duo-card.draft .ico { background: #fef3c7; }
+    .duo-card.draft .ico svg { color: #b45309; }
+    .duo-card.pub .ico { background: #d1fae5; }
+    .duo-card.pub .ico svg { color: #047857; }
+    .duo-card h3 { font-family: var(--font-serif); font-size: 1.05rem; color: var(--navy); margin: 0 0 0.5rem 0; }
+    .duo-card p { margin: 0; font-size: 0.875rem; line-height: 1.5; color: rgba(31,39,49,0.85); }
+    .duo-card .note { margin-top: 0.5rem; font-size: 0.78rem; color: var(--muted); }
+
+    /* ── Generic info list (used in "Ce NU se editează") ── */
+    ul.info-list { list-style: none; padding: 0; margin: 1.25rem 0; display: flex; flex-direction: column; gap: 0.75rem; }
+    ul.info-list li {
+      padding: 1rem;
+      border: 1px solid rgba(11,31,51,0.1);
+      background: var(--paper);
+      border-radius: 1rem;
+    }
+    ul.info-list .route { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.86rem; color: var(--navy); }
+    ul.info-list .desc { margin: 0.35rem 0 0 0; font-size: 0.875rem; color: rgba(31,39,49,0.8); }
+
+    /* ── Greșeli list ── */
+    ul.errors { list-style: none; padding: 0; margin: 1.25rem 0; display: flex; flex-direction: column; gap: 0.75rem; }
+    ul.errors li {
+      padding: 1.25rem;
+      border: 1px solid rgba(11,31,51,0.1);
+      background: var(--paper);
+      border-radius: 1rem;
+    }
+    ul.errors .err-title { font-weight: 600; color: var(--navy); margin: 0; }
+    ul.errors .err-fix { margin: 0.5rem 0 0 0; font-size: 0.92rem; color: rgba(31,39,49,0.85); }
+    ul.errors .err-fix .lbl { color: #047857; font-weight: 700; }
+
+    /* ── Final help card ── */
+    .help-card {
+      margin-top: 2rem;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      background: linear-gradient(135deg, var(--navy-deep), var(--navy-soft));
+      color: #fff;
+    }
+    .help-card .eyebrow { color: var(--gold-light); }
+    .help-card h3 { font-family: var(--font-serif); font-size: 1.25rem; color: #fff; margin-top: 0.5rem; }
+    .help-card ul { list-style: none; padding: 0; margin: 1.25rem 0 0 0; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.875rem; color: rgba(255,255,255,0.85); }
+    .help-card ul a { color: var(--gold-light); display: inline-flex; align-items: center; gap: 0.4rem; }
+    .help-card ul a:hover { text-decoration: underline; }
+    .help-card .small { font-size: 0.78rem; color: rgba(255,255,255,0.65); margin: 0.2rem 0 0 0; }
+    .help-card .stamp { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; color: rgba(255,255,255,0.55); }
+
+    /* ── Footer ── */
+    footer.foot {
+      margin-top: 4rem;
+      padding: 2rem 0;
+      background: var(--navy-deep);
+      color: rgba(255,255,255,0.55);
+      font-size: 0.78rem;
+      text-align: center;
+    }
+    footer.foot strong { color: rgba(255,255,255,0.85); font-family: var(--font-serif); font-weight: 600; }
+
+    /* Focus visible */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ─────────────── HERO ─────────────── -->
+<header class="hero">
+  <div class="wrap">
+    <a href="https://seminarortodoxtargoviste.ro" class="back" aria-label="Înapoi la pagina principală">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+      Înapoi la pagina principală
+    </a>
+    <div style="margin-top:2rem;max-width:48rem;">
+      <span class="badge">Tutorial intern</span>
+      <h1 class="text-balance">Cum actualizezi site-ul</h1>
+      <p class="sub">Sanity Studio · pas cu pas</p>
+      <svg class="diamond" viewBox="0 0 240 12" aria-hidden="true">
+        <line x1="0" y1="6" x2="100" y2="6" stroke="currentColor" stroke-width="0.6" />
+        <path d="M120 1 L125 6 L120 11 L115 6 Z" fill="currentColor" />
+        <line x1="140" y1="6" x2="240" y2="6" stroke="currentColor" stroke-width="0.6" />
+      </svg>
+      <p class="lede text-pretty">
+        Un ghid pas-cu-pas pentru personalul școlii: cum se publică
+        anunțuri, activități, hotărâri, fotografii și schimbări de text,
+        fără să fie nevoie de cunoștințe de programare.
+      </p>
+    </div>
+  </div>
+</header>
+
+<!-- ─────────────── BODY ─────────────── -->
+<main>
+  <div class="wrap body-grid">
+
+    <!-- Sticky TOC -->
+    <nav class="toc" aria-label="Cuprins tutorial">
+      <p class="eyebrow">Cuprins</p>
+      <ol id="toc-list">
+        <li><a href="#intro"          data-target="intro"          class="active"><span class="step">01</span><span><span class="label">Bun-venit</span><span class="sub">Ce este Sanity Studio</span></span></a></li>
+        <li><a href="#login"          data-target="login"         ><span class="step">02</span><span><span class="label">Cum te conectezi</span><span class="sub">/studio + e-mail</span></span></a></li>
+        <li><a href="#interfata"      data-target="interfata"     ><span class="step">03</span><span><span class="label">Interfața Studio</span><span class="sub">Bara stângă, panoul de editare</span></span></a></li>
+        <li><a href="#ce-poti-edita"  data-target="ce-poti-edita" ><span class="step">04</span><span><span class="label">Ce poți edita</span><span class="sub">9 tipuri de conținut</span></span></a></li>
+        <li><a href="#activitati"     data-target="activitati"    ><span class="step">05</span><span><span class="label">Activități și evenimente</span><span class="sub">Cel mai folosit</span></span></a></li>
+        <li><a href="#anunturi"       data-target="anunturi"      ><span class="step">06</span><span><span class="label">Anunțuri</span><span class="sub">Pe scurt, la avizier</span></span></a></li>
+        <li><a href="#admitere"       data-target="admitere"      ><span class="step">07</span><span><span class="label">Admitere</span><span class="sub">Sesiunea curentă</span></span></a></li>
+        <li><a href="#rezultate"      data-target="rezultate"     ><span class="step">08</span><span><span class="label">Rezultate examene</span><span class="sub">BAC, Atestat, EN</span></span></a></li>
+        <li><a href="#personal"       data-target="personal"      ><span class="step">09</span><span><span class="label">Profesori și personal</span><span class="sub">Adăugare cadru didactic</span></span></a></li>
+        <li><a href="#pagini"         data-target="pagini"        ><span class="step">10</span><span><span class="label">Pagini statice</span><span class="sub">/[slug] flexibil</span></span></a></li>
+        <li><a href="#documente"      data-target="documente"     ><span class="step">11</span><span><span class="label">Documente PDF</span><span class="sub">Upload + reutilizare</span></span></a></li>
+        <li><a href="#imagini"        data-target="imagini"       ><span class="step">12</span><span><span class="label">Imagini</span><span class="sub">Mereu cu alt text</span></span></a></li>
+        <li><a href="#publicare"      data-target="publicare"     ><span class="step">13</span><span><span class="label">Publicare</span><span class="sub">Draft → Publish → Live</span></span></a></li>
+        <li><a href="#ce-nu-poti"     data-target="ce-nu-poti"    ><span class="step">14</span><span><span class="label">Ce NU se editează în Studio</span><span class="sub">Paginile fixe</span></span></a></li>
+        <li><a href="#greseli"        data-target="greseli"       ><span class="step">15</span><span><span class="label">Greșeli frecvente</span><span class="sub">Ce să eviți</span></span></a></li>
+        <li><a href="#ajutor"         data-target="ajutor"        ><span class="step">16</span><span><span class="label">Ajutor</span><span class="sub">Când nu mai înțelegi</span></span></a></li>
+      </ol>
+    </nav>
+
+    <!-- Article -->
+    <article>
+
+      <!-- 01 INTRO -->
+      <section>
+        <header class="section-head" id="intro">
+          <p class="eyebrow">Bun-venit</p>
+          <h2>
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </span>
+            Ce este Sanity Studio și de ce îl folosim
+          </h2>
+          <p class="text-pretty">
+            Sanity Studio este o aplicație web în care editezi conținutul site-ului fără să intri în cod. Funcționează ca o foaie Excel cu câmpuri prestabilite — completezi titlu, dată, text, atașezi o poză și apeși „Publish”. Câteva secunde mai târziu, modificarea apare pe site.
+          </p>
+        </header>
+        <div class="callout tip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+          <p>Pe scurt: <strong>Sanity = unde scrii conținutul</strong>, <strong>site-ul = unde se afișează</strong>. Sunt separate intenționat — așa poți schimba un anunț fără să strici design-ul.</p>
+        </div>
+      </section>
+
+      <!-- 02 LOGIN -->
+      <section>
+        <header class="section-head" id="login">
+          <p class="eyebrow">Pas 1</p>
+          <h2>
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>
+            </span>
+            Cum te conectezi
+          </h2>
+          <p class="text-pretty">
+            Sanity Studio este accesat la /studio. Te loghezi cu adresa de e-mail (Google sau e-mail/parolă), fără cont separat.
+          </p>
+        </header>
+        <ol class="steps">
+          <li><span class="num">1</span><p>Deschide în browser adresa: <strong>seminarortodoxtargoviste.ro/studio</strong> (sau, dacă nu a fost încă pus în producție, link-ul preview pe care l-ai primit).</p></li>
+          <li><span class="num">2</span><p>Apasă „Log in with Google” și folosește adresa de e-mail pe care ai primit invitația. Dacă ai un cont @scolidb.ro, alege „Continue with Google”.</p></li>
+          <li><span class="num">3</span><p>Prima dată, Sanity îți va cere permisiune să acceseze profilul tău Google — accept-o. Datele tale rămân la Google, Sanity doar verifică identitatea.</p></li>
+          <li><span class="num">4</span><p>Te vei trezi într-o interfață cu un meniu pe stânga. Felicitări — ești înăuntru.</p></li>
+        </ol>
+        <div class="callout warn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+          <p>Dacă nu ai fost invitat la proiectul Sanity și nu vezi nimic, scrie-i administratorului (seminarul.tgv@scolidb.ro) pentru o invitație. Doar utilizatorii invitați pot edita.</p>
+        </div>
+      </section>
+
+      <!-- 03 INTERFATA -->
+      <section>
+        <header class="section-head" id="interfata">
+          <p class="eyebrow">Pas 2</p>
+          <h2>
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            </span>
+            Interfața Studio: ce vezi pe ecran
+          </h2>
+          <p class="text-pretty">Studio are trei zone principale. Înțelegerea lor te scapă de 90% din confuziile inițiale.</p>
+        </header>
+        <ul class="info-list">
+          <li>
+            <span class="route" style="font-family:var(--font-serif);font-size:1rem;font-weight:600;color:var(--navy)">Bara stângă · Tipuri de conținut</span>
+            <p class="desc">O listă cu „Setări site”, „Activități”, „Anunțuri”, „Admitere”, „Personal”, „Pagini statice”, „Documente”. Aici alegi ce vrei să editezi.</p>
+          </li>
+          <li>
+            <span class="route" style="font-family:var(--font-serif);font-size:1rem;font-weight:600;color:var(--navy)">Coloana din mijloc · Lista documentelor</span>
+            <p class="desc">După ce alegi un tip (de ex. „Activități”), vezi toate documentele existente. Click pe unul ca să-l editezi sau <kbd>+ Create</kbd> sus pentru a crea unul nou.</p>
+          </li>
+          <li>
+            <span class="route" style="font-family:var(--font-serif);font-size:1rem;font-weight:600;color:var(--navy)">Coloana din dreapta · Editorul</span>
+            <p class="desc">Aici completezi câmpurile. Jos vezi două butoane: <kbd>Publish</kbd> (face modificările live) și <kbd>Save</kbd> (păstrează draft).</p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 04 CE POTI EDITA -->
+      <section>
+        <header class="section-head" id="ce-poti-edita">
+          <p class="eyebrow">Pas 3</p>
+          <h2>
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg>
+            </span>
+            Ce poți edita în Studio
+          </h2>
+          <p class="text-pretty">Site-ul are 9 tipuri de conținut. Iată ce face fiecare — în detaliu mai jos, secțiune cu secțiune.</p>
+        </header>
+        <div class="type-grid">
+          <div class="type-card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962l6.135-1.583A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .963L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg></span><div><p class="title">Activitate</p><p class="desc">Eveniment, articol cu poze, exemplu: „Concert de Crăciun”.</p></div></div>
+          <div class="type-card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg></span><div><p class="title">Anunț</p><p class="desc">Anunț scurt — calendar, înscrieri, vacanțe.</p></div></div>
+          <div class="type-card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg></span><div><p class="title">Admitere</p><p class="desc">Sesiunea curentă: locuri, calendar, metodologie, documente.</p></div></div>
+          <div class="type-card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg></span><div><p class="title">Rezultate</p><p class="desc">Rezultate examene — BAC, Evaluare Națională, Atestat.</p></div></div>
+          <div class="type-card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg></span><div><p class="title">Personal</p><p class="desc">Profesori, preoți, personal administrativ.</p></div></div>
+          <div class="type-card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span><div><p class="title">Erasmus+</p><p class="desc">Anunțuri / actualizări proiect Erasmus+.</p></div></div>
+          <div class="type-card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg></span><div><p class="title">Pagină statică</p><p class="desc">Pagini libere cu text + imagini — vor apărea la URL-ul slugului lor.</p></div></div>
+          <div class="type-card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg></span><div><p class="title">Document (PDF)</p><p class="desc">Fișiere PDF reutilizabile — încarci o dată, le folosești oriunde.</p></div></div>
+          <div class="type-card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275z"/></svg></span><div><p class="title">Setări site</p><p class="desc">Setări globale (telefon, email, banner activ) — un singur document.</p></div></div>
+        </div>
+      </section>
+
+      <!-- 05 ACTIVITATI -->
+      <section>
+        <header class="section-head" id="activitati">
+          <p class="eyebrow">Cel mai folosit</p>
+          <h2>
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962l6.135-1.583A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .963L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+            </span>
+            Cum publici o activitate sau un eveniment
+          </h2>
+          <p class="text-pretty">Activitățile sunt articolele care apar pe pagina principală („Cele mai recente”) și pe /activitati. Exemplu: „Hramul școlii — 13 noiembrie 2026”.</p>
+        </header>
+        <ol class="steps">
+          <li><span class="num">1</span><p>În bara stângă apasă „Activități”.</p></li>
+          <li><span class="num">2</span><p>Sus, apasă butonul „+ Create” → „Activitate”.</p></li>
+          <li><span class="num">3</span><p>Completează câmpurile (vezi tabelul de mai jos).</p></li>
+          <li><span class="num">4</span><p>La „Cover image”, încarcă o fotografie reprezentativă (minim 1200px lățime, format JPG sau PNG).</p></li>
+          <li><span class="num">5</span><p>Scrie corpul articolului în câmpul „Conținut” — la fel ca într-un Word.</p></li>
+          <li><span class="num">6</span><p>Când ești mulțumită(ă), apasă „Publish” jos-dreapta. Articolul va apărea pe site în ~30 de secunde.</p></li>
+        </ol>
+        <div class="field-table">
+          <table>
+            <thead><tr><th>Câmp</th><th>La ce folosește</th></tr></thead>
+            <tbody>
+              <tr><td><span class="name">Titlu</span><span class="req">obligatoriu</span></td><td class="desc">Titlu scurt, descriptiv. Apare ca antet și în meniul SEO. Ex: „Concertul Coralia 2026”.</td></tr>
+              <tr><td><span class="name">Slug</span><span class="req">obligatoriu</span></td><td class="desc">URL-ul articolului. Se generează automat din titlu — apasă „Generate” după ce scrii titlul.</td></tr>
+              <tr><td><span class="name">Data evenimentului</span><span class="req">obligatoriu</span></td><td class="desc">Data calendaristică la care a avut loc. Articolele se sortează după această dată.</td></tr>
+              <tr><td><span class="name">An școlar</span></td><td class="desc">Format 2025-2026. Filtrează articolele pe pagina /activitati.</td></tr>
+              <tr><td><span class="name">Categorie</span><span class="req">obligatoriu</span></td><td class="desc">Una din: Eveniment, Cultural, Erasmus+, Performanță, Educație, Spiritualitate.</td></tr>
+              <tr><td><span class="name">Cover image</span><span class="req">obligatoriu</span></td><td class="desc">Imagine reprezentativă. ALT TEXT-ul este obligatoriu (descrie ce e în poză).</td></tr>
+              <tr><td><span class="name">Excerpt</span></td><td class="desc">Rezumat 1-2 propoziții (160 caractere). Apare pe cărțile din pagina principală.</td></tr>
+              <tr><td><span class="name">Conținut</span></td><td class="desc">Textul articolului. Poți insera titluri, paragrafe, imagini, citate.</td></tr>
+              <tr><td><span class="name">Galerie</span></td><td class="desc">Multiple imagini afișate sub textul principal — fiecare cu ALT și legendă.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout ok">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
+          <p><strong>Sfat:</strong> Nu te grăbi. Apasă <kbd>Save</kbd> ca să salvezi un draft, lucrează în mai multe ședințe. Articolul nu se vede online până la <kbd>Publish</kbd>.</p>
+        </div>
+      </section>
+
+      <!-- 06 ANUNTURI -->
+      <section>
+        <header class="section-head" id="anunturi">
+          <p class="eyebrow">Pe scurt</p>
+          <h2>
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg>
+            </span>
+            Anunțuri (avizier electronic)
+          </h2>
+          <p class="text-pretty">Pentru ceva rapid și fără poze — de exemplu „Joi, cursurile încep la 09:00 din cauza inspecției ISJ”. Apar pe pagina principală în secțiunea de anunțuri.</p>
+        </header>
+        <div class="field-table">
+          <table>
+            <thead><tr><th>Câmp</th><th>La ce folosește</th></tr></thead>
+            <tbody>
+              <tr><td><span class="name">Titlu</span><span class="req">obligatoriu</span></td><td class="desc">Anunțul în sine, scurt. Max 160 de caractere.</td></tr>
+              <tr><td><span class="name">Slug</span><span class="req">obligatoriu</span></td><td class="desc">Generat automat.</td></tr>
+              <tr><td><span class="name">Data publicării</span><span class="req">obligatoriu</span></td><td class="desc">Astăzi, în mod normal.</td></tr>
+              <tr><td><span class="name">Fixat în top</span></td><td class="desc">Bifează dacă vrei ca anunțul să rămână primul, peste altele mai noi.</td></tr>
+              <tr><td><span class="name">Expiră la</span></td><td class="desc">Data după care anunțul se ascunde automat. Util pentru anunțuri sezoniere.</td></tr>
+              <tr><td><span class="name">Conținut</span></td><td class="desc">Detaliile (opțional). Dacă scrii doar la „Titlu”, anunțul apare ca un singur rând.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout tip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+          <p>Folosește „Expiră la” — un avizier curat e mai citit decât unul plin de anunțuri vechi.</p>
+        </div>
+      </section>
+
+      <!-- 07 ADMITERE -->
+      <section>
+        <header class="section-head" id="admitere">
+          <p class="eyebrow">Anual</p>
+          <h2>
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
+            </span>
+            Sesiunea de admitere
+          </h2>
+          <p class="text-pretty">O dată pe an creezi un nou document „Admitere” pentru sesiunea care vine. Bifezi „Sesiune curentă” și site-ul afișează automat acel ciclu pe pagina /admitere.</p>
+        </header>
+        <ol class="steps">
+          <li><span class="num">1</span><p>Studio → „Admitere” → „+ Create”.</p></li>
+          <li><span class="num">2</span><p>Completează „Anul școlar” (ex: 2027-2028), „Locuri disponibile”, „Specializare” (Teologie Pastorală).</p></li>
+          <li><span class="num">3</span><p>Bifează „Sesiune curentă”. Dacă ai mai multe documente (ex: 2026-2027 + 2027-2028), doar unul trebuie bifat.</p></li>
+          <li><span class="num">4</span><p>Completează „Calendar” (etape, date), „Metodologie” (text), atașează „Documente necesare” (PDF-uri).</p></li>
+          <li><span class="num">5</span><p>Publish. Pagina /admitere va arăta noua sesiune.</p></li>
+        </ol>
+        <div class="callout warn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+          <p>Sesiunile vechi nu se șterg — rămân ca arhivă. Doar debifează „Sesiune curentă” și creează una nouă cu „Sesiune curentă” bifat.</p>
+        </div>
+      </section>
+
+      <!-- 08 REZULTATE -->
+      <section>
+        <header class="section-head" id="rezultate">
+          <p class="eyebrow">Periodic</p>
+          <h2>
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg>
+            </span>
+            Rezultate examene
+          </h2>
+          <p class="text-pretty">După BAC, Evaluare Națională sau Atestat, atașezi PDF-urile cu rezultatele. Documentele se afișează pe paginile corespunzătoare.</p>
+        </header>
+        <ol class="steps">
+          <li><span class="num">1</span><p>Studio → „Rezultate examene” → „+ Create”.</p></li>
+          <li><span class="num">2</span><p>Completează „Titlu” („Rezultate BAC 2026 — sesiunea iunie”), „Examen” (BAC / Evaluare Națională / Atestat).</p></li>
+          <li><span class="num">3</span><p>Atașează PDF-ul (vezi secțiunea „Documente PDF”).</p></li>
+          <li><span class="num">4</span><p>Completează „An școlar” și „Sesiune” (iunie / august).</p></li>
+          <li><span class="num">5</span><p>Publish.</p></li>
+        </ol>
+      </section>
+
+      <!-- 09 PERSONAL -->
+      <section>
+        <header class="section-head" id="personal">
+          <p class="eyebrow">Rar</p>
+          <h2>
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+            </span>
+            Profesori și personal
+          </h2>
+          <p class="text-pretty">Pentru cadrele didactice noi, înlocuiri, plecări. Apar pe /profesori și — dacă au rol de Director — pe /director.</p>
+        </header>
+        <div class="field-table">
+          <table>
+            <thead><tr><th>Câmp</th><th>La ce folosește</th></tr></thead>
+            <tbody>
+              <tr><td><span class="name">Nume</span><span class="req">obligatoriu</span></td><td class="desc">Numele complet, cu titulatură (Pr., Prof., dr.).</td></tr>
+              <tr><td><span class="name">Rol</span><span class="req">obligatoriu</span></td><td class="desc">Funcția: Director, Profesor, Diacon, Secretar, etc.</td></tr>
+              <tr><td><span class="name">Categorie</span><span class="req">obligatoriu</span></td><td class="desc">Conducere / Didactic / Didactic-auxiliar / Nedidactic.</td></tr>
+              <tr><td><span class="name">Disciplină</span></td><td class="desc">Materia predată (pentru categoria „Didactic”). Ex: Liturgică, Latină.</td></tr>
+              <tr><td><span class="name">Foto</span></td><td class="desc">Portret 4:5 (1080×1350 ideal). Crop pe față, lumină difuză.</td></tr>
+              <tr><td><span class="name">Ordine</span></td><td class="desc">Număr — controlează ordinea pe pagină. Lasă gol și se sortează alfabetic.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout tip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+          <p>Pentru a marca un nou Director: setează „Rol” cu un text care începe cu „Director” (ex. „Director”, „Director adjunct”). Site-ul îl prinde automat pe pagina /director.</p>
+        </div>
+      </section>
+
+      <!-- 10 PAGINI -->
+      <section>
+        <header class="section-head" id="pagini">
+          <p class="eyebrow">Flexibil</p>
+          <h2>
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+            </span>
+            Pagini statice (URL liber)
+          </h2>
+          <p class="text-pretty">Când vrei o pagină nouă care nu se încadrează în categoriile de mai sus — de exemplu „Galeria foto absolvire 2026” sau „Calendar manifestări”.</p>
+        </header>
+        <ol class="steps">
+          <li><span class="num">1</span><p>Studio → „Pagini statice” → „+ Create”.</p></li>
+          <li><span class="num">2</span><p>Completează „Titlu” („Galerie absolvire 2026”).</p></li>
+          <li><span class="num">3</span><p>„Slug” se generează automat — sau modifică-l manual (ex: „galerie-absolvire-2026”). Pagina va fi accesibilă la /galerie-absolvire-2026.</p></li>
+          <li><span class="num">4</span><p>Scrie conținutul în câmpul „Conținut” (titluri, paragrafe, imagini, citate, embed-uri YouTube).</p></li>
+          <li><span class="num">5</span><p>Publish.</p></li>
+        </ol>
+        <div class="callout warn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+          <p>Nu folosi slug-uri care există deja ca rute fixe — ex. <em>contact</em>, <em>campus</em>, <em>admitere</em>, <em>director</em>. Site-ul le va ignora pentru că au paginile lor proprii.</p>
+        </div>
+      </section>
+
+      <!-- 11 DOCUMENTE -->
+      <section>
+        <header class="section-head" id="documente">
+          <p class="eyebrow">Tehnic</p>
+          <h2>
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+            </span>
+            Documente PDF
+          </h2>
+          <p class="text-pretty">Un PDF se încarcă o singură dată, apoi poate fi reutilizat oriunde (pe Admitere, Rezultate, în Activități, etc.). Asta evită încărcările duplicate.</p>
+        </header>
+        <ol class="steps">
+          <li><span class="num">1</span><p>Studio → „Documente (PDF)” → „+ Create”.</p></li>
+          <li><span class="num">2</span><p>„Titlu”: nume scurt și clar (ex. „Metodologie admitere 2026-2027”).</p></li>
+          <li><span class="num">3</span><p>Apasă „Choose file” și încarcă PDF-ul (max 50 MB).</p></li>
+          <li><span class="num">4</span><p>„Categorie”: Regulament / Metodologie / Anunț / Rezultate — ajută la filtrare.</p></li>
+          <li><span class="num">5</span><p>Publish. Acum poți face referință la acest PDF din alte documente (de ex. pe pagina de Admitere).</p></li>
+        </ol>
+        <div class="callout tip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+          <p>Pentru viitor: vom face un import automat al celor 100+ Hotărâri CA în Studio, ca să poată fi editate / completate cu sumar. Până atunci, ele apar pe site direct din arhiva scrapată.</p>
+        </div>
+      </section>
+
+      <!-- 12 IMAGINI -->
+      <section>
+        <header class="section-head" id="imagini">
+          <p class="eyebrow">Foarte important</p>
+          <h2>
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+            </span>
+            Imagini și ALT text
+          </h2>
+          <p class="text-pretty">Site-ul refuză imagini fără ALT — descrierea pe care o aud nevăzătorii când navigează. E o cerință legală și o regulă bună de accesibilitate.</p>
+        </header>
+        <ol class="steps">
+          <li><span class="num">1</span><p>Click pe câmpul „Image”, apoi „Upload file”.</p></li>
+          <li><span class="num">2</span><p>După încărcare, apare o căsuță „Alt text” — obligatorie. Scrie ce se vede în imagine, nu cum se cheamă fișierul.</p></li>
+          <li><span class="num">3</span><p>Exemplu BUN: „Corul seminarului pe scena sălii de festivități, în timpul concertului de Crăciun 2025”.</p></li>
+          <li><span class="num">4</span><p>Exemplu RĂU: „IMG_0042.jpg” sau „cor”.</p></li>
+          <li><span class="num">5</span><p>Caption (legendă) e opțional — apare sub imagine. Util pentru fotografi / drepturi de autor.</p></li>
+        </ol>
+        <div class="callout ok">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
+          <p>Format ideal pentru web: <strong>JPEG</strong>, <strong>2400px</strong> pe latura lungă, mărime <strong>sub 2 MB</strong>. Sanity face automat versiunile mai mici pentru telefoane.</p>
+        </div>
+        <div class="callout warn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+          <p>Nu încărca poze de la telefon nemodificate — sunt prea mari (10-20 MB). Folosește „Resize” pe telefon (sau Photos pe Mac) la 2400px max înainte să încarci.</p>
+        </div>
+      </section>
+
+      <!-- 13 PUBLICARE -->
+      <section>
+        <header class="section-head" id="publicare">
+          <p class="eyebrow">Critic</p>
+          <h2>
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
+            </span>
+            Save vs. Publish: ce înseamnă fiecare
+          </h2>
+          <p class="text-pretty">Sanity are 2 stări pentru un document: draft (doar tu îl vezi) și published (tot mondul îl vede). Confuzia între ele e cea mai frecventă greșeală.</p>
+        </header>
+        <div class="duo">
+          <div class="duo-card draft">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg></span>
+            <h3>Save (draft)</h3>
+            <p>Modificările sunt salvate în Sanity, dar <strong>NU apar pe site</strong>. Util pentru lucru parțial — poți reveni mai târziu.</p>
+            <p class="note">Studio îți spune „Unpublished changes” în partea de jos.</p>
+          </div>
+          <div class="duo-card pub">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg></span>
+            <h3>Publish</h3>
+            <p>Modificările devin <strong>vizibile pe site</strong> în ~30 de secunde. Versiunea publicată e cea care apare la vizitatori.</p>
+            <p class="note">Studio confirmă cu un check verde lângă numele documentului.</p>
+          </div>
+        </div>
+        <div class="callout tip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+          <p>Dacă ai apăsat „Save” dar uiți să apeși „Publish”, modificările tale nu se văd. Întotdeauna verifică „Published changes” în bara de jos înainte să închizi browser-ul.</p>
+        </div>
+      </section>
+
+      <!-- 14 CE NU POTI -->
+      <section>
+        <header class="section-head" id="ce-nu-poti">
+          <p class="eyebrow">Limită</p>
+          <h2>
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+            </span>
+            Ce NU se editează în Studio
+          </h2>
+          <p class="text-pretty">Unele pagini au texte fixe (hardcoded) pentru că rar se schimbă. Dacă vrei să modifici aceste texte, contactează administratorul — o modificare durează 5 minute.</p>
+        </header>
+        <ul class="info-list">
+          <li><span class="route">/</span><p class="desc">Pagina principală — secțiunile statice (hero, „Welcome”, „Admissions CTA”).</p></li>
+          <li><span class="route">/campus, /campus/[slug]</span><p class="desc">Cele 6 zone ale campusului (paraclis, săli, internat, etc.).</p></li>
+          <li><span class="route">/istoric, /misiune-si-viziune</span><p class="desc">Texte instituționale care se schimbă rar.</p></li>
+          <li><span class="route">/regulamente, /declaratie-accesibilitate</span><p class="desc">Texte legale.</p></li>
+          <li><span class="route">tutorial.html</span><p class="desc">Documentația internă (pagina asta).</p></li>
+        </ul>
+        <div class="callout tip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+          <p>Modificările aici se fac de către dezvoltator. Trimite un mesaj cu ce vrei schimbat, primești o variantă demo pe un URL preview, după ce confirmi se publică pe site.</p>
+        </div>
+      </section>
+
+      <!-- 15 GRESELI -->
+      <section>
+        <header class="section-head" id="greseli">
+          <p class="eyebrow">Atenție</p>
+          <h2>
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+            </span>
+            Greșeli frecvente — și cum le eviți
+          </h2>
+          <p class="text-pretty">Toate cele de mai jos sunt erori făcute de echipa noastră în primele săptămâni. Trecere prin lista asta = 80% din probleme evitate.</p>
+        </header>
+        <ul class="errors">
+          <li>
+            <p class="err-title">„Am scris articolul, dar nu apare pe site.”</p>
+            <p class="err-fix"><span class="lbl">Soluție:</span> Probabil ai salvat (Save), dar nu ai publicat (Publish). Întoarce-te în Studio, deschide documentul, apasă „Publish”.</p>
+          </li>
+          <li>
+            <p class="err-title">„Imaginile mele sunt mari și încarcă greu.”</p>
+            <p class="err-fix"><span class="lbl">Soluție:</span> Înainte să încarci, redimensionează la 2400px lățime și salvează ca JPEG calitate 80%. Pe Mac: Preview → Tools → Adjust Size.</p>
+          </li>
+          <li>
+            <p class="err-title">„Sanity îmi cere ALT și nu mă lasă să public.”</p>
+            <p class="err-fix"><span class="lbl">Soluție:</span> Toate imaginile au nevoie de ALT (descriere). Scrie ce se vede în poză — nu numele fișierului.</p>
+          </li>
+          <li>
+            <p class="err-title">„Anunțul vechi apare în continuare.”</p>
+            <p class="err-fix"><span class="lbl">Soluție:</span> Setează un „Expiră la” pe anunțul vechi, sau șterge-l (Actions → Delete).</p>
+          </li>
+          <li>
+            <p class="err-title">„Am creat o pagină nouă la /contact, dar nu apare.”</p>
+            <p class="err-fix"><span class="lbl">Soluție:</span> /contact e o rută fixă în site. Folosește alt slug — sau modifică pagina fixă (vezi „Ce NU se editează”).</p>
+          </li>
+          <li>
+            <p class="err-title">„Mi-am pierdut documentul după ce am închis browser-ul.”</p>
+            <p class="err-fix"><span class="lbl">Soluție:</span> Verifică în lista „Drafts” — Sanity salvează automat draft-uri. Click pe „Drafts” în bara de sus.</p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 16 AJUTOR -->
+      <section>
+        <header class="section-head" id="ajutor">
+          <p class="eyebrow">Pas final</p>
+          <h2>
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M4.93 4.93l4.24 4.24"/><path d="M14.83 9.17l4.24-4.24"/><path d="M14.83 14.83l4.24 4.24"/><path d="M9.17 14.83l-4.24 4.24"/><circle cx="12" cy="12" r="4"/></svg>
+            </span>
+            Când nu mai înțelegi: ce să faci
+          </h2>
+          <p class="text-pretty">Sanity Studio e robust și fără riscul de „a strica” site-ul — modificările tale sunt înregistrate și se pot reveni la versiuni anterioare. Dacă te-ai blocat, există o ieșire.</p>
+        </header>
+        <ol class="steps">
+          <li><span class="num">1</span><p>Verifică „History” în Studio — fiecare document păstrează toate versiunile sale. Poți reveni la oricare prin „Restore”.</p></li>
+          <li><span class="num">2</span><p>Citește din nou secțiunea relevantă din acest ghid (e accesibil oricând la /tutorial.html).</p></li>
+          <li><span class="num">3</span><p>Pune o întrebare scurtă pe e-mail: seminarul.tgv@scolidb.ro. Pe scurt: ce încerci să faci + ce mesaj de eroare ai primit.</p></li>
+          <li><span class="num">4</span><p>Pentru probleme tehnice mai mari (ex: Studio nu se încarcă deloc), contactează direct dezvoltatorul site-ului.</p></li>
+        </ol>
+        <div class="help-card">
+          <p class="eyebrow">Resurse oficiale Sanity</p>
+          <h3>Pentru cazuri avansate</h3>
+          <ul>
+            <li>
+              <a href="https://www.sanity.io/docs" target="_blank" rel="noopener noreferrer">
+                Documentația oficială Sanity
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+              </a>
+              <p class="small">(în engleză, dar are screenshot-uri clare)</p>
+            </li>
+            <li>
+              <a href="https://www.sanity.io/help" target="_blank" rel="noopener noreferrer">
+                Centrul de ajutor Sanity
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+              </a>
+            </li>
+          </ul>
+          <p class="stamp">Acest tutorial a fost scris pe 25 iunie 2026 și se actualizează la fiecare schimbare majoră a schemei Studio.</p>
+        </div>
+      </section>
+
+    </article>
+  </div>
+</main>
+
+<footer class="foot">
+  <p>© 2026 <strong>Seminarul Teologic Ortodox „Sf. Ioan Gură de Aur”</strong> · Târgoviște · Tutorial intern</p>
+</footer>
+
+<!-- ─────────────── TOC active-section observer ─────────────── -->
+<script>
+  (function () {
+    var links = document.querySelectorAll('nav.toc a[data-target]');
+    if (!links.length || !('IntersectionObserver' in window)) return;
+    var byId = {};
+    links.forEach(function (a) { byId[a.dataset.target] = a; });
+
+    function setActive(id) {
+      links.forEach(function (a) { a.classList.remove('active'); });
+      if (byId[id]) byId[id].classList.add('active');
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      var visible = entries
+        .filter(function (e) { return e.isIntersecting; })
+        .sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top; })[0];
+      if (visible) setActive(visible.target.id);
+    }, { rootMargin: '-30% 0px -55% 0px', threshold: 0 });
+
+    document.querySelectorAll('.section-head').forEach(function (el) {
+      observer.observe(el);
+    });
+  })();
+</script>
+
+</body>
+</html>
