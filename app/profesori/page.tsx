@@ -6,7 +6,6 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
 import { ProfessorGrid } from "@/components/ProfessorGrid";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { sanityClient } from "@/sanity/lib/client";
 import { allPersonalQuery } from "@/sanity/lib/queries";
@@ -90,13 +89,13 @@ function Hero({ total, subjectsCount }: { total: number; subjectsCount: number }
   return (
     <section className="relative isolate overflow-hidden bg-gradient-to-br from-navy-deep via-navy to-navy-soft pt-36 pb-24 text-white">
       <div className="wrap relative mx-auto max-w-3xl text-center">
-        <Reveal as="p" className="eyebrow !text-gold-light">
+        <Reveal as="p" className="eyebrow text-gold-light!">
           Corpul profesoral
         </Reveal>
         <Reveal
           as="h1"
           delay={1}
-          className="mt-3 !text-white text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]"
+          className="mt-3 text-white! text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]"
         >
           Dascăli, modele, mentori
         </Reveal>
@@ -141,56 +140,6 @@ function HeroStat({
       <span className="font-serif text-lg font-semibold text-white">{value}</span>
       <span className="text-white/65">{label}</span>
     </span>
-  );
-}
-
-/* ── Conducere — feature row ─────────────────────────────────── */
-
-function Conducere({
-  people,
-  didactic,
-}: {
-  people: Personal[];
-  didactic: Personal[];
-}) {
-  // The director is also a teacher with subjects — pull a hint from didactic
-  // listings if the conducere record doesn't carry a discipline.
-  const director = people.find((p) => /director/i.test(p.role));
-  const teaching = director
-    ? didactic.find((d) => d.name === director.name)
-    : undefined;
-  const directorSubject = director?.subject ?? teaching?.subject ?? null;
-
-  return (
-    <section className="wrap mt-20">
-      <SectionHeader
-        eyebrow="Conducere"
-        title="Cei care deschid ușa seminarului"
-        intro="Director și duhovnici — cu rol activ în viața academică și liturgică zilnică."
-      />
-      <div className="mt-12 grid gap-6 lg:grid-cols-3">
-        {people.map((p, i) => (
-          <Reveal key={p._id} delay={((i % 3) + 1) as 1 | 2 | 3}>
-            <Card className="h-full overflow-hidden border-navy/10 bg-paper">
-              <PortraitFrame person={p} large />
-              <CardContent className="p-6">
-                <Badge variant="outline" className="border-gold/40 text-gold-deep">
-                  {p.role}
-                </Badge>
-                <p className="mt-3 font-serif text-2xl font-semibold leading-tight text-navy text-balance">
-                  {p.name}
-                </p>
-                {(p.subject || (p === director && directorSubject)) && (
-                  <p className="mt-1 text-sm text-muted">
-                    {p.subject ?? directorSubject}
-                  </p>
-                )}
-              </CardContent>
-            </Card>
-          </Reveal>
-        ))}
-      </div>
-    </section>
   );
 }
 
@@ -284,8 +233,8 @@ function ContactCta() {
         <Card className="overflow-hidden border-navy/10 bg-gradient-to-br from-navy-deep to-navy-soft text-white">
           <CardContent className="grid gap-8 p-10 md:grid-cols-[1.2fr_1fr]">
             <div>
-              <p className="eyebrow !text-gold-light">Vrei să afli mai multe?</p>
-              <h2 className="mt-3 !text-white font-serif text-[clamp(1.8rem,3.5vw,2.6rem)] font-semibold leading-tight">
+              <p className="eyebrow text-gold-light!">Vrei să afli mai multe?</p>
+              <h2 className="mt-3 text-white! font-serif text-[clamp(1.8rem,3.5vw,2.6rem)] font-semibold leading-tight">
                 Întâlnește profesorii la o ședință de pregătire
               </h2>
               <p className="mt-4 max-w-md text-pretty text-white/80">

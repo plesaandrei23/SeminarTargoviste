@@ -29,6 +29,7 @@ const STATIC_ROUTES: { path: string; changeFrequency: MetadataRoute.Sitemap[numb
   { path: "/director", changeFrequency: "yearly", priority: 0.6 },
   { path: "/consiliul-de-administratie", changeFrequency: "monthly", priority: 0.6 },
   { path: "/activitati", changeFrequency: "weekly", priority: 0.8 },
+  { path: "/anunturi", changeFrequency: "daily", priority: 0.7 },
   // Despre școală
   { path: "/istoric", changeFrequency: "yearly", priority: 0.5 },
   { path: "/misiune-si-viziune", changeFrequency: "yearly", priority: 0.5 },

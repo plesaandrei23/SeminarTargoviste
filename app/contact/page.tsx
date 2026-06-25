@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Clock, Mail, MapPin, Phone, ShieldCheck } from "lucide-react";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
@@ -39,13 +39,13 @@ function Hero() {
   return (
     <section className="relative isolate overflow-hidden bg-gradient-to-br from-navy-deep via-navy to-navy-soft pt-36 pb-24 text-white">
       <div className="wrap relative mx-auto max-w-3xl text-center">
-        <Reveal as="p" className="eyebrow !text-gold-light">
+        <Reveal as="p" className="eyebrow text-gold-light!">
           Contact
         </Reveal>
         <Reveal
           as="h1"
           delay={1}
-          className="mt-3 !text-white text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]"
+          className="mt-3 text-white! text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]"
         >
           Întreabă-ne orice
         </Reveal>
@@ -115,8 +115,8 @@ function DirectorCard() {
     <Reveal delay={1}>
       <Card className="overflow-hidden border-navy/10 bg-gradient-to-br from-navy-deep to-navy-soft text-white">
         <CardContent className="space-y-4 p-7">
-          <p className="eyebrow !text-gold-light">Director</p>
-          <h2 className="font-serif text-xl font-semibold leading-tight !text-white">
+          <p className="eyebrow text-gold-light!">Director</p>
+          <h2 className="font-serif text-xl font-semibold leading-tight text-white!">
             Pr. Prof. Pleşa Alin–Marian
           </h2>
           <p className="text-sm text-white/80 text-pretty">

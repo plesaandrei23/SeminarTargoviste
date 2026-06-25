@@ -146,6 +146,55 @@ export const admissionCyclesQuery = groq`
 `;
 
 /**
+ * Active anunturi (avizier). Pinned items first; expired ones (expiresAt < today)
+ * are hidden. Used by /anunturi listing.
+ */
+export const activeAnunturiQuery = groq`
+  *[_type == "anunt"
+    && (!defined(expiresAt) || expiresAt >= $today)]
+    | order(pinned desc, date desc, _createdAt desc) {
+      _id,
+      title,
+      "slug": slug.current,
+      date,
+      pinned,
+      expiresAt,
+      "hasBody": defined(body) && length(body) > 0,
+      "excerpt": coalesce(body[_type == "block"][0].children[0].text, "")
+    }
+`;
+
+/** Single anunt for /anunturi/[slug]. */
+export const anuntBySlugQuery = groq`
+  *[_type == "anunt" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    date,
+    pinned,
+    expiresAt,
+    "body": coalesce(body, [])[]{
+      ...,
+      _type == "localizedImage" => {
+        asset->{ _id, url, metadata { dimensions { width, height } } },
+        alt,
+        caption
+      }
+    },
+    "attachments": coalesce(attachments, [])[]{
+      "asset": asset->{ url, originalFilename, size, mimeType }
+    },
+    seo
+  }
+`;
+
+/** Slugs for /anunturi/[slug] generateStaticParams. */
+export const anuntSlugsQuery = groq`
+  *[_type == "anunt" && defined(slug.current)
+    && (!defined(expiresAt) || expiresAt >= $today)].slug.current
+`;
+
+/**
  * Slugs of static pages we render via the catch-all /[slug] route. Used
  * by generateStaticParams + filtered against route paths that have
  * dedicated pages (those win over the catch-all anyway, but excluding

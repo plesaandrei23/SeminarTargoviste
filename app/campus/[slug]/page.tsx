@@ -105,7 +105,7 @@ function Hero({ zone }: { zone: (typeof CAMPUS_ZONES)[number] }) {
             Campus
           </Badge>
         </div>
-        <h1 className="mt-6 max-w-3xl text-balance !text-white text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]">
+        <h1 className="mt-6 max-w-3xl text-balance text-white! text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]">
           {zone.name}
         </h1>
         <p className="mt-4 max-w-2xl text-pretty text-white/85 sm:text-lg">
@@ -173,8 +173,8 @@ function Body({ zone }: { zone: (typeof CAMPUS_ZONES)[number] }) {
         <Card className="border-navy/10 bg-navy text-white shadow-[var(--shadow-elevated)]">
           <CardContent className="space-y-5 p-7">
             <div>
-              <p className="eyebrow !text-gold-light">Informații practice</p>
-              <h3 className="mt-2 !text-white font-serif text-xl font-semibold leading-tight">
+              <p className="eyebrow text-gold-light!">Informații practice</p>
+              <h3 className="mt-2 text-white! font-serif text-xl font-semibold leading-tight">
                 Detalii utile
               </h3>
             </div>

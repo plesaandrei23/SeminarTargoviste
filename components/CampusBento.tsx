@@ -49,13 +49,13 @@ export function CampusBento() {
     >
       <div className="wrap relative">
         <div className="mx-auto mb-12 max-w-2xl text-center">
-          <Reveal as="p" className="eyebrow !text-gold-light">
+          <Reveal as="p" className="eyebrow text-gold-light!">
             Explorează
           </Reveal>
           <Reveal
             as="h2"
             delay={1}
-            className="mt-2 !text-white text-[clamp(2rem,4.4vw,3.3rem)]"
+            className="mt-2 text-white! text-[clamp(2rem,4.4vw,3.3rem)]"
           >
             Campusul, la un pas de tine
           </Reveal>
@@ -108,7 +108,7 @@ export function CampusBento() {
                 <p className="text-xs uppercase tracking-[0.18em] text-gold-light">
                   Vino la noi
                 </p>
-                <h3 className="mt-3 max-w-md font-serif text-[clamp(1.6rem,3vw,2.4rem)] font-semibold leading-tight !text-white text-balance">
+                <h3 className="mt-3 max-w-md font-serif text-[clamp(1.6rem,3vw,2.4rem)] font-semibold leading-tight text-white! text-balance">
                   Începe turul de pe alee
                 </h3>
                 <p className="mt-3 max-w-md text-pretty text-sm leading-relaxed text-white/85 sm:text-base">
@@ -195,7 +195,7 @@ function ZoneTile({
         </span>
 
         <div>
-          <h3 className="font-serif text-[clamp(1.2rem,2vw,1.6rem)] font-semibold leading-tight !text-white text-balance">
+          <h3 className="font-serif text-[clamp(1.2rem,2vw,1.6rem)] font-semibold leading-tight text-white! text-balance">
             {zone.name}
           </h3>
           <p className="mt-1 line-clamp-2 max-w-[18rem] text-pretty text-xs text-white/75 sm:text-sm">

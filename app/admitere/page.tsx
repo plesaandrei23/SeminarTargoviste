@@ -205,13 +205,13 @@ function Hero() {
   return (
     <section className="relative isolate overflow-hidden bg-gradient-to-br from-navy-deep via-navy to-navy-soft pt-36 pb-28 text-white">
       <div className="wrap relative mx-auto max-w-3xl text-center">
-        <Reveal as="p" className="eyebrow !text-gold-light">
+        <Reveal as="p" className="eyebrow text-gold-light!">
           Admitere {siteConfig.admission.cycle}
         </Reveal>
         <Reveal
           as="h1"
           delay={1}
-          className="mt-3 !text-white text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]"
+          className="mt-3 text-white! text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]"
         >
           Devino seminarist
         </Reveal>
@@ -525,11 +525,11 @@ function DocumentsSection() {
         <Reveal as="aside" delay={1} className="lg:sticky lg:top-32">
           <Card className="border-navy/10 bg-navy text-white">
             <CardHeader>
-              <p className="eyebrow !text-gold-light">Secretariat</p>
-              <CardTitle className="!text-white font-serif text-2xl font-semibold">
+              <p className="eyebrow text-gold-light!">Secretariat</p>
+              <CardTitle className="text-white! font-serif text-2xl font-semibold">
                 Pentru întrebări despre dosar
               </CardTitle>
-              <CardDescription className="!text-white/75 text-pretty">
+              <CardDescription className="text-white!/75 text-pretty">
                 Răspundem la întrebări legate de înscrieri, calendar, probele
                 de aptitudini și piese de dosar incomplete.
               </CardDescription>
@@ -601,8 +601,8 @@ function ContactSection() {
         <Card className="overflow-hidden border-navy/10 bg-gradient-to-br from-navy-deep to-navy-soft text-white shadow-[var(--shadow-elevated)]">
           <CardContent className="grid gap-10 p-10 md:grid-cols-[1.2fr_1fr]">
             <div>
-              <p className="eyebrow !text-gold-light">Te așteptăm</p>
-              <h2 className="mt-3 !text-white font-serif text-[clamp(1.8rem,3.5vw,2.6rem)] font-semibold leading-tight">
+              <p className="eyebrow text-gold-light!">Te așteptăm</p>
+              <h2 className="mt-3 text-white! font-serif text-[clamp(1.8rem,3.5vw,2.6rem)] font-semibold leading-tight">
                 Vrei să fii seminarist?
               </h2>
               <p className="mt-4 max-w-md text-pretty text-white/80">

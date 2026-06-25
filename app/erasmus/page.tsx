@@ -37,19 +37,19 @@ const MOBILITIES: Mobility[] = [
     city: "Roma",
     country: "Italia",
     dates: "19 – 24 februarie 2024",
-    reportUrl: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/raport-erasmus-roma-pe-zile-19-24.02.2024-mjEvgEnBjJCVlo1M.pdf",
+    reportUrl: "/docs/erasmus/raport-roma-2024.pdf",
   },
   {
     city: "Florența",
     country: "Italia",
     dates: "19 – 24 februarie 2024",
-    reportUrl: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/raport-erasmus-florenea-19.02-24.02.2024-AQEyPjnXy5TnyNMX.pdf",
+    reportUrl: "/docs/erasmus/raport-florenta-2024.pdf",
   },
   {
     city: "Barcelos",
     country: "Portugalia",
     dates: "21 – 27 aprilie 2024",
-    reportUrl: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/raport-erasmus-barcelos-21.04-27.04.2024-AGB6QoEqJ8F85aN8.pdf",
+    reportUrl: "/docs/erasmus/raport-barcelos-2024.pdf",
   },
 ];
 
@@ -67,42 +67,42 @@ const APPLY_DOCS: DocGroup = {
     {
       title: "Metodologie de selecție",
       byline: "Procedura completă · PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/metodologie_de_selectie_scanata-CBxYkBWYjwXH22wp.pdf",
+      href: "/docs/erasmus/metodologie-selectie.pdf",
     },
     {
       title: "Anexa 8 · Cerere de înscriere",
       byline: "Pentru elevi · PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/anexa-8_cererea_de_inscriere_elevi-Q7S1ah5pf0ep0Pec.pdf",
+      href: "/docs/erasmus/anexa-8-cerere-inscriere-elevi.pdf",
     },
     {
       title: "Anexa 9 · Acord de participare",
       byline: "Elevi minori · PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/anexa-9_acord_pentru_participare_elevi-WxaAYu0wfex3bBaU.pdf",
+      href: "/docs/erasmus/anexa-9-acord-participare-elevi.pdf",
     },
     {
       title: "Anexa 9.1 · Acord elev major",
       byline: "PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/anexa-9_1_acord_pentru_participare_elevi_majori-bQrrG0AVUIBkiLaF.pdf",
+      href: "/docs/erasmus/anexa-9_1-acord-elev-major.pdf",
     },
     {
       title: "Anexa 10 · Consimțământ GDPR",
       byline: "Date personale elevi · PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/anexa-10_consimtamant_prelucrare_date_personale_elevi-ZnGOFj0fUbPEnTSP.pdf",
+      href: "/docs/erasmus/anexa-10-gdpr-elevi.pdf",
     },
     {
       title: "Anexa 11 · Acord prelucrare imagine",
       byline: "PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/anexa-11_acord_prelucrare_imagine_elevi-uQ52IXv0pl04sSVe.pdf",
+      href: "/docs/erasmus/anexa-11-imagine-elevi.pdf",
     },
     {
       title: "Anexa 12 · Oportunități reduse",
       byline: "Chestionar · PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/anexa-12_chestionar_oportunitati_reduse_elevi-jSSX13tcxy2STcbi.pdf",
+      href: "/docs/erasmus/anexa-12-oportunitati-elevi.pdf",
     },
     {
       title: "Anexa 13 · Angajament de disponibilitate",
       byline: "Elevi · PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/anexa-13_angajament_disponibilitate_elevi-RST0txXAMO1KTtmn.pdf",
+      href: "/docs/erasmus/anexa-13-disponibilitate-elevi.pdf",
     },
   ],
 };
@@ -115,37 +115,37 @@ const TEACHER_DOCS: DocGroup = {
     {
       title: "Anexa 1 · Cerere de înscriere",
       byline: "PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/anexa-1_cerere_de_inscriere-KzR8hoikkX8q55Io.pdf",
+      href: "/docs/erasmus/anexa-1-cerere-inscriere.pdf",
     },
     {
       title: "Anexa 2 · Fișă autoevaluare",
       byline: "PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/anexa-2_fisa_evaluare_si_autoevaluare_nou-9AuSWyw6S3JaStFO.pdf",
+      href: "/docs/erasmus/anexa-2-fisa-autoevaluare.pdf",
     },
     {
       title: "Anexa 3 · Declarație finanțare multiplă",
       byline: "PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/anexa-3_declaratie_privind_excluderea_finantarii_multiple-cf0HoTmw9h9exmb9.pdf",
+      href: "/docs/erasmus/anexa-3-declaratie-finantare.pdf",
     },
     {
       title: "Anexa 4 · Responsabilități și activități",
       byline: "PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/anexa-4_acord_cu_privire_la_responabilitati_si_activitati-PFhIPOGqkzmmoFAB.pdf",
+      href: "/docs/erasmus/anexa-4-responsabilitati.pdf",
     },
     {
       title: "Anexa 5 · GDPR",
       byline: "PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/anexa-5_acord_privind_utilizarea_datelor_personale-ryXfMRHwchhRf4ul.pdf",
+      href: "/docs/erasmus/anexa-5-gdpr.pdf",
     },
     {
       title: "Anexa 6 · Declarație rambursare",
       byline: "PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/anexa-6_declaratie_privind_rambursarea_contravalorii_cheltuielilor-6K6gGcMDAWFABNFB.pdf",
+      href: "/docs/erasmus/anexa-6-rambursare.pdf",
     },
     {
       title: "Anexa 7 · Acord imagine personală",
       byline: "PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/anexa-7_acord_privind_utilizarea_imaginii_personale-XVRGyQGDEM5aBOUn.pdf",
+      href: "/docs/erasmus/anexa-7-imagine.pdf",
     },
   ],
 };
@@ -157,32 +157,32 @@ const RESULTS_DOCS: DocGroup = {
     {
       title: "Rezultate finale selecție elevi",
       byline: "Selecție · PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/rezultate_elevi_finale-CjcnFCkjfZsKsWrG.pdf",
+      href: "/docs/erasmus/rezultate-elevi-finale.pdf",
     },
     {
       title: "Rezultate finale selecție profesori",
       byline: "Selecție · PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/rezultate_profesori_finale-xkLeM5z9Pzf0XGNt.pdf",
+      href: "/docs/erasmus/rezultate-profesori-finale.pdf",
     },
     {
       title: "Rezultate interviu limba engleză",
       byline: "PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/rezultate_interviu_engleza-RpM6SWLvSS4SN0us.pdf",
+      href: "/docs/erasmus/rezultate-interviu-engleza.pdf",
     },
     {
       title: "Rezultate analiză dosare elevi",
       byline: "PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/rezultate_analiza_dosar_elevi-mP426MyMKOIX2nVM.pdf",
+      href: "/docs/erasmus/rezultate-analiza-dosar-elevi.pdf",
     },
     {
       title: "Rezultate selecție dosare elevi",
       byline: "PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/rezultate_selectie_dosare_elevi-yXSr5y8B2GdsWsCS.pdf",
+      href: "/docs/erasmus/rezultate-selectie-dosare-elevi.pdf",
     },
     {
       title: "Rezultate finale AES III",
       byline: "PDF",
-      href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/rezultate_finale_aes-iii-dWxBqENyE9TMeyND.pdf",
+      href: "/docs/erasmus/rezultate-finale-aes-iii.pdf",
     },
   ],
 };
@@ -219,7 +219,7 @@ function Hero() {
             <Badge variant="outline" className="border-gold/40 text-gold-light">
               Internațional
             </Badge>
-            <h1 className="mt-5 text-balance !text-white text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]">
+            <h1 className="mt-5 text-balance text-white! text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]">
               Erasmus+
             </h1>
             <p className="mt-2 font-mono text-sm text-gold-light">
@@ -371,7 +371,7 @@ function Mobilities() {
                 >
                   <MapPin className="size-6 text-gold-light" strokeWidth={1.75} />
                 </span>
-                <h3 className="mt-4 font-serif text-2xl font-semibold leading-tight !text-white">
+                <h3 className="mt-4 font-serif text-2xl font-semibold leading-tight text-white!">
                   {m.city}
                 </h3>
                 <p className="mt-1 text-sm text-gold-light">{m.country}</p>
@@ -422,7 +422,6 @@ function Documents() {
                   href={doc.href}
                   title={doc.title}
                   byline={doc.byline}
-                  external
                 />
               </Reveal>
             ))}
@@ -440,8 +439,8 @@ function Cta() {
         <Card className="overflow-hidden border-navy/10 bg-gradient-to-br from-navy-deep to-navy-soft text-white shadow-[var(--shadow-elevated)]">
           <CardContent className="grid gap-8 p-10 md:grid-cols-[1.2fr_1fr]">
             <div>
-              <p className="eyebrow !text-gold-light">Întrebări</p>
-              <h2 className="mt-3 !text-white font-serif text-[clamp(1.6rem,3vw,2.2rem)] font-semibold leading-tight">
+              <p className="eyebrow text-gold-light!">Întrebări</p>
+              <h2 className="mt-3 text-white! font-serif text-[clamp(1.6rem,3vw,2.2rem)] font-semibold leading-tight">
                 Vrei să afli mai multe?
               </h2>
               <p className="mt-4 max-w-md text-pretty text-white/80">

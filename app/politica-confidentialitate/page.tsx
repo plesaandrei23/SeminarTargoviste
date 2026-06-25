@@ -77,7 +77,7 @@ function Hero() {
           <Badge variant="outline" className="border-gold/40 text-gold-light">
             Legal
           </Badge>
-          <h1 className="mt-5 text-balance !text-white text-[clamp(2.2rem,4.8vw,3.8rem)] font-semibold leading-[1.05]">
+          <h1 className="mt-5 text-balance text-white! text-[clamp(2.2rem,4.8vw,3.8rem)] font-semibold leading-[1.05]">
             Politică de confidențialitate
           </h1>
           <p className="mt-6 text-pretty text-white/85 sm:text-lg">
@@ -192,8 +192,8 @@ function Contact() {
       <Reveal>
         <Card className="overflow-hidden border-navy/10 bg-gradient-to-br from-navy-deep to-navy-soft text-white shadow-[var(--shadow-elevated)]">
           <CardContent className="space-y-6 p-10">
-            <p className="eyebrow !text-gold-light">Cereri GDPR</p>
-            <h2 className="!text-white font-serif text-[clamp(1.4rem,2.6vw,1.9rem)] font-semibold leading-tight">
+            <p className="eyebrow text-gold-light!">Cereri GDPR</p>
+            <h2 className="text-white! font-serif text-[clamp(1.4rem,2.6vw,1.9rem)] font-semibold leading-tight">
               Contactează responsabilul cu protecția datelor
             </h2>
             <p className="text-pretty text-white/80">

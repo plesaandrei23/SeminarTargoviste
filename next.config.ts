@@ -33,6 +33,21 @@ const SLUG_REDIRECTS: { source: string; destination: string }[] = [
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  /**
+   * Barrel-file packages that ship a re-export per module. Without this,
+   * every lucide icon (or radix primitive) is bundled as a separate file
+   * in dev — Turbopack compile of routes like /orar can hit 40s because of
+   * it. With `optimizePackageImports`, Next rewrites bare imports to direct
+   * deep paths so only the icons actually used get compiled. Dev-only win:
+   * production builds already tree-shake.
+   */
+  experimental: {
+    optimizePackageImports: [
+      "lucide-react",
+      "radix-ui",
+      "@portabletext/react",
+    ],
+  },
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "assets.zyrosite.com" },

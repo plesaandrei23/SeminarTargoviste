@@ -30,7 +30,8 @@ async function fetchHtml(url) {
 }
 
 /** Extract every internal href; normalise to absolute URLs without trailing slashes. */
-function extractLinks(html, base) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function extractLinks(html, _base) {
   const links = new Set();
   for (const m of html.matchAll(/href="([^"]+)"/g)) {
     let h = m[1];

@@ -23,15 +23,24 @@ export function Stat({ value, suffix, label, icon }: StatProps) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setN(value);
-      return;
-    }
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    // For prefers-reduced-motion, we still observe the element but skip
+    // the count-up animation and jump straight to the final value when
+    // it enters the viewport. setN never fires synchronously inside the
+    // effect body — only inside callbacks — which keeps React's
+    // set-state-in-effect rule happy.
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting && !animated.current) {
             animated.current = true;
+            if (prefersReducedMotion) {
+              setN(value);
+              observer.unobserve(entry.target);
+              continue;
+            }
             const duration = 1400;
             const start = performance.now();
             const tick = (now: number) => {

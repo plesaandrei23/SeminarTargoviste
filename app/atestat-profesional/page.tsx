@@ -80,7 +80,7 @@ function Hero() {
           <Badge variant="outline" className="border-gold/40 text-gold-light">
             Pentru elevi
           </Badge>
-          <h1 className="mt-5 text-balance !text-white text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]">
+          <h1 className="mt-5 text-balance text-white! text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]">
             Atestat profesional
           </h1>
           <p className="mt-2 text-sm uppercase tracking-[0.16em] text-gold-light">
@@ -138,8 +138,8 @@ function Overview() {
               <Award className="size-6 text-gold-light" strokeWidth={1.75} />
             </span>
             <div>
-              <p className="eyebrow !text-gold-light">Atestatul</p>
-              <h3 className="mt-2 !text-white font-serif text-xl font-semibold leading-tight">
+              <p className="eyebrow text-gold-light!">Atestatul</p>
+              <h3 className="mt-2 text-white! font-serif text-xl font-semibold leading-tight">
                 Diplomă oficială de absolvire vocațională
               </h3>
             </div>

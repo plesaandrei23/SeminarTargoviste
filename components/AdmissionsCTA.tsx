@@ -31,13 +31,13 @@ export function AdmissionsCTA() {
       </svg>
 
       <div className="wrap relative">
-        <Reveal as="p" className="eyebrow !text-gold-light">
+        <Reveal as="p" className="eyebrow text-gold-light!">
           Admitere {siteConfig.admission.cycle}
         </Reveal>
         <Reveal
           as="h2"
           delay={1}
-          className="mt-3 !text-white text-[clamp(2.1rem,5vw,3.6rem)]"
+          className="mt-3 text-white! text-[clamp(2.1rem,5vw,3.6rem)]"
         >
           Devino seminarist
         </Reveal>

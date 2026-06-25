@@ -3,30 +3,72 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronDown, Menu, X } from "lucide-react";
+import { MegaMenu, type MegaEntry } from "@/components/MegaMenu";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/site-config";
 
 /**
- * Nav targets. Hash-only hrefs (e.g. `#admitere`) only work on the home page;
- * from any other route (/activitati, /admitere) the browser would resolve
- * them against the current path. Prefix with "/" so they always land at the
- * home page's anchor, and use real routes where those exist.
+ * Top-level nav structure. Mix of flat links + dropdown groups.
+ * `link` entries render as simple anchors; `menu` entries render a hover/click
+ * dropdown panel. Mobile drawer reuses the same data with collapsible groups.
  */
-const nav = [
-  { href: "/", label: "Acasă" },
-  { href: "/#admitere", label: "Admitere" },
-  { href: "/activitati", label: "Activități" },
-  { href: "/campus", label: "Campus" },
-  { href: "/profesori", label: "Profesori" },
-  { href: "/contact", label: "Contact" },
+const NAV: MegaEntry[] = [
+  // "Acasă" is dropped from the top nav — the logo/wordmark on the left
+  // already routes home. Drops noise + makes room for the dropdown groups.
+  {
+    kind: "menu",
+    label: "Despre școală",
+    items: [
+      { href: "/istoric", label: "Istoric", description: "De la 1992 până astăzi" },
+      { href: "/misiune-si-viziune", label: "Misiune și viziune", description: "Ce facem și încotro mergem" },
+      { href: "/director", label: "Mesajul directorului", description: "Cuvânt de bun-venit" },
+      { href: "/regulamente", label: "Regulamente", description: "Protocol + ROFUÎP" },
+      { href: "/managementul-cazurilor-de-violenta", label: "Anti-bullying", description: "Mecanismul de sesizare" },
+    ],
+  },
+  { kind: "link", href: "/admitere", label: "Admitere" },
+  {
+    kind: "menu",
+    label: "Știri",
+    items: [
+      { href: "/activitati", label: "Activități", description: "Evenimente cu fotografii" },
+      { href: "/anunturi", label: "Anunțuri", description: "Avizier electronic" },
+    ],
+  },
+  {
+    kind: "menu",
+    label: "Pentru elevi",
+    items: [
+      { href: "/orar", label: "Orar", description: "Programul zilei de seminar" },
+      { href: "/burse", label: "Burse", description: "Tipuri și criterii" },
+      { href: "/bacalaureat", label: "Bacalaureat", description: "Structura examenului" },
+      { href: "/atestat-profesional", label: "Atestat profesional", description: "Examen vocațional" },
+      { href: "/consiliul-elevilor", label: "Consiliul elevilor", description: "Cum te alături" },
+    ],
+  },
+  {
+    kind: "menu",
+    label: "Conducere",
+    items: [
+      { href: "/profesori", label: "Profesori", description: "Corpul didactic" },
+      { href: "/consiliul-de-administratie", label: "Consiliul de Administrație", description: "Arhivă hotărâri" },
+      { href: "/mobilitate-cadre-didactice", label: "Mobilitate cadre", description: "Concurs ocupare posturi" },
+      { href: "/erasmus", label: "Erasmus+", description: "Acreditare KA120" },
+    ],
+  },
+  { kind: "link", href: "/campus", label: "Campus" },
+  { kind: "link", href: "/contact", label: "Contact" },
 ];
 
 export function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const drawerRef = useRef<HTMLDivElement | null>(null);
+  const hamburgerRef = useRef<HTMLButtonElement | null>(null);
+  const wasOpen = useRef(false);
 
   // The transparent / white-text styling only makes sense over the home page's
   // dark hero. On every other route the page background is parchment, so the
@@ -43,6 +85,52 @@ export function Header() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+  }, [open]);
+
+  // Mobile drawer focus management — trap Tab inside, close on Escape, and
+  // restore focus to the hamburger trigger when the drawer closes. We don't
+  // run this on initial mount: wasOpen tracks the previous value so we only
+  // restore focus when the drawer actually transitions open → closed.
+  useEffect(() => {
+    if (open) {
+      const drawer = drawerRef.current;
+      if (!drawer) return;
+      // Focus first focusable element so the keyboard user lands inside the dialog.
+      const focusables = drawer.querySelectorAll<HTMLElement>(
+        'a, button, [tabindex]:not([tabindex="-1"])',
+      );
+      focusables[0]?.focus();
+
+      const onKey = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          setOpen(false);
+          return;
+        }
+        if (e.key !== "Tab") return;
+        const items = Array.from(
+          drawer.querySelectorAll<HTMLElement>(
+            'a, button, [tabindex]:not([tabindex="-1"])',
+          ),
+        ).filter((el) => !el.hasAttribute("disabled"));
+        if (items.length === 0) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      };
+      document.addEventListener("keydown", onKey);
+      wasOpen.current = true;
+      return () => document.removeEventListener("keydown", onKey);
+    }
+    if (wasOpen.current) {
+      hamburgerRef.current?.focus();
+      wasOpen.current = false;
+    }
   }, [open]);
 
   return (
@@ -95,9 +183,16 @@ export function Header() {
             priority
             className="h-[54px] w-auto drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]"
           />
+          {/*
+            The wordmark is the link's accessible name on both desktop and
+            mobile. On mobile (<sm) it's visually hidden via sr-only so the
+            logo can stand alone, but screen readers still announce it —
+            which means the visible text and the accessible name match
+            (WCAG 2.5.3 label-content-name-mismatch).
+          */}
           <span
             className={cn(
-              "font-serif font-semibold leading-tight transition-colors duration-500 hidden sm:block",
+              "font-serif font-semibold leading-tight transition-colors duration-500 sr-only sm:not-sr-only sm:block",
               solid ? "text-navy" : "text-white",
             )}
             style={{ fontSize: "1rem" }}
@@ -109,33 +204,22 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-7">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "relative text-[0.85rem] font-medium tracking-wide py-1 transition-colors duration-300 after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-0 after:bg-gold after:transition-[width] after:duration-300 hover:after:w-full",
-                solid
-                  ? "text-navy hover:text-navy-deep"
-                  : "text-white/90 hover:text-white",
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <div className="hidden lg:flex items-center gap-6">
+          <MegaMenu entries={NAV} solid={solid} />
           <Link
             href="/admitere"
-            className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-[0.92rem] font-semibold text-navy-deep transition-all duration-300 hover:bg-gold-light hover:-translate-y-0.5 hover:shadow-[var(--shadow-gold)]"
+            className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-gold px-4 py-2 text-[0.85rem] font-semibold text-navy-deep transition-all duration-300 hover:bg-gold-light hover:-translate-y-0.5 hover:shadow-[var(--shadow-gold)] xl:px-5 xl:py-2.5 xl:text-[0.92rem]"
           >
             Înscrie-te
           </Link>
-        </nav>
+        </div>
 
         <button
+          ref={hamburgerRef}
           type="button"
           aria-label={open ? "Închide meniul" : "Deschide meniul"}
           aria-expanded={open}
+          aria-controls="mobile-drawer"
           onClick={() => setOpen((v) => !v)}
           className={cn(
             "lg:hidden p-2 z-[62] transition-colors",
@@ -156,26 +240,23 @@ export function Header() {
       (only 105px tall) instead of the viewport, and the menu would clip.
     */}
     <div
+      id="mobile-drawer"
+      ref={drawerRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Meniu de navigare"
+      // When closed, `inert` removes the dialog from the tab order so users
+      // can't tab into invisible content. When open, the Tab handler in the
+      // effect above traps focus inside.
+      inert={!open || undefined}
       className={cn(
-        "fixed inset-0 z-[61] bg-navy-deep flex flex-col items-center justify-center gap-6 transition-[opacity,transform,visibility] duration-500 lg:hidden",
-        open
-          ? "opacity-100 scale-100 visible"
-          : "opacity-0 scale-105 invisible",
+        "fixed inset-0 z-[61] bg-navy-deep transition-[opacity,visibility] duration-500 lg:hidden",
+        open ? "opacity-100 visible" : "opacity-0 invisible",
       )}
       onClick={(e) => {
-        // Tap on the dark backdrop closes the menu; tap on a link or button
-        // doesn't bubble here (Link's onClick already closes, and the close
-        // button stops propagation).
         if (e.target === e.currentTarget) setOpen(false);
       }}
     >
-      {/*
-        Dedicated close button inside the overlay. The hamburger in the
-        header lives in a separate stacking context (header has z-50, so
-        its button's z-[62] only beats siblings INSIDE the header). The
-        menu sits at z-61 in body's stacking context, so it covers the
-        hamburger entirely — we need our own close affordance here.
-      */}
       <button
         type="button"
         aria-label="Închide meniul"
@@ -185,24 +266,96 @@ export function Header() {
         <X size={26} />
       </button>
 
-      {nav.map((item) => (
-        <Link
-          key={item.href}
-          href={item.href}
-          onClick={() => setOpen(false)}
-          className="font-serif text-3xl text-parchment hover:text-gold-light transition-colors"
-        >
-          {item.label}
-        </Link>
-      ))}
-      <Link
-        href="/admitere"
-        onClick={() => setOpen(false)}
-        className="mt-4 inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-[0.95rem] font-semibold text-navy-deep"
-      >
-        Înscrie-te →
-      </Link>
+      <div className="h-full overflow-y-auto px-6 pt-20 pb-12">
+        <nav aria-label="Meniu mobil" className="mx-auto max-w-md space-y-1">
+          {NAV.map((entry) =>
+            entry.kind === "link" ? (
+              <Link
+                key={entry.href}
+                href={entry.href}
+                onClick={() => setOpen(false)}
+                className="block font-serif text-2xl text-parchment py-3 px-2 transition-colors hover:text-gold-light"
+              >
+                {entry.label}
+              </Link>
+            ) : (
+              <MobileGroup
+                key={entry.label}
+                label={entry.label}
+                items={entry.items}
+                onItemClick={() => setOpen(false)}
+              />
+            ),
+          )}
+          <Link
+            href="/admitere"
+            onClick={() => setOpen(false)}
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-[0.95rem] font-semibold text-navy-deep"
+          >
+            Înscrie-te →
+          </Link>
+        </nav>
+      </div>
     </div>
     </>
+  );
+}
+
+function MobileGroup({
+  label,
+  items,
+  onItemClick,
+}: {
+  label: string;
+  items: { href: string; label: string }[];
+  onItemClick: () => void;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div className="border-b border-white/5">
+      <button
+        type="button"
+        onClick={() => setExpanded((v) => !v)}
+        aria-expanded={expanded}
+        className="flex w-full items-center justify-between font-serif text-2xl text-parchment py-3 px-2 transition-colors hover:text-gold-light"
+      >
+        {label}
+        <ChevronDown
+          className={cn(
+            "size-5 transition-transform duration-300 text-gold-light",
+            expanded && "rotate-180",
+          )}
+          strokeWidth={2}
+          aria-hidden="true"
+        />
+      </button>
+      <div
+        // `inert` + `aria-hidden` keeps the collapsed submenu out of the
+        // accessibility tree AND out of the tab order — the grid-rows
+        // animation only hides it visually, so without these, screen
+        // readers + keyboard users could still reach the links.
+        aria-hidden={!expanded}
+        inert={!expanded || undefined}
+        className={cn(
+          "grid transition-[grid-template-rows] duration-300",
+          expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+        )}
+      >
+        <ul className="overflow-hidden">
+          {items.map((it) => (
+            <li key={it.href}>
+              <Link
+                href={it.href}
+                onClick={onItemClick}
+                tabIndex={expanded ? undefined : -1}
+                className="block pl-4 pr-2 py-2.5 text-base text-parchment/85 transition-colors hover:text-gold-light"
+              >
+                {it.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }

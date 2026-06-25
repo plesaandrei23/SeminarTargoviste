@@ -27,53 +27,56 @@ type Doc = {
   title: string;
   byline: string;
   href: string;
+  /** When true, the link opens in a new tab instead of triggering download. */
+  external?: boolean;
 };
 
 /**
- * The originals still live on assets.zyrosite.com — those URLs survive
- * until the Hostinger sub gets cancelled. Phase 3 in plan.md re-hosts
- * them into the CMS asset pipeline; until then, link externally.
+ * Documents re-hosted to /public/docs/mobilitate from the original
+ * assets.zyrosite.com URLs. The legacy CDN survives only until the
+ * Hostinger sub is cancelled — these are the canonical copies now.
  */
 const DOCS: Doc[] = [
   {
     title: "Procedura Operațională · Mobilitatea personalului didactic 2026–2027",
     byline: "Aviz Seminar 2026 · PDF",
-    href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/procedurai-operatissionalai-mobilitate-2026-2027-aviz-seminar-2026-FWBV2aaD1nM5nRzW.pdf",
+    href: "/docs/mobilitate/procedura-mobilitate-2026-2027.pdf",
   },
   {
     title: "Condiții specifice de mobilitate 2026–2027",
     byline: "Seminarul Teologic Ortodox · PDF",
-    href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/conditii-specifice-de-mobilitate-2026-2027-jVNxMSQtB27Ple5M.pdf",
+    href: "/docs/mobilitate/conditii-specifice-mobilitate-2026-2027.pdf",
   },
   {
     title: "Metodologie mobilitate 2026–2027",
-    byline: "Ministerul Educației · PDF",
-    href: "https://seminarortodoxtargoviste.ro/mobilitate-cadre-didactice#metodologie",
+    byline: "Ministerul Educației · portal oficial",
+    href: "https://www.edu.ro/mobilitatea_personalului_didactic_2026_2027",
+    external: true,
   },
   {
     title: "Grafic inspecții la clasă",
     byline: "Religie · PDF",
-    href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/religie_inspectii-p0fA2GT0ZI2cWMzf.pdf",
+    href: "/docs/mobilitate/religie-inspectii.pdf",
   },
   {
     title: "Programare inspecții",
     byline: "Inspecții la clasă · PDF",
-    href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/programarea-inspeceiilor-la-clasa-CE9X0dWNT03Ob9BZ.pdf",
+    href: "/docs/mobilitate/programarea-inspectiilor.pdf",
   },
   {
     title: "Teme inspecție",
     byline: "Susținere inspecții la clasă · PDF",
-    href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/teme-sustinere-inspectii-la-clasa-orMsh3l5476IMghS.pdf",
+    href: "/docs/mobilitate/teme-inspectii.pdf",
   },
   {
     title: "Grilă interviu",
     byline: "Interviu candidați · PDF",
-    href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/grila_interviu-OVxDZYIcSIjVIlr2.pdf",
+    href: "/docs/mobilitate/grila-interviu.pdf",
   },
   {
     title: "Rezultate inspecții — obținere aviz",
     byline: "Rezultate probe aviz · PDF",
-    href: "https://assets.zyrosite.com/d95MN2J9V3cXzoxX/rezultate-probe-aviz-hC9yM81dQUriJW2N.pdf",
+    href: "/docs/mobilitate/rezultate-probe-aviz.pdf",
   },
 ];
 
@@ -107,7 +110,7 @@ function Hero() {
           <Badge variant="outline" className="border-gold/40 text-gold-light">
             Personal didactic
           </Badge>
-          <h1 className="mt-5 text-balance !text-white text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]">
+          <h1 className="mt-5 text-balance text-white! text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]">
             Mobilitate cadre didactice
           </h1>
           <p className="mt-2 text-sm uppercase tracking-[0.16em] text-gold-light">
@@ -169,8 +172,8 @@ function Announcement() {
         <Card className="overflow-hidden border-navy/10 bg-navy text-white shadow-[var(--shadow-elevated)]">
           <CardContent className="space-y-6 p-7">
             <div>
-              <p className="eyebrow !text-gold-light">Reper</p>
-              <h3 className="mt-2 !text-white font-serif text-2xl font-semibold leading-tight">
+              <p className="eyebrow text-gold-light!">Reper</p>
+              <h3 className="mt-2 text-white! font-serif text-2xl font-semibold leading-tight">
                 Vineri · 29 mai 2026
               </h3>
               <p className="mt-1 text-sm text-white/70">ora 14:00</p>
@@ -236,7 +239,7 @@ function Documents() {
               href={doc.href}
               title={doc.title}
               byline={doc.byline}
-              external
+              external={doc.external}
             />
           </Reveal>
         ))}
@@ -252,8 +255,8 @@ function Cta() {
         <Card className="overflow-hidden border-navy/10 bg-gradient-to-br from-navy-deep to-navy-soft text-white shadow-[var(--shadow-elevated)]">
           <CardContent className="grid gap-8 p-10 md:grid-cols-[1.2fr_1fr]">
             <div>
-              <p className="eyebrow !text-gold-light">Întrebări</p>
-              <h2 className="mt-3 !text-white font-serif text-[clamp(1.6rem,3vw,2.2rem)] font-semibold leading-tight">
+              <p className="eyebrow text-gold-light!">Întrebări</p>
+              <h2 className="mt-3 text-white! font-serif text-[clamp(1.6rem,3vw,2.2rem)] font-semibold leading-tight">
                 Contactează secretariatul
               </h2>
               <p className="mt-4 max-w-md text-pretty text-white/80">
