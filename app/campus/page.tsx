@@ -46,13 +46,13 @@ function Hero() {
         className="absolute inset-0 bg-gradient-to-b from-navy-deep/70 via-navy/60 to-navy-deep/95"
       />
       <div className="wrap relative mx-auto max-w-3xl text-center">
-        <Reveal as="p" className="eyebrow !text-gold-light">
+        <Reveal as="p" className="eyebrow text-gold-light!">
           Campus
         </Reveal>
         <Reveal
           as="h1"
           delay={1}
-          className="mt-3 !text-white text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]"
+          className="mt-3 text-white! text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]"
         >
           Locul în care ne-am așezat
         </Reveal>
@@ -150,8 +150,8 @@ function VisitCta() {
         <Card className="overflow-hidden border-navy/10 bg-gradient-to-br from-navy-deep to-navy-soft text-white shadow-[var(--shadow-elevated)]">
           <CardContent className="grid gap-8 p-10 md:grid-cols-[1.2fr_1fr]">
             <div>
-              <p className="eyebrow !text-gold-light">Vino la noi</p>
-              <h2 className="mt-3 !text-white font-serif text-[clamp(1.8rem,3.5vw,2.6rem)] font-semibold leading-tight">
+              <p className="eyebrow text-gold-light!">Vino la noi</p>
+              <h2 className="mt-3 text-white! font-serif text-[clamp(1.8rem,3.5vw,2.6rem)] font-semibold leading-tight">
                 Programează un tur al seminarului
               </h2>
               <p className="mt-4 max-w-md text-pretty text-white/80">

@@ -97,7 +97,7 @@ function Hero({ count }: { count: number }) {
             <Badge variant="outline" className="border-gold/40 text-gold-light">
               Informații
             </Badge>
-            <h1 className="mt-5 text-balance !text-white text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]">
+            <h1 className="mt-5 text-balance text-white! text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]">
               Anunțuri & avizier
             </h1>
             <svg

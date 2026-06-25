@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { MegaMenu, type MegaEntry } from "@/components/MegaMenu";
 import { cn } from "@/lib/utils";
@@ -66,6 +66,9 @@ export function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const drawerRef = useRef<HTMLDivElement | null>(null);
+  const hamburgerRef = useRef<HTMLButtonElement | null>(null);
+  const wasOpen = useRef(false);
 
   // The transparent / white-text styling only makes sense over the home page's
   // dark hero. On every other route the page background is parchment, so the
@@ -82,6 +85,52 @@ export function Header() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+  }, [open]);
+
+  // Mobile drawer focus management — trap Tab inside, close on Escape, and
+  // restore focus to the hamburger trigger when the drawer closes. We don't
+  // run this on initial mount: wasOpen tracks the previous value so we only
+  // restore focus when the drawer actually transitions open → closed.
+  useEffect(() => {
+    if (open) {
+      const drawer = drawerRef.current;
+      if (!drawer) return;
+      // Focus first focusable element so the keyboard user lands inside the dialog.
+      const focusables = drawer.querySelectorAll<HTMLElement>(
+        'a, button, [tabindex]:not([tabindex="-1"])',
+      );
+      focusables[0]?.focus();
+
+      const onKey = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          setOpen(false);
+          return;
+        }
+        if (e.key !== "Tab") return;
+        const items = Array.from(
+          drawer.querySelectorAll<HTMLElement>(
+            'a, button, [tabindex]:not([tabindex="-1"])',
+          ),
+        ).filter((el) => !el.hasAttribute("disabled"));
+        if (items.length === 0) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      };
+      document.addEventListener("keydown", onKey);
+      wasOpen.current = true;
+      return () => document.removeEventListener("keydown", onKey);
+    }
+    if (wasOpen.current) {
+      hamburgerRef.current?.focus();
+      wasOpen.current = false;
+    }
   }, [open]);
 
   return (
@@ -166,9 +215,11 @@ export function Header() {
         </div>
 
         <button
+          ref={hamburgerRef}
           type="button"
           aria-label={open ? "Închide meniul" : "Deschide meniul"}
           aria-expanded={open}
+          aria-controls="mobile-drawer"
           onClick={() => setOpen((v) => !v)}
           className={cn(
             "lg:hidden p-2 z-[62] transition-colors",
@@ -189,6 +240,15 @@ export function Header() {
       (only 105px tall) instead of the viewport, and the menu would clip.
     */}
     <div
+      id="mobile-drawer"
+      ref={drawerRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Meniu de navigare"
+      // When closed, `inert` removes the dialog from the tab order so users
+      // can't tab into invisible content. When open, the Tab handler in the
+      // effect above traps focus inside.
+      inert={!open || undefined}
       className={cn(
         "fixed inset-0 z-[61] bg-navy-deep transition-[opacity,visibility] duration-500 lg:hidden",
         open ? "opacity-100 visible" : "opacity-0 invisible",
@@ -270,6 +330,12 @@ function MobileGroup({
         />
       </button>
       <div
+        // `inert` + `aria-hidden` keeps the collapsed submenu out of the
+        // accessibility tree AND out of the tab order — the grid-rows
+        // animation only hides it visually, so without these, screen
+        // readers + keyboard users could still reach the links.
+        aria-hidden={!expanded}
+        inert={!expanded || undefined}
         className={cn(
           "grid transition-[grid-template-rows] duration-300",
           expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
@@ -281,6 +347,7 @@ function MobileGroup({
               <Link
                 href={it.href}
                 onClick={onItemClick}
+                tabIndex={expanded ? undefined : -1}
                 className="block pl-4 pr-2 py-2.5 text-base text-parchment/85 transition-colors hover:text-gold-light"
               >
                 {it.label}

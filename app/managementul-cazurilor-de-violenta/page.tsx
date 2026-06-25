@@ -57,7 +57,7 @@ function Hero() {
           <Badge variant="outline" className="border-gold/40 text-gold-light">
             Siguranță
           </Badge>
-          <h1 className="mt-5 text-balance !text-white text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]">
+          <h1 className="mt-5 text-balance text-white! text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]">
             Anti-bullying
           </h1>
           <p className="mt-2 text-sm uppercase tracking-[0.16em] text-gold-light">
@@ -169,7 +169,7 @@ function ReportChannels() {
               <p className="mt-4 text-xs uppercase tracking-[0.14em] text-gold-light">
                 Canal 1
               </p>
-              <p className="mt-2 font-serif text-2xl font-semibold leading-tight !text-white">
+              <p className="mt-2 font-serif text-2xl font-semibold leading-tight text-white!">
                 Formular online
               </p>
             </div>
@@ -205,7 +205,7 @@ function ReportChannels() {
               <p className="mt-4 text-xs uppercase tracking-[0.14em] text-gold-light">
                 Canal 2
               </p>
-              <p className="mt-2 font-serif text-2xl font-semibold leading-tight !text-white">
+              <p className="mt-2 font-serif text-2xl font-semibold leading-tight text-white!">
                 Cutia poștală
               </p>
             </div>
@@ -315,8 +315,8 @@ function LegalFramework() {
         <Card className="overflow-hidden border-navy/10 bg-gradient-to-br from-navy-deep to-navy-soft text-white shadow-[var(--shadow-elevated)]">
           <CardContent className="grid gap-8 p-10 md:grid-cols-[1.2fr_1fr]">
             <div>
-              <p className="eyebrow !text-gold-light">Cadrul legal</p>
-              <h2 className="mt-3 !text-white font-serif text-[clamp(1.6rem,3vw,2.2rem)] font-semibold leading-tight">
+              <p className="eyebrow text-gold-light!">Cadrul legal</p>
+              <h2 className="mt-3 text-white! font-serif text-[clamp(1.6rem,3vw,2.2rem)] font-semibold leading-tight">
                 Pe ce ne bazăm
               </h2>
               <ul className="mt-5 space-y-3 text-sm text-white/85">

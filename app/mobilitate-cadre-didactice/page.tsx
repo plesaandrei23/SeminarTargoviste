@@ -27,6 +27,8 @@ type Doc = {
   title: string;
   byline: string;
   href: string;
+  /** When true, the link opens in a new tab instead of triggering download. */
+  external?: boolean;
 };
 
 /**
@@ -47,8 +49,9 @@ const DOCS: Doc[] = [
   },
   {
     title: "Metodologie mobilitate 2026–2027",
-    byline: "Ministerul Educației · PDF",
-    href: "/docs/erasmus/metodologie-selectie.pdf",
+    byline: "Ministerul Educației · portal oficial",
+    href: "https://www.edu.ro/mobilitatea_personalului_didactic_2026_2027",
+    external: true,
   },
   {
     title: "Grafic inspecții la clasă",
@@ -107,7 +110,7 @@ function Hero() {
           <Badge variant="outline" className="border-gold/40 text-gold-light">
             Personal didactic
           </Badge>
-          <h1 className="mt-5 text-balance !text-white text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]">
+          <h1 className="mt-5 text-balance text-white! text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]">
             Mobilitate cadre didactice
           </h1>
           <p className="mt-2 text-sm uppercase tracking-[0.16em] text-gold-light">
@@ -169,8 +172,8 @@ function Announcement() {
         <Card className="overflow-hidden border-navy/10 bg-navy text-white shadow-[var(--shadow-elevated)]">
           <CardContent className="space-y-6 p-7">
             <div>
-              <p className="eyebrow !text-gold-light">Reper</p>
-              <h3 className="mt-2 !text-white font-serif text-2xl font-semibold leading-tight">
+              <p className="eyebrow text-gold-light!">Reper</p>
+              <h3 className="mt-2 text-white! font-serif text-2xl font-semibold leading-tight">
                 Vineri · 29 mai 2026
               </h3>
               <p className="mt-1 text-sm text-white/70">ora 14:00</p>
@@ -236,6 +239,7 @@ function Documents() {
               href={doc.href}
               title={doc.title}
               byline={doc.byline}
+              external={doc.external}
             />
           </Reveal>
         ))}
@@ -251,8 +255,8 @@ function Cta() {
         <Card className="overflow-hidden border-navy/10 bg-gradient-to-br from-navy-deep to-navy-soft text-white shadow-[var(--shadow-elevated)]">
           <CardContent className="grid gap-8 p-10 md:grid-cols-[1.2fr_1fr]">
             <div>
-              <p className="eyebrow !text-gold-light">Întrebări</p>
-              <h2 className="mt-3 !text-white font-serif text-[clamp(1.6rem,3vw,2.2rem)] font-semibold leading-tight">
+              <p className="eyebrow text-gold-light!">Întrebări</p>
+              <h2 className="mt-3 text-white! font-serif text-[clamp(1.6rem,3vw,2.2rem)] font-semibold leading-tight">
                 Contactează secretariatul
               </h2>
               <p className="mt-4 max-w-md text-pretty text-white/80">

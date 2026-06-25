@@ -89,13 +89,13 @@ function Hero({ total, subjectsCount }: { total: number; subjectsCount: number }
   return (
     <section className="relative isolate overflow-hidden bg-gradient-to-br from-navy-deep via-navy to-navy-soft pt-36 pb-24 text-white">
       <div className="wrap relative mx-auto max-w-3xl text-center">
-        <Reveal as="p" className="eyebrow !text-gold-light">
+        <Reveal as="p" className="eyebrow text-gold-light!">
           Corpul profesoral
         </Reveal>
         <Reveal
           as="h1"
           delay={1}
-          className="mt-3 !text-white text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]"
+          className="mt-3 text-white! text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]"
         >
           Dascăli, modele, mentori
         </Reveal>
@@ -233,8 +233,8 @@ function ContactCta() {
         <Card className="overflow-hidden border-navy/10 bg-gradient-to-br from-navy-deep to-navy-soft text-white">
           <CardContent className="grid gap-8 p-10 md:grid-cols-[1.2fr_1fr]">
             <div>
-              <p className="eyebrow !text-gold-light">Vrei să afli mai multe?</p>
-              <h2 className="mt-3 !text-white font-serif text-[clamp(1.8rem,3.5vw,2.6rem)] font-semibold leading-tight">
+              <p className="eyebrow text-gold-light!">Vrei să afli mai multe?</p>
+              <h2 className="mt-3 text-white! font-serif text-[clamp(1.8rem,3.5vw,2.6rem)] font-semibold leading-tight">
                 Întâlnește profesorii la o ședință de pregătire
               </h2>
               <p className="mt-4 max-w-md text-pretty text-white/80">

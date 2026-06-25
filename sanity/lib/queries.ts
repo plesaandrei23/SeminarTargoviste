@@ -181,7 +181,9 @@ export const anuntBySlugQuery = groq`
         caption
       }
     },
-    attachments,
+    "attachments": coalesce(attachments, [])[]{
+      "asset": asset->{ url, originalFilename, size, mimeType }
+    },
     seo
   }
 `;

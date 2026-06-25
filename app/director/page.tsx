@@ -106,7 +106,7 @@ function Hero({
             <Badge variant="outline" className="border-gold/40 text-gold-light">
               Conducere
             </Badge>
-            <h1 className="mt-4 max-w-2xl text-balance !text-white text-[clamp(2.2rem,5vw,4rem)] font-semibold leading-[1.05]">
+            <h1 className="mt-4 max-w-2xl text-balance text-white! text-[clamp(2.2rem,5vw,4rem)] font-semibold leading-[1.05]">
               Mesajul directorului
             </h1>
             <p className="mt-5 text-pretty text-white/85 sm:text-lg">
@@ -186,8 +186,8 @@ function Body({ name, role }: { name: string; role: string }) {
         <Card className="overflow-hidden border-navy/10 bg-navy text-white shadow-[var(--shadow-elevated)]">
           <CardContent className="space-y-6 p-7">
             <div>
-              <p className="eyebrow !text-gold-light">Pași următori</p>
-              <h2 className="mt-2 !text-white font-serif text-xl font-semibold leading-tight">
+              <p className="eyebrow text-gold-light!">Pași următori</p>
+              <h2 className="mt-2 text-white! font-serif text-xl font-semibold leading-tight">
                 Cum poți afla mai multe
               </h2>
             </div>
@@ -226,7 +226,7 @@ function Body({ name, role }: { name: string; role: string }) {
             </div>
 
             <div className="border-t border-white/10 pt-5">
-              <p className="eyebrow !text-gold-light">Secretariat</p>
+              <p className="eyebrow text-gold-light!">Secretariat</p>
               <a
                 href={`tel:${siteConfig.contact.phone}`}
                 className="mt-3 flex items-center gap-3 text-sm transition-colors hover:text-gold-light"

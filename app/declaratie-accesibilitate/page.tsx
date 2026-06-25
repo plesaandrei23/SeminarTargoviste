@@ -51,7 +51,7 @@ function Hero() {
           <Badge variant="outline" className="border-gold/40 text-gold-light">
             Legal
           </Badge>
-          <h1 className="mt-5 text-balance !text-white text-[clamp(2.2rem,4.8vw,3.8rem)] font-semibold leading-[1.05]">
+          <h1 className="mt-5 text-balance text-white! text-[clamp(2.2rem,4.8vw,3.8rem)] font-semibold leading-[1.05]">
             Declarație de accesibilitate
           </h1>
           <p className="mt-6 text-pretty text-white/85 sm:text-lg">
@@ -208,8 +208,8 @@ function Feedback() {
                 <Accessibility className="size-6 text-gold-light" strokeWidth={1.5} />
               </span>
               <div>
-                <p className="eyebrow !text-gold-light">Feedback și sesizări</p>
-                <h2 className="mt-1 !text-white font-serif text-xl font-semibold leading-tight">
+                <p className="eyebrow text-gold-light!">Feedback și sesizări</p>
+                <h2 className="mt-1 text-white! font-serif text-xl font-semibold leading-tight">
                   Ai întâmpinat o barieră?
                 </h2>
               </div>

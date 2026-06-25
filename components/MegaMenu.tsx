@@ -158,7 +158,11 @@ function MenuItem({
       <button
         ref={triggerRef}
         type="button"
-        aria-haspopup="menu"
+        // Disclosure pattern — NOT a WAI-ARIA menu. We use plain Tab
+        // navigation through the panel's links; menu/menuitem roles would
+        // imply arrow-key navigation we don't implement. aria-expanded
+        // alone is enough for assistive tech to know the link list opens
+        // and closes.
         aria-expanded={isOpen}
         aria-controls={panelId}
         onClick={() => (isOpen ? onClose() : onOpen())}
@@ -182,8 +186,13 @@ function MenuItem({
 
       <div
         id={panelId}
-        role="menu"
+        // Plain region with an aria-label so screen readers know what
+        // group these links belong to. inert when collapsed so the links
+        // can't be focused via Tab and the visibility transition stays
+        // visible-only.
         aria-label={label}
+        aria-hidden={!isOpen}
+        inert={!isOpen || undefined}
         className={cn(
           "absolute left-1/2 top-full mt-3 -translate-x-1/2 transition-[opacity,transform,visibility] duration-200",
           isOpen ? "visible opacity-100 translate-y-0" : "invisible opacity-0 -translate-y-1",
@@ -203,10 +212,9 @@ function MenuItem({
             )}
           >
             {items.map((it) => (
-              <li key={it.href} role="none">
+              <li key={it.href}>
                 <Link
                   href={it.href}
-                  role="menuitem"
                   className={cn(
                     "block rounded-xl px-3 py-2.5 transition-colors duration-200",
                     "hover:bg-gold/15 focus:bg-gold/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold",

@@ -104,7 +104,7 @@ export function Hero() {
 
       {/* ─── Hero content ─────────────────────────────────────── */}
       <div className="wrap relative z-10 pt-24 pb-12">
-        <Reveal as="p" className="eyebrow !text-gold-light">
+        <Reveal as="p" className="eyebrow text-gold-light!">
           {siteConfig.diocese}
         </Reveal>
         <Reveal as="h1" delay={1} className="mt-3 mb-2 text-white text-balance">

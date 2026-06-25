@@ -164,14 +164,14 @@ function Hero({
     <section className="relative isolate overflow-hidden bg-gradient-to-br from-navy-deep via-navy to-navy-soft pt-36 pb-20 text-white">
       <div className="wrap relative mx-auto max-w-3xl text-center">
         {sectionLabel && (
-          <Reveal as="p" className="eyebrow !text-gold-light">
+          <Reveal as="p" className="eyebrow text-gold-light!">
             {sectionLabel}
           </Reveal>
         )}
         <Reveal
           as="h1"
           delay={1}
-          className="mt-3 !text-white text-[clamp(2.2rem,5vw,4rem)] font-semibold leading-[1.05] text-balance"
+          className="mt-3 text-white! text-[clamp(2.2rem,5vw,4rem)] font-semibold leading-[1.05] text-balance"
         >
           {title}
         </Reveal>

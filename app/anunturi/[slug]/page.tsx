@@ -108,7 +108,7 @@ function Hero({ anunt }: { anunt: AnuntDetail }) {
               </span>
             )}
           </div>
-          <h1 className="mt-5 text-balance !text-white text-[clamp(2rem,4.4vw,3.4rem)] font-semibold leading-[1.1]">
+          <h1 className="mt-5 text-balance text-white! text-[clamp(2rem,4.4vw,3.4rem)] font-semibold leading-[1.1]">
             {anunt.title}
           </h1>
           <p className="mt-5 inline-flex items-center gap-2 text-sm text-gold-light">

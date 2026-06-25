@@ -85,7 +85,7 @@ function Hero() {
           <Badge variant="outline" className="border-gold/40 text-gold-light">
             Pentru elevi
           </Badge>
-          <h1 className="mt-5 text-balance !text-white text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]">
+          <h1 className="mt-5 text-balance text-white! text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]">
             Consiliul elevilor
           </h1>
           <svg
@@ -214,8 +214,8 @@ function HowToJoin() {
         <Card className="overflow-hidden border-navy/10 bg-gradient-to-br from-navy-deep to-navy-soft text-white shadow-[var(--shadow-elevated)]">
           <CardContent className="grid gap-8 p-10 md:grid-cols-[1.2fr_1fr]">
             <div>
-              <p className="eyebrow !text-gold-light">Cum te alături</p>
-              <h2 className="mt-3 !text-white font-serif text-[clamp(1.6rem,3vw,2.2rem)] font-semibold leading-tight">
+              <p className="eyebrow text-gold-light!">Cum te alături</p>
+              <h2 className="mt-3 text-white! font-serif text-[clamp(1.6rem,3vw,2.2rem)] font-semibold leading-tight">
                 Trei pași — clasă, vot, mandat
               </h2>
               <ol className="mt-6 space-y-4 text-sm text-white/85">
