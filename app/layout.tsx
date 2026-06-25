@@ -86,6 +86,10 @@ export default function RootLayout({
   return (
     <html
       lang="ro"
+      // Next 16 turns OFF smooth scroll during route transitions unless we
+      // opt back in here. Without this attribute the dev warns on every
+      // page that has `html { scroll-behavior: smooth }`.
+      data-scroll-behavior="smooth"
       className={`${inter.variable} ${cormorant.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-parchment text-ink">
