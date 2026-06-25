@@ -53,7 +53,7 @@ export const CAMPUS_ZONES: CampusZone[] = [
     practical: [
       { label: "Acces", value: "Elevii și profesorii seminarului" },
       { label: "Slujbe", value: "Zilnic — 07:30 dimineața · 19:00 seara" },
-      { label: "Duhovnici", value: "Pr. Constantin Rădulescu · Pr. Ștefănel Cosmin Gheorghe" },
+      { label: "Duhovnic", value: "Pr. Ștefănel Cosmin Gheorghe" },
     ],
     image: {
       src: "/campus/paraclis.jpg",
@@ -68,7 +68,7 @@ export const CAMPUS_ZONES: CampusZone[] = [
     intro:
       "Săli moderne pentru disciplinele teologice și de cultură generală. Aici se țin orele de Religie, Limba Latină, Limbi străine, Matematică, Fizică, Istorie și Filosofie — la clase de maximum 28 de elevi.",
     features: [
-      "12 săli active, configurate pentru clase de până la 28 elevi",
+      "16 săli active, configurate pentru clase de până la 28 elevi",
       "Echipamente pentru proiecții, conferințe și ateliere practice",
       "Săli dedicate pentru cele patru ani de liceu (a IX-a – a XII-a)",
       "Mediu adaptat predării vocaționale și teoretice",
