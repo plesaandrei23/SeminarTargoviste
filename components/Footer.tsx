@@ -41,8 +41,10 @@ const nav = [
 const studentLinks = [
   { href: "/orar", label: "Orar" },
   { href: "/burse", label: "Burse" },
+  { href: "/evaluarea-nationala", label: "Evaluarea Națională" },
   { href: "/bacalaureat", label: "Bacalaureat" },
   { href: "/atestat-profesional", label: "Atestat profesional" },
+  { href: "/coruri", label: "Coruri" },
   { href: "/consiliul-elevilor", label: "Consiliul elevilor" },
 ];
 

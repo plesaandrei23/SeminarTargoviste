@@ -40,8 +40,10 @@ const STATIC_ROUTES: { path: string; changeFrequency: MetadataRoute.Sitemap[numb
   // Pentru elevi
   { path: "/orar", changeFrequency: "yearly", priority: 0.4 },
   { path: "/burse", changeFrequency: "yearly", priority: 0.5 },
+  { path: "/evaluarea-nationala", changeFrequency: "yearly", priority: 0.5 },
   { path: "/bacalaureat", changeFrequency: "yearly", priority: 0.5 },
   { path: "/atestat-profesional", changeFrequency: "yearly", priority: 0.5 },
+  { path: "/coruri", changeFrequency: "yearly", priority: 0.5 },
   { path: "/consiliul-elevilor", changeFrequency: "yearly", priority: 0.4 },
   // Legal
   { path: "/declaratie-accesibilitate", changeFrequency: "yearly", priority: 0.3 },

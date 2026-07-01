@@ -37,8 +37,10 @@ const NAV: MegaEntry[] = [
     items: [
       { href: "/orar", label: "Orar", description: "Programul zilei de seminar" },
       { href: "/burse", label: "Burse", description: "Tipuri și criterii" },
+      { href: "/evaluarea-nationala", label: "Evaluarea Națională", description: "EN VIII · admiterea la liceu" },
       { href: "/bacalaureat", label: "Bacalaureat", description: "Structura examenului" },
       { href: "/atestat-profesional", label: "Atestat profesional", description: "Examen vocațional" },
+      { href: "/coruri", label: "Coruri", description: "Cor liturgic + cor reprezentativ" },
       { href: "/consiliul-elevilor", label: "Consiliul elevilor", description: "Cum te alături" },
     ],
   },
@@ -186,7 +188,7 @@ export function Header() {
           */}
           <span
             className={cn(
-              "font-serif font-semibold leading-tight transition-colors duration-500 sr-only sm:not-sr-only sm:block",
+              "font-serif font-semibold leading-tight transition-colors duration-500 sr-only sm:not-sr-only sm:block sm:text-center",
               solid ? "text-navy" : "text-white",
             )}
             style={{ fontSize: "1rem" }}

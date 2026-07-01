@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, BookOpenCheck, ExternalLink, Scale } from "lucide-react";
+import { ArrowLeft, BookOpenCheck, ExternalLink, HeartHandshake, Scale } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
@@ -40,6 +40,14 @@ const DOCUMENTS: Document[] = [
     icon: Scale,
     description:
       "Regulamentul-cadru al Ministerului Educației aplicabil tuturor unităților de învățământ preuniversitar din România. Reglementează drepturile și obligațiile elevilor, evaluarea, frecvența, disciplina, precum și raporturile dintre școală, familie și autorități.",
+  },
+  {
+    title: "Codul de Conduită Etică 2025–2026",
+    byline: "Seminarul Teologic Ortodox · anul școlar 2025–2026",
+    href: "/docs/codul-de-conduita-etica-2025-2026.pdf",
+    icon: HeartHandshake,
+    description:
+      "Codul de conduită etică al seminarului — principiile morale și profesionale pe care le împărtășesc elevii, profesorii și personalul: integritate, respect, responsabilitate, mărturisirea credinței ortodoxe și demnitatea comportamentală în toate contextele școlii.",
   },
 ];
 
@@ -102,16 +110,18 @@ function DocumentsSection() {
         Documente oficiale
       </Reveal>
       <Reveal as="h2" delay={1} className="mt-3 max-w-2xl text-[clamp(1.8rem,3.5vw,2.6rem)] font-semibold leading-tight">
-        Două documente, două niveluri de reglementare
+        Trei documente, trei niveluri de reglementare
       </Reveal>
       <Reveal as="p" delay={2} className="mt-4 max-w-2xl text-pretty text-muted">
         Pentru aspectele vocaționale — programul liturgic, disciplinele de
         specialitate, formarea pastorală — se aplică Protocolul Sfântului
-        Sinod. Pentru toate celelalte aspecte ale vieții școlare se aplică
-        Regulamentul Ministerului Educației.
+        Sinod. Pentru celelalte aspecte ale vieții școlare se aplică
+        Regulamentul Ministerului Educației. Iar Codul de Conduită Etică
+        stabilește principiile morale și profesionale ale comunității
+        seminarului — actualizat anual.
       </Reveal>
 
-      <div className="mt-12 grid gap-6 lg:grid-cols-2">
+      <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {DOCUMENTS.map((doc, i) => (
           <Reveal key={doc.href} delay={((i % 3) + 1) as 1 | 2 | 3}>
             <Card className="h-full border-navy/10 bg-paper transition-all duration-500 hover:-translate-y-1 hover:shadow-[var(--shadow-elevated)]">

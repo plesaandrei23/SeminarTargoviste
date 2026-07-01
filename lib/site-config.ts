@@ -43,7 +43,8 @@ export const siteConfig = {
     /** Numeric Facebook Page ID — used by the FB Page Plugin embed + future Graph API integration. */
     facebookPageId: "61554192865224",
     tiktok: "https://www.tiktok.com/@seminartargoviste",
-    instagram: "#",
+    instagram:
+      "https://www.instagram.com/seminarul_teologic_targoviste?utm_source=qr",
   },
   admission: {
     cycle: "2026–2027",

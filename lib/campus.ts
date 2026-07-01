@@ -157,13 +157,14 @@ export const CAMPUS_ZONES: CampusZone[] = [
     slug: "sala-de-festivitati",
     name: "Sala de festivități",
     Icon: Music2,
-    tagline: "Locul în care comunitatea se adună",
+    tagline: "Sală de festivități și sală de mese, într-un singur spațiu",
     intro:
-      "Concerte de Crăciun, festivități de absolvire, sesiuni de comunicări științifice, întâlniri duhovnicești cu părinți și absolvenți — toate evenimentele mari ale seminarului au loc aici.",
+      "Un spațiu cu dublu rol: în zilele obișnuite găzduiește mesele elevilor interni în cantina seminarului, iar la sărbători și evenimente se transformă în sală de festivități — pentru concerte de Crăciun, absolviri, sesiuni de comunicări științifice și întâlniri duhovnicești.",
     features: [
       "Capacitate de aproximativ 200 de locuri",
-      "Scenă cu pian, sistem audio și proiector",
-      "Configurabilă pentru concerte, prelegeri, expoziții",
+      "Trei mese pe zi pentru elevii interni — mic dejun, prânz, cină",
+      "Scenă cu pian, sistem audio și proiector pentru evenimente",
+      "Configurabilă pentru concerte, prelegeri și expoziții",
       "Găzduiește evenimentele Arhiepiscopiei Târgoviștei",
     ],
     practical: [
