@@ -26,6 +26,13 @@ export type CampusZone = {
   intro: string;
   /** Bulleted highlights — each rendered as a CheckCircle-style item. */
   features: string[];
+  /**
+   * Optional override for the "Ce găsești aici" heading above the
+   * features list. Some zones (paraclis) read better as
+   * "Ce se desfășoară aici" — a program of activities rather than a
+   * collection of things.
+   */
+  featuresHeading?: string;
   /** Practical info shown in the right rail of the detail page. */
   practical: { label: string; value: string }[];
   /**
@@ -43,13 +50,14 @@ export const CAMPUS_ZONES: CampusZone[] = [
     Icon: Church,
     tagline: "Inima duhovnicească a seminarului",
     intro:
-      "Aici începe orice zi de seminar. Slujbele de dimineață și de seară, rugăciunile dinaintea meselor, sărbătorile liturgice — toate au loc în paraclisul seminarului, sub îndrumarea duhovnicilor.",
+      "Aici începe orice zi de seminar. Slujbele de dimineață și de seară, sărbătorile liturgice — toate au loc în paraclisul seminarului, sub îndrumarea duhovnicilor.",
     features: [
       "Slujbe zilnice — Sfânta Liturghie de dimineață și vecernia",
       "Sărbători liturgice — sfințirea anului școlar, Te Deum de Crăciun",
       "Spovedanie săptămânală cu părinții duhovnici",
       "Repetiții ale corului bărbătesc al seminarului",
     ],
+    featuresHeading: "Ce se desfășoară aici",
     practical: [
       { label: "Acces", value: "Elevii și profesorii seminarului" },
       { label: "Slujbe", value: "Zilnic — 07:30 dimineața · 19:00 seara" },
@@ -69,6 +77,7 @@ export const CAMPUS_ZONES: CampusZone[] = [
       "Săli moderne pentru disciplinele teologice și de cultură generală. Aici se țin orele de Religie, Limba Latină, Limbi străine, Matematică, Fizică, Istorie și Filosofie — la clase de maximum 28 de elevi.",
     features: [
       "16 săli active, configurate pentru clase de până la 28 elevi",
+      "2 laboratoare TIC dotate cu calculatoare pentru orele de informatică",
       "Echipamente pentru proiecții, conferințe și ateliere practice",
       "Săli dedicate pentru cele patru ani de liceu (a IX-a – a XII-a)",
       "Mediu adaptat predării vocaționale și teoretice",

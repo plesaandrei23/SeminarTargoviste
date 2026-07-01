@@ -9,13 +9,19 @@ type Props = {
   item: ActivityCardType;
   /** 1–6, fed straight into `<Reveal delay>` for the cascade effect. */
   delay?: 1 | 2 | 3 | 4 | 5 | 6;
+  /**
+   * When true, the cover image is loaded eagerly. Set this on the very
+   * first card on the home page — it's the LCP element there and the
+   * default lazy-load pushes LCP > 2.5s on mobile.
+   */
+  priority?: boolean;
 };
 
 /**
  * Card used on the home page News grid AND on the /activitati listing.
  * Kept in one place so the two pages can't drift visually.
  */
-export function ActivityCard({ item, delay }: Props) {
+export function ActivityCard({ item, delay, priority = false }: Props) {
   const href = `/activitati/${item.slug}`;
   const tag = categoryLabel(item.category);
   const date = formatRoDate(item.date);
@@ -37,6 +43,7 @@ export function ActivityCard({ item, delay }: Props) {
             alt={item.coverImage.alt || ""}
             fill
             sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw"
+            priority={priority}
             className="object-cover transition-transform duration-700 group-hover:scale-[1.08]"
           />
         ) : (

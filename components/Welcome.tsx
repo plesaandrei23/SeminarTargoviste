@@ -88,6 +88,10 @@ export function Welcome() {
                 <div className="mt-2 text-sm text-muted">
                   mobilități europene
                 </div>
+                <div className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-gold/10 px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-gold-deep">
+                  <span aria-hidden="true">★</span>
+                  Școală Europeană
+                </div>
               </CardContent>
             </Card>
           </Reveal>

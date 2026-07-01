@@ -60,6 +60,10 @@ export async function News() {
                 key={item._id}
                 item={item}
                 delay={((i % 3) + 1) as 1 | 2 | 3}
+                // Home page's News grid is above the fold on desktop and
+                // the first card's cover is the LCP element — eager-load
+                // it so we hit CWV's LCP < 2.5s target.
+                priority={i === 0}
               />
             ))}
           </div>

@@ -144,7 +144,7 @@ function Body({ zone }: { zone: (typeof CAMPUS_ZONES)[number] }) {
         <Reveal delay={1}>
           <div>
             <h2 className="font-serif text-[clamp(1.6rem,2.8vw,2.1rem)] font-semibold leading-tight text-navy">
-              Ce găsești aici
+              {zone.featuresHeading ?? "Ce găsești aici"}
             </h2>
             <ul className="mt-6 space-y-3">
               {zone.features.map((feature, i) => (

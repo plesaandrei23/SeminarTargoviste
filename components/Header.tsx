@@ -29,14 +29,8 @@ const NAV: MegaEntry[] = [
     ],
   },
   { kind: "link", href: "/admitere", label: "Admitere" },
-  {
-    kind: "menu",
-    label: "Știri",
-    items: [
-      { href: "/activitati", label: "Activități", description: "Evenimente cu fotografii" },
-      { href: "/anunturi", label: "Anunțuri", description: "Avizier electronic" },
-    ],
-  },
+  { kind: "link", href: "/activitati", label: "Activități" },
+  { kind: "link", href: "/anunturi", label: "Anunțuri" },
   {
     kind: "menu",
     label: "Pentru elevi",
@@ -54,7 +48,7 @@ const NAV: MegaEntry[] = [
     items: [
       { href: "/profesori", label: "Profesori", description: "Corpul didactic" },
       { href: "/consiliul-de-administratie", label: "Consiliul de Administrație", description: "Arhivă hotărâri" },
-      { href: "/mobilitate-cadre-didactice", label: "Mobilitate cadre", description: "Concurs ocupare posturi" },
+      { href: "/mobilitate-cadre-didactice", label: "Mobilitatea personalului didactic", description: "Concurs național ocupare posturi" },
       { href: "/erasmus", label: "Erasmus+", description: "Acreditare KA120" },
     ],
   },

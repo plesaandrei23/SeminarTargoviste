@@ -195,10 +195,15 @@ function SocialLink({
   label: string;
   icon: React.ReactNode;
 }) {
+  // Placeholder URLs (empty or "#") would just scroll the page to top —
+  // hide the icon entirely until a real URL is set on siteConfig.
+  if (!href || href === "#") return null;
   return (
     <Link
       href={href}
       aria-label={label}
+      target="_blank"
+      rel="noopener noreferrer"
       className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 text-white transition-all hover:-translate-y-0.5 hover:border-gold hover:bg-gold hover:text-navy-deep"
     >
       {icon}

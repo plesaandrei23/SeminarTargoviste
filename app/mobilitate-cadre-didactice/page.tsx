@@ -18,7 +18,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "Mobilitate cadre didactice",
+  title: "Mobilitatea personalului didactic",
   description: `Concursul național de ocupare a posturilor didactice, sesiunea 2026 — la Seminarul Teologic Ortodox „${siteConfig.patron}” din ${siteConfig.city}. Calendar, condiții, documente.`,
   alternates: { canonical: "/mobilitate-cadre-didactice" },
 };
@@ -111,7 +111,7 @@ function Hero() {
             Personal didactic
           </Badge>
           <h1 className="mt-5 text-balance text-white! text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.05]">
-            Mobilitate cadre didactice
+            Mobilitatea personalului didactic
           </h1>
           <p className="mt-2 text-sm uppercase tracking-[0.16em] text-gold-light">
             Sesiunea 2026 · Aviz Seminarul Teologic
