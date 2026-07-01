@@ -17,6 +17,9 @@ const BASE = siteConfig.url;
 const STATIC_ROUTES: { path: string; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"]; priority: number }[] = [
   { path: "", changeFrequency: "weekly", priority: 1.0 },
   { path: "/admitere", changeFrequency: "monthly", priority: 0.9 },
+  { path: "/admitere/gimnaziu", changeFrequency: "monthly", priority: 0.7 },
+  { path: "/admitere/teologie", changeFrequency: "monthly", priority: 0.9 },
+  { path: "/admitere/filologia", changeFrequency: "monthly", priority: 0.7 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.8 },
   { path: "/campus", changeFrequency: "monthly", priority: 0.8 },
   { path: "/campus/paraclis", changeFrequency: "yearly", priority: 0.6 },
