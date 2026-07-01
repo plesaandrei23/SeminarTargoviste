@@ -7,20 +7,44 @@ import { Reveal } from "@/components/Reveal";
 import { HotarariArchive } from "@/components/HotarariArchive";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { HOTARARI, HOTARARI_YEARS } from "@/lib/hotarari";
+import { sanityClient } from "@/sanity/lib/client";
+import { allHotarariCAQuery } from "@/sanity/lib/queries";
+import type { HotarareCA } from "@/sanity/lib/types";
 import { siteConfig } from "@/lib/site-config";
+
+// Rebuild every 5 minutes — this page displays the CA archive coming from
+// Sanity, so we want editor updates (new summaries, new PDFs) live on the
+// site without waiting for a redeploy.
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Consiliul de Administrație",
-  description: `Hotărârile Consiliului de Administrație al Seminarului Teologic Ortodox „${siteConfig.patron}” din ${siteConfig.city} — arhivă completă, ${HOTARARI.length} documente.`,
+  description: `Hotărârile Consiliului de Administrație al Seminarului Teologic Ortodox „${siteConfig.patron}” din ${siteConfig.city} — arhivă completă.`,
   alternates: { canonical: "/consiliul-de-administratie" },
 };
 
-export default function ConsiliuPage() {
-  const total = HOTARARI.length;
-  const yearsCovered = HOTARARI_YEARS.length;
-  const oldest = HOTARARI_YEARS.at(-1) ?? new Date().getFullYear();
-  const newest = HOTARARI_YEARS.at(0) ?? new Date().getFullYear();
+async function fetchHotarari(): Promise<HotarareCA[]> {
+  try {
+    return await sanityClient.fetch<HotarareCA[]>(
+      allHotarariCAQuery,
+      {},
+      { next: { revalidate: 300, tags: ["hotarareCA"] } },
+    );
+  } catch (e) {
+    console.error("hotarari fetch failed:", e);
+    return [];
+  }
+}
+
+export default async function ConsiliuPage() {
+  const items = await fetchHotarari();
+  const total = items.length;
+  const years = Array.from(
+    new Set(items.map((h) => h.year).filter((y): y is number => y != null)),
+  ).sort((a, b) => b - a);
+  const yearsCovered = years.length;
+  const oldest = years.at(-1) ?? new Date().getFullYear();
+  const newest = years.at(0) ?? new Date().getFullYear();
 
   return (
     <>
@@ -28,7 +52,7 @@ export default function ConsiliuPage() {
       <main className="flex-1 bg-parchment pb-[clamp(4rem,9vw,8rem)]">
         <Hero total={total} yearsCovered={yearsCovered} oldest={oldest} newest={newest} />
         <Context />
-        <HotarariArchive />
+        <HotarariArchive items={items} />
         <Note />
       </main>
       <Footer />

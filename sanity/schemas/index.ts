@@ -6,6 +6,7 @@ import { personal } from "./personal";
 import { erasmus } from "./erasmus";
 import { pagina } from "./pagina";
 import { documentFile } from "./documentFile";
+import { hotarareCA } from "./hotarareCA";
 import { siteSettings } from "./siteSettings";
 import { seoFields } from "./_objects/seoFields";
 import { localizedImage } from "./_objects/localizedImage";
@@ -23,6 +24,7 @@ export const schemaTypes = [
   erasmus,
   pagina,
   documentFile,
+  hotarareCA,
   // Singletons
   siteSettings,
 ];

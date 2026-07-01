@@ -195,6 +195,24 @@ export const anuntSlugsQuery = groq`
 `;
 
 /**
+ * All Consiliul de Administrație decisions, newest first. Each entry
+ * carries either the original zyrosite PDF URL (for the seeded 2020-2026
+ * archive) or a Sanity file asset URL (for records uploaded via Studio).
+ * The listing UI picks whichever URL is set.
+ */
+export const allHotarariCAQuery = groq`
+  *[_type == "hotarareCA"] | order(date desc, nr desc) {
+    _id,
+    nr,
+    date,
+    year,
+    summary,
+    "originalUrl": originalUrl,
+    "pdfUrl": pdf.asset->url
+  }
+`;
+
+/**
  * Slugs of static pages we render via the catch-all /[slug] route. Used
  * by generateStaticParams + filtered against route paths that have
  * dedicated pages (those win over the catch-all anyway, but excluding

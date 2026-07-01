@@ -34,6 +34,7 @@ export default defineConfig({
             S.documentTypeListItem("personal").title("Personal"),
             S.documentTypeListItem("erasmus").title("Erasmus+"),
             S.divider(),
+            S.documentTypeListItem("hotarareCA").title("Hotărâri C.A."),
             S.documentTypeListItem("pagina").title("Pagini statice"),
             S.documentTypeListItem("documentFile").title("Documente (PDF)"),
           ]),

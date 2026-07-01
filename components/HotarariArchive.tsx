@@ -6,44 +6,51 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import {
-  HOTARARI,
-  HOTARARI_YEARS,
   formatHotarareDate,
   groupByYear,
-  type Hotarare,
+  resolveHotarareUrl,
 } from "@/lib/hotarari";
+import type { HotarareCA } from "@/sanity/lib/types";
 
 const ALL_YEARS_KEY = "__all";
 
-export function HotarariArchive() {
-  const [year, setYear] = useState<number | typeof ALL_YEARS_KEY>(HOTARARI_YEARS[0] ?? ALL_YEARS_KEY);
+export function HotarariArchive({ items }: { items: HotarareCA[] }) {
+  const years = useMemo(
+    () =>
+      Array.from(new Set(items.map((h) => h.year).filter((y): y is number => y != null))).sort(
+        (a, b) => b - a,
+      ),
+    [items],
+  );
+
+  const [year, setYear] = useState<number | typeof ALL_YEARS_KEY>(years[0] ?? ALL_YEARS_KEY);
   const [q, setQ] = useState("");
 
   const totalsByYear = useMemo(() => {
     const map = new Map<number, number>();
-    for (const h of HOTARARI) {
+    for (const h of items) {
       if (h.year == null) continue;
       map.set(h.year, (map.get(h.year) ?? 0) + 1);
     }
     return map;
-  }, []);
+  }, [items]);
 
   const filtered = useMemo(() => {
     const trimmed = q.trim().toLowerCase();
-    return HOTARARI.filter((h) => {
+    return items.filter((h) => {
       if (year !== ALL_YEARS_KEY && h.year !== year) return false;
       if (!trimmed) return true;
       const haystack = [
-        h.label,
-        h.nr != null ? `nr ${h.nr}` : "",
+        h.nr != null ? `hotărârea nr ${h.nr}` : "",
         h.date ? formatHotarareDate(h.date).toLowerCase() : "",
         h.date ?? "",
+        h.summary ?? "",
       ]
         .join(" ")
         .toLowerCase();
       return haystack.includes(trimmed);
     });
-  }, [year, q]);
+  }, [items, year, q]);
 
   const groups = useMemo(() => groupByYear(filtered), [filtered]);
   const groupedYears = [...groups.keys()].sort((a, b) => b - a);
@@ -56,9 +63,9 @@ export function HotarariArchive() {
           label="Toate"
           active={year === ALL_YEARS_KEY}
           onClick={() => setYear(ALL_YEARS_KEY)}
-          count={HOTARARI.length}
+          count={items.length}
         />
-        {HOTARARI_YEARS.map((y) => (
+        {years.map((y) => (
           <YearChip
             key={y}
             label={String(y)}
@@ -80,7 +87,7 @@ export function HotarariArchive() {
           type="search"
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Caută după număr sau dată — ex. 22 sau 09.2025"
+          placeholder="Caută după număr, dată sau rezumat"
           className="w-full rounded-full border border-navy/10 bg-paper py-3 pl-11 pr-10 text-sm text-ink shadow-sm transition-colors focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30"
         />
         {q && (
@@ -104,7 +111,7 @@ export function HotarariArchive() {
       {/* Grouped list */}
       <div className="mt-10 space-y-12">
         {groupedYears.map((y) => {
-          const items = groups.get(y) ?? [];
+          const list = groups.get(y) ?? [];
           return (
             <section key={y}>
               <div className="flex items-end justify-between gap-4 border-b border-navy/10 pb-4">
@@ -112,12 +119,12 @@ export function HotarariArchive() {
                   {y || "Nedatate"}
                 </h2>
                 <p className="text-xs uppercase tracking-[0.14em] text-gold-deep">
-                  {items.length} {items.length === 1 ? "hotărâre" : "hotărâri"}
+                  {list.length} {list.length === 1 ? "hotărâre" : "hotărâri"}
                 </p>
               </div>
               <ul className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-                {items.map((h) => (
-                  <HotarareCard key={h.url} h={h} />
+                {list.map((h) => (
+                  <HotarareCard key={h._id} h={h} />
                 ))}
               </ul>
             </section>
@@ -167,11 +174,14 @@ function YearChip({
   );
 }
 
-function HotarareCard({ h }: { h: Hotarare }) {
+function HotarareCard({ h }: { h: HotarareCA }) {
+  const url = resolveHotarareUrl(h);
+  const label = h.nr != null ? `Hotărârea nr. ${h.nr}` : "Hotărâre C.A.";
   return (
     <li>
       <a
-        href={h.url}
+        href={url ?? "#"}
+        aria-disabled={!url}
         target="_blank"
         rel="noopener noreferrer"
         className="group block focus:outline-none focus-visible:rounded-2xl focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
@@ -189,11 +199,17 @@ function HotarareCard({ h }: { h: Hotarare }) {
                 {h.date ? formatHotarareDate(h.date) : "Fără dată"}
               </p>
               <p className="mt-1 font-serif text-base font-semibold leading-tight text-navy text-balance">
-                {h.nr != null ? `Hotărârea nr. ${h.nr}` : h.label}
+                {label}
               </p>
-              <p className="mt-2 text-xs text-muted">
-                Consiliul de Administrație · PDF
-              </p>
+              {h.summary ? (
+                <p className="mt-2 line-clamp-3 text-pretty text-xs text-ink/75">
+                  {h.summary}
+                </p>
+              ) : (
+                <p className="mt-2 text-xs text-muted">
+                  Consiliul de Administrație · PDF
+                </p>
+              )}
             </div>
             <span
               aria-hidden="true"

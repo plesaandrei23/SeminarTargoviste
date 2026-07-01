@@ -96,6 +96,16 @@ export type AnuntCard = {
   excerpt: string;
 };
 
+export type HotarareCA = {
+  _id: string;
+  nr: number;
+  date: string;
+  year: number;
+  summary?: string;
+  originalUrl?: string;
+  pdfUrl?: string;
+};
+
 export type AnuntDetail = {
   _id: string;
   title: string;
